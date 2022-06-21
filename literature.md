@@ -53,3 +53,5 @@ cleaned WISE×SuperCOSMOS
 galaxy number counts
 https://scholarlypublications.universiteitleiden.nl/access/item%3A2914478/download  
 
+Robust Measurements of the Large-Scale Clustering of Galaxy Survey Data  
+https://etd.ohiolink.edu/apexprod/rws_etd/send_file/send?accession=ohiou1626320867298365&disposition=inline
