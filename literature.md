@@ -34,6 +34,7 @@ https://www.stat.purdue.edu/~huang251/Whitney_1028.pdf
 
 Think continuous: Markovian Gaussian models in
 spatial statistics  
+https://www.math.ntnu.no/preprint/statistics/2011/S9-2011.pdf  
 
 Cosmological Measurements from Angular Power Spectra
 Analysis of BOSS DR12 Tomography
@@ -43,5 +44,5 @@ Determining the cosmological parameters Ωm and
 σ8 from peculiar velocity and density-contrast
 data  
 https://www.astro.rug.nl/opleidingsinstituut/reports/bachelor/Astro_Bc_2008_WDocters.pdf
-https://www.math.ntnu.no/preprint/statistics/2011/S9-2011.pdf  
+
 
