@@ -62,4 +62,7 @@ Cosmological constraints from noisy convergence maps through deep learning
 https://arxiv.org/pdf/1807.08732.pdf  
 Non-Gaussian information from weak lensing data via deep learning  
 https://arxiv.org/pdf/1802.01212.pdf  
+Cosmological Model discriminization with DeepLearning  
+https://arxiv.org/pdf/1707.05167.pdf  
+
 
