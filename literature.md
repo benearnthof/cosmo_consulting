@@ -58,3 +58,8 @@ https://etd.ohiolink.edu/apexprod/rws_etd/send_file/send?accession=ohiou16263208
 
 DeepSphere  
 https://arxiv.org/pdf/1810.12186.pdf  
+Cosmological constraints from noisy convergence maps through deep learning  
+https://arxiv.org/pdf/1807.08732.pdf  
+Non-Gaussian information from weak lensing data via deep learning  
+https://arxiv.org/pdf/1802.01212.pdf  
+
