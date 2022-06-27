@@ -67,4 +67,6 @@ https://arxiv.org/pdf/1707.05167.pdf
 Graph Based Classification for Omnidirectional Images  
 https://arxiv.org/pdf/1707.08301.pdf  
 
+### Gaussian Process Regression on the Sphere: 
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6457667/
 
