@@ -70,3 +70,8 @@ https://arxiv.org/pdf/1707.08301.pdf
 ### Gaussian Process Regression on the Sphere: 
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6457667/
 
+Bayesian Graph Convolutions on the sphere  
+https://arxiv.org/pdf/2006.12504.pdf  
+ 
+What Uncertainties do we need in bayesian deep learning?  
+https://arxiv.org/pdf/1703.04977.pdf
