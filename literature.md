@@ -74,4 +74,8 @@ Bayesian Graph Convolutions on the sphere
 https://arxiv.org/pdf/2006.12504.pdf  
  
 What Uncertainties do we need in bayesian deep learning?  
-https://arxiv.org/pdf/1703.04977.pdf
+https://arxiv.org/pdf/1703.04977.pdf  
+
+Bayesian NNs for MCMC sampling in cosmology  
+https://ml4physicalsciences.github.io/2020/files/NeurIPS_ML4PS_2020_40.pdf  
+
