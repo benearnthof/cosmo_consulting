@@ -79,3 +79,5 @@ https://arxiv.org/pdf/1703.04977.pdf
 Bayesian NNs for MCMC sampling in cosmology  
 https://ml4physicalsciences.github.io/2020/files/NeurIPS_ML4PS_2020_40.pdf  
 
+Supplement for bayesian cosmo full syk stuff
+https://zenodo.org/record/3963028  
