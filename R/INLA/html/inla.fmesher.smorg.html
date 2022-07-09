@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute various mesh related quantities.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.fmesher.smorg {INLA}"><tr><td>inla.fmesher.smorg {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute various mesh related quantities.</h2>
+
+<h3>Description</h3>
+
+<p>Low level function for computing finite element matrices, spherical
+harmonics, B-splines, and point mappings with barycentric triangle
+coordinates.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.fmesher.smorg(
+  loc,
+  tv,
+  fem = NULL,
+  aniso = NULL,
+  gradients = FALSE,
+  sph0 = NULL,
+  sph = NULL,
+  bspline = NULL,
+  points2mesh = NULL,
+  splitlines = NULL,
+  output = NULL,
+  keep = FALSE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>loc</code></td>
+<td>
+<p>3-column triangle vertex coordinate matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>tv</code></td>
+<td>
+<p>3-column triangle vertex index matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>fem</code></td>
+<td>
+<p>Maximum finite element matrix order to be computed.</p>
+</td></tr>
+<tr valign="top"><td><code>aniso</code></td>
+<td>
+<p>A two-element list with <i>gamma</i> and <i>v</i> for
+an anisotropic operator <i>div H grad</i>, where
+<i>H = gamma I + v v'</i></p>
+</td></tr>
+<tr valign="top"><td><code>gradients</code></td>
+<td>
+<p>When <code>TRUE</code>, calculate derivative operator matrices
+<code>dx</code>, dy, and dz.</p>
+</td></tr>
+<tr valign="top"><td><code>sph0</code></td>
+<td>
+<p>Maximal order of rotationally invariant spherical harmonics.</p>
+</td></tr>
+<tr valign="top"><td><code>sph</code></td>
+<td>
+<p>Maximal order of general spherical harmonics.</p>
+</td></tr>
+<tr valign="top"><td><code>bspline</code></td>
+<td>
+<p>Rotationally invariant B-splines on a sphere.  3-vector with
+number of basis functions <code>n</code>, basis degree <code>degree</code>, and a
+logical; <code>TRUE</code> uniform knot angles, <code>FALSE</code> for uniform spacing
+in <i>sin(latitude)</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>points2mesh</code></td>
+<td>
+<p>3-column matrix with points to be located in the mesh.</p>
+</td></tr>
+<tr valign="top"><td><code>splitlines</code></td>
+<td>
+<p>A list with elements <code>loc</code> (3-column coordinate
+matrix) and <code>idx</code> (2-column index matrix) describing line segments that
+are to be split into sub-segments at triangle boundaries.</p>
+</td></tr>
+<tr valign="top"><td><code>output</code></td>
+<td>
+<p>Names of objects to be included in the output, if different
+from defaults.</p>
+</td></tr>
+<tr valign="top"><td><code>keep</code></td>
+<td>
+<p>When <code>TRUE</code>, for debugging purposes keep the <code>fmesher</code>
+I/O files on disk.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list of generated named quantities.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

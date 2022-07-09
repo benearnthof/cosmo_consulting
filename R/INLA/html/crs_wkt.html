@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Handling CRS/WKT</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.wkt_is_geocent {INLA}"><tr><td>inla.wkt_is_geocent {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Handling CRS/WKT</h2>
+
+<h3>Description</h3>
+
+<p>Get and set CRS object or WKT string properties.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.wkt_is_geocent(wkt)
+
+inla.crs_is_geocent(crs)
+
+inla.wkt_get_ellipsoid_radius(wkt)
+
+inla.crs_get_ellipsoid_radius(crs)
+
+inla.wkt_set_ellipsoid_radius(wkt, radius)
+
+inla.crs_set_ellipsoid_radius(crs, radius)
+
+inla.wkt_unit_params()
+
+inla.wkt_get_lengthunit(wkt)
+
+inla.wkt_set_lengthunit(wkt, unit, params = NULL)
+
+inla.crs_get_wkt(crs)
+
+inla.crs_get_lengthunit(crs)
+
+inla.crs_set_lengthunit(crs, unit, params = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>wkt</code></td>
+<td>
+<p>A WKT2 character string</p>
+</td></tr>
+<tr valign="top"><td><code>crs</code></td>
+<td>
+<p>A <code>sp::CRS</code> or <code>inla.CRS</code> object</p>
+</td></tr>
+<tr valign="top"><td><code>unit</code></td>
+<td>
+<p>character, name of a unit. Supported names are
+&quot;metre&quot;, &quot;kilometre&quot;, and the aliases &quot;meter&quot;, &quot;m&quot;, International metre&quot;,
+&quot;kilometer&quot;, and &quot;km&quot;, as defined by <code>inla.wkt_unit_params</code> or the
+<code>params</code> argument. (For legacy PROJ4 use, only &quot;m&quot; and &quot;km&quot; are
+supported)</p>
+</td></tr>
+<tr valign="top"><td><code>params</code></td>
+<td>
+<p>Length unit definitions, in the list format produced by
+<code>inla.wkt_unit_params()</code>, Default: NULL, which invokes
+<code>inla.wkt_unit_params()</code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>For <code>inla.wkt_unit_params</code>, a list of named unit definitions
+</p>
+<p>For <code>inla.wkt_get_lengthunit</code>, a list of length units used in the wkt
+string, excluding the ellipsoid radius unit.
+</p>
+<p>For <code>inla.wkt_set_lengthunit</code>, a WKT2 string with altered length units.
+Note that the length unit for the ellipsoid radius is unchanged.
+</p>
+<p>For <code>inla.crs_get_wkt</code>, WKT2 string.
+</p>
+<p>For <code>inla.crs_get_lengthunit</code>, a list of length units used in the wkt
+string, excluding the ellipsoid radius unit. (For legacy PROJ4 code, the raw
+units from the proj4string are returned, if present.)
+</p>
+<p>For <code>inla.crs_set_lengthunit</code>, a <code>sp::CRS</code> object with altered
+length units. Note that the length unit for the ellipsoid radius is
+unchanged.
+</p>
+<p>For <code>inla.wkt_unit_params</code>, a
+list of named unit definitions
+</p>
+<p>For <code>inla.wkt_get_lengthunit</code>, a
+list of length units used in the wkt string, excluding the ellipsoid radius
+unit.
+</p>
+<p>For <code>inla.wkt_set_lengthunit</code>, a
+WKT2 string with altered length units.
+Note that the length unit for the ellipsoid radius is unchanged.
+</p>
+<p>For <code>inla.crs_get_wkt</code>, WKT2 string.
+</p>
+<p>For <code>inla.crs_get_lengthunit</code>, a
+list of length units used in the wkt string, excluding the ellipsoid radius
+unit. (For legacy PROJ4 code, the raw units from the proj4string are
+returned, if present.)
+</p>
+<p>For <code>inla.crs_set_lengthunit</code>, a <code>sp::CRS</code> object with
+altered length units.
+Note that the length unit for the ellipsoid radius is unchanged.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.sp_get_crs.html">inla.sp_get_crs()</a></code>
+</p>
+<p><code><a href="../../INLA/help/inla.sp_get_crs.html">inla.sp_get_crs()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Not run: 
+if (inla.has_PROJ6()) {
+    c1 &lt;- inla.CRS("globe")
+    inla.crs_get_lengthunit(c1)
+    c2 &lt;- inla.crs_set_lengthunit(c1, "km")
+    inla.crs_get_lengthunit(c2)
+}
+
+## End(Not run)
+
+## Not run: 
+if (inla.has_PROJ6()) {
+    c1 &lt;- inla.CRS("globe")
+    inla.crs_get_lengthunit(c1)
+    c2 &lt;- inla.crs_set_lengthunit(c1, "km")
+    inla.crs_get_lengthunit(c2)
+}
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

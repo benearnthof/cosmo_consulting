@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Control variables in control.fixed</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for control.fixed {INLA}"><tr><td>control.fixed {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Control variables in control.fixed</h2>
+
+<h3>Description</h3>
+
+<p>Control variables in <code>control.fixed</code> for use in <code>inla</code></p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.set.control.fixed.default(...)
+control.fixed(cdf, compute, correlation.matrix, expand.factor.strategy, mean, mean.intercept, prec, prec.intercept, quantiles, remove.names)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Possible arguments</p>
+</td></tr>
+<tr valign="top"><td><code>cdf</code></td>
+<td>
+<p>   A list of values to compute the CDF for, for all fixed effects</p>
+</td></tr>
+<tr valign="top"><td><code>quantiles</code></td>
+<td>
+<p>   A list of quantiles to compute for all fixed effects</p>
+</td></tr>
+<tr valign="top"><td><code>expand.factor.strategy</code></td>
+<td>
+<p>   The strategy used to expand factors into fixed effects based on their levels. The default strategy is us use the <code>model.matrix</code>-function for which NA's are not allowed (<code>expand.factor.strategy="model.matrix"</code>) and levels are possible removed. The alternative option (<code>expand.factor.strategy="inla"</code>) use an <code>inla</code>-spesific expansion which expand a factor into one fixed effects for each level, do allow for NA's and all levels are present in the model. In this case, factors MUST BE factors in the data.frame/list and NOT added as <code>.+factor(x1)+.</code> in the formula only.</p>
+</td></tr>
+<tr valign="top"><td><code>mean</code></td>
+<td>
+<p>   Prior mean for all fixed effects except the intercept. Alternatively, a named list with specific means where name=default applies to unmatched names. For example <code>control.fixed=list(mean=list(a=1, b=2, default=0))</code> assign 'mean=1' to fixed effect 'a' , 'mean=2' to effect 'b' and 'mean=0' to all others. (default 0.0)</p>
+</td></tr>
+<tr valign="top"><td><code>mean.intercept</code></td>
+<td>
+<p>   Prior mean for the intercept (default 0.0)</p>
+</td></tr>
+<tr valign="top"><td><code>prec</code></td>
+<td>
+<p>   Default precision for all fixed effects except the intercept. Alternatively, a named list with specific means where name=default applies to unmatched names. For example <code>control.fixed=list(prec=list(a=1, b=2, default=0.01))</code> assign 'prec=1' to fixed effect 'a' , 'prec=2' to effect 'b' and 'prec=0.01' to all others. (default 0.001)</p>
+</td></tr>
+<tr valign="top"><td><code>prec.intercept</code></td>
+<td>
+<p>   Default precision the intercept (default 0.0)</p>
+</td></tr>
+<tr valign="top"><td><code>compute</code></td>
+<td>
+<p>   Compute marginals for the fixed effects ? (default TRUE)</p>
+</td></tr>
+<tr valign="top"><td><code>correlation.matrix</code></td>
+<td>
+<p>   Compute the posterior correlation matrix for all fixed effects? (default FALSE) OOPS: This option will set up appropriate linear combinations and the results are shown as the posterior correlation matrix of the linear combinations. This option will imply <code>control.inla=list(lincomb.derived.correlation.matrix=TRUE)</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>remove.names</code></td>
+<td>
+<p>   A vector of names of expanded fixed effects to remove from the model-matrix. This is an expert option, and should only be used if you know what you are doing.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The function <code>control.fixed</code> is used to TAB-complete arguments and returns a list of given arguments.
+The function <code>inla.set.control.fixed.default</code> returns a list with all the default values of all parameters within this control statement.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/control.update.html">control.update</a></code>, <code><a href="../../INLA/help/control.lincomb.html">control.lincomb</a></code>, <code><a href="../../INLA/help/control.group.html">control.group</a></code>, <code><a href="../../INLA/help/control.mix.html">control.mix</a></code>, <code><a href="../../INLA/help/control.pom.html">control.pom</a></code>, <code><a href="../../INLA/help/control.link.html">control.link</a></code>, <code><a href="../../INLA/help/control.expert.html">control.expert</a></code>, <code><a href="../../INLA/help/control.compute.html">control.compute</a></code>, <code><a href="../../INLA/help/control.lp.scale.html">control.lp.scale</a></code>, <code><a href="../../INLA/help/control.pardiso.default.html">control.pardiso.default</a></code>, <code><a href="../../INLA/help/control.bgev.default.html">control.bgev.default</a></code>, <code><a href="../../INLA/help/control.family.html">control.family</a></code>, <code><a href="../../INLA/help/control.fixed.html">control.fixed</a></code>, <code><a href="../../INLA/help/control.inla.html">control.inla</a></code>, <code><a href="../../INLA/help/control.predictor.html">control.predictor</a></code>, <code><a href="../../INLA/help/control.mode.html">control.mode</a></code>, <code><a href="../../INLA/help/control.hazard.html">control.hazard</a></code>, 
+<code><a href="../../INLA/help/inla.html">inla</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Function space definition objects for 1D SPDE models.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.mesh.1d {INLA}"><tr><td>inla.mesh.1d {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Function space definition objects for 1D SPDE models.</h2>
+
+<h3>Description</h3>
+
+<p>Create a 1D mesh specification <code>inla.mesh.1d</code> object, that defines a
+function space for 1D SPDE models.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.mesh.1d(
+  loc,
+  interval = range(loc),
+  boundary = NULL,
+  degree = 1,
+  free.clamped = FALSE,
+  ...
+)
+
+inla.mesh.1d.fem(mesh)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>loc</code></td>
+<td>
+<p>B-spline knot locations.</p>
+</td></tr>
+<tr valign="top"><td><code>interval</code></td>
+<td>
+<p>Interval domain endpoints.</p>
+</td></tr>
+<tr valign="top"><td><code>boundary</code></td>
+<td>
+<p>Boundary condition specification.  Valid conditions are
+<code>c('neumann', 'dirichlet', 'free', 'cyclic')</code>.  Two separate values can
+be specified, one applied to each endpoint.</p>
+</td></tr>
+<tr valign="top"><td><code>degree</code></td>
+<td>
+<p>The B-spline basis degree.  Supported values are 0, 1, and 2.</p>
+</td></tr>
+<tr valign="top"><td><code>free.clamped</code></td>
+<td>
+<p>If <code>TRUE</code>, for <code>'free'</code> boundaries, clamp the
+basis functions to the interval endpoints.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional option, currently unused.</p>
+</td></tr>
+<tr valign="top"><td><code>mesh</code></td>
+<td>
+<p>An inla.mesh.1d object</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

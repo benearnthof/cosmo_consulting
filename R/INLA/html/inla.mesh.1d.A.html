@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Mapping matrix for 1D meshes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.mesh.1d.bary {INLA}"><tr><td>inla.mesh.1d.bary {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Mapping matrix for 1D meshes</h2>
+
+<h3>Description</h3>
+
+<p>Calculates barycentric coordinates and weight matrices for
+<code><a href="../../INLA/help/inla.mesh.1d.html">inla.mesh.1d()</a></code> objects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.mesh.1d.bary(mesh, loc, method = c("linear", "nearest"))
+
+inla.mesh.1d.A(
+  mesh,
+  loc,
+  weights = NULL,
+  derivatives = NULL,
+  method = c("linear", "nearest", "quadratic")
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mesh</code></td>
+<td>
+<p>An <code><a href="../../INLA/help/inla.mesh.1d.html">inla.mesh.1d()</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>loc</code></td>
+<td>
+<p>Coordinate values.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>Interpolation method.  If not specified for
+<code>inla.mesh.1d.A</code> (recommended), it is determined by the <code>mesh</code>
+basis function properties.</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+<p>Weights to be applied to the <code>A</code> matrix rows.</p>
+</td></tr>
+<tr valign="top"><td><code>derivatives</code></td>
+<td>
+<p>If <code>TRUE</code>, also compute derivative weight matrices
+<code>dA</code> and <code>d2A</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

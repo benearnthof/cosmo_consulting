@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute connected mesh subsets</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.mesh.components {INLA}"><tr><td>inla.mesh.components {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute connected mesh subsets</h2>
+
+<h3>Description</h3>
+
+<p>Compute subsets of vertices and triangles in an inla.mesh object that are
+connected by edges.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.mesh.components(mesh)
+</pre>
+
+
+<h3>Value</h3>
+
+<p>A list with elements <code>vertex</code> and <code>triangle</code>, vectors of
+integer labels for which connected component they belong, and <code>info</code>, a
+<code>data.frame</code> with columns
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>component</code></td>
+<td>
+<p>Connected component integer label.</p>
+</td></tr>
+<tr valign="top"><td><code>nV</code></td>
+<td>
+<p>The number of vertices in the component.</p>
+</td></tr>
+<tr valign="top"><td><code>nT</code></td>
+<td>
+<p>The number of triangles in the component.</p>
+</td></tr>
+<tr valign="top"><td><code>area</code></td>
+<td>
+<p>The surface area associated with the component.
+Component lables are not comparable across
+different meshes, but some ordering stability is guaranteed by initiating
+each component from the lowest numbered triangle whenever a new component is
+initiated.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.mesh.2d.html">inla.mesh.2d()</a></code>, <code><a href="../../INLA/help/inla.mesh.create.html">inla.mesh.create()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# Construct two simple meshes:
+loc &lt;- matrix(c(0, 1, 0, 1), 2, 2)
+mesh1 &lt;- inla.mesh.2d(loc = loc, max.edge = 0.1)
+bnd &lt;- inla.nonconvex.hull(loc, 0.3)
+mesh2 &lt;- inla.mesh.2d(boundary = bnd, max.edge = 0.1)
+
+# Compute connectivity information:
+conn1 &lt;- inla.mesh.components(mesh1)
+conn2 &lt;- inla.mesh.components(mesh2)
+# One component, simply connected mesh
+conn1$info
+# Two disconnected components
+conn2$info
+
+# Extract the subset mesh for the largest component:
+# (Note: some information is lost, such as fixed segments,
+# and boundary edge labels.)
+maxi &lt;- conn2$info$component[which.max(conn2$info$area)]
+mesh3 &lt;- inla.mesh.create(
+    loc = mesh2$loc,
+    tv = mesh2$graph$tv[conn2$triangle == maxi, , drop = FALSE]
+)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

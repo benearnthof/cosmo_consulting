@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Control variables in control.inla</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for control.inla {INLA}"><tr><td>control.inla {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Control variables in control.inla</h2>
+
+<h3>Description</h3>
+
+<p>Control variables in <code>control.inla</code> for use in <code>inla</code></p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.set.control.inla.default(...)
+control.inla(adapt.hessian.max.trials, adapt.hessian.mode, adapt.hessian.scale, adaptive.max, adjust.weights, b.strategy, cmin, constr.marginal.diagonal, cpo.diff, cutoff, diagonal, diff.logdens, dz, fast, force.diagonal, global.node.degree, global.node.factor, h, huge, improved.simplified.laplace, int.design, int.strategy, interpolator, lincomb.derived.correlation.matrix, linear.correction, mode.known, npoints, num.gradient, num.hessian, numint.abserr, numint.maxfeval, numint.relerr, optimise.strategy, optimiser, parallel.linesearch, print.joint.hyper, reordering, restart, skip.configurations, stencil, step.factor, step.len, strategy, stupid.search, stupid.search.factor, stupid.search.max.iter, tolerance, tolerance.f, tolerance.g, tolerance.step, tolerance.x, use.directions, verbose)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Possible arguments</p>
+</td></tr>
+<tr valign="top"><td><code>strategy</code></td>
+<td>
+<p>   Character The strategy to use for the approximations; one of 'auto' (default), 'gaussian', 'simplified.laplace', 'laplace' or 'adaptive'</p>
+</td></tr>
+<tr valign="top"><td><code>int.strategy</code></td>
+<td>
+<p>   Character The integration strategy to use; one of 'auto' (default), 'ccd', 'grid', 'eb' (empirical bayes), 'user' or 'user.std'</p>
+</td></tr>
+<tr valign="top"><td><code>int.design</code></td>
+<td>
+<p>   Matrix Matrix of user-defined integration points and weights. Each row consists theta values and the integration weight. (EXPERIMENTAL!)</p>
+</td></tr>
+<tr valign="top"><td><code>interpolator</code></td>
+<td>
+<p>   Character The interpolator used to compute the marginals for the hyperparameters. One of 'auto', 'nearest', 'quadratic', 'weighted.distance', 'ccd', 'ccdintegrate', 'gridsum', 'gaussian'. Default is 'auto'.</p>
+</td></tr>
+<tr valign="top"><td><code>fast</code></td>
+<td>
+<p>   Logical If TRUE, then replace conditional modes in the Laplace approximation with conditional expectation (default TRUE)</p>
+</td></tr>
+<tr valign="top"><td><code>linear.correction</code></td>
+<td>
+<p>   Logical Default TRUE for the 'strategy = laplace' option.</p>
+</td></tr>
+<tr valign="top"><td><code>h</code></td>
+<td>
+<p>   Numerical The step-length for the gradient calculations for the hyperparameters. Default 0.005.</p>
+</td></tr>
+<tr valign="top"><td><code>dz</code></td>
+<td>
+<p>   Numerical The step-length in the standarised scale for the integration of the hyperparameters. Default 0.75.</p>
+</td></tr>
+<tr valign="top"><td><code>diff.logdens</code></td>
+<td>
+<p>   Numerical The difference of the log.density for the hyperpameters to stop numerical integration using int.strategy='grid'. Default 6.</p>
+</td></tr>
+<tr valign="top"><td><code>print.joint.hyper</code></td>
+<td>
+<p>   Logical If TRUE, the store also the joint distribution of the hyperparameters (without any costs). Default TRUE.</p>
+</td></tr>
+<tr valign="top"><td><code>force.diagonal</code></td>
+<td>
+<p>   Logical If TRUE, then force the Hessian to be diagonal. (Default <code>FALSE</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>skip.configurations</code></td>
+<td>
+<p>   Logical Skip configurations if the values at the main axis are to small. (Default <code>TRUE</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>mode.known</code></td>
+<td>
+<p>   Logical If TRUE then no optimisation is done. (Default FALSE.)</p>
+</td></tr>
+<tr valign="top"><td><code>adjust.weights</code></td>
+<td>
+<p>   Logical If TRUE then just more accurate integration weights. (Default TRUE.)</p>
+</td></tr>
+<tr valign="top"><td><code>tolerance</code></td>
+<td>
+<p>   Numerical The tolerance for the optimisation of the hyperparameters. If set, this is the default value for for 'tolerance.f/2', 'tolerance.g' and 'tolerance.x'; see below.</p>
+</td></tr>
+<tr valign="top"><td><code>tolerance.f</code></td>
+<td>
+<p>   Numerical The tolerance for the absolute change in the log posterior in the optimisation of the hyperparameters.</p>
+</td></tr>
+<tr valign="top"><td><code>tolerance.g</code></td>
+<td>
+<p>   Numerical The tolerance for the absolute change in the gradient of the log posterior in the optimisation of the hyperparameters.</p>
+</td></tr>
+<tr valign="top"><td><code>tolerance.x</code></td>
+<td>
+<p>   Numerical The tolerance for the change in the hyperparameters (root-mean-square) in the optimisation of the hyperparameters.</p>
+</td></tr>
+<tr valign="top"><td><code>tolerance.step</code></td>
+<td>
+<p>   Numerical The tolerance for the change in root-mean_squre in the inner Newton-like optimisation of the latent field.</p>
+</td></tr>
+<tr valign="top"><td><code>restart</code></td>
+<td>
+<p>   Numerical To improve the optimisation, the optimiser is restarted at the found optimum 'restart' number of times.</p>
+</td></tr>
+<tr valign="top"><td><code>optimiser</code></td>
+<td>
+<p>   Character The optimiser to use; one of 'gsl' or 'default'.</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>   Logical Run in verbose mode? (Default FALSE)</p>
+</td></tr>
+<tr valign="top"><td><code>reordering</code></td>
+<td>
+<p>   Character Type of reordering to use. (EXPERT OPTION; one of &quot;AUTO&quot;, &quot;DEFAULT&quot;, &quot;IDENTITY&quot;, &quot;REVERSEIDENTITY&quot;, &quot;BAND&quot;, &quot;METIS&quot;, &quot;GENMMD&quot;, &quot;AMD&quot;, &quot;MD&quot;, &quot;MMD&quot;, &quot;AMDBAR&quot;, &quot;AMDC&quot;, &quot;AMDBARC&quot;, or the output from <code>inla.qreordering</code>. Default is 'auto'.)</p>
+</td></tr>
+<tr valign="top"><td><code>cpo.diff</code></td>
+<td>
+<p>   Numerical Threshold to define when the cpo-calculations are inaccurate. (EXPERT OPTION.)</p>
+</td></tr>
+<tr valign="top"><td><code>npoints</code></td>
+<td>
+<p>   Numerical Number of points to use in the 'stratey=laplace' approximation (default 9)</p>
+</td></tr>
+<tr valign="top"><td><code>cutoff</code></td>
+<td>
+<p>   Numerical The cutoff used in the 'stratey=laplace' approximation. (Smaller value is more accurate and more slow.) (default 1e-4)</p>
+</td></tr>
+<tr valign="top"><td><code>adapt.hessian.mode</code></td>
+<td>
+<p>   Logical Should optimisation be continued if the Hessian estimate is void? (Default TRUE)</p>
+</td></tr>
+<tr valign="top"><td><code>adapt.hessian.max.trials</code></td>
+<td>
+<p>   Numerical Number of steps in the adaptive Hessian optimisation</p>
+</td></tr>
+<tr valign="top"><td><code>adapt.hessian.scale</code></td>
+<td>
+<p>   Numerical The scaling of the 'h' after each trial.</p>
+</td></tr>
+<tr valign="top"><td><code>adaptive.max</code></td>
+<td>
+<p>   Selecting <code>strategy="adaptive"</code> will chose the default strategy for all fixed effects and model components with length less or equal to <code>adaptive.max</code>, for others, the gaussian strategy will be applied.</p>
+</td></tr>
+<tr valign="top"><td><code>huge</code></td>
+<td>
+<p>   Logical If TRUE then try to do some of the internal parallisations differently. Hopefully this will be of benefite for 'HUGE' models. (Default FALSE.) [THIS OPTION IS OBSOLETE AND NOT USED!]</p>
+</td></tr>
+<tr valign="top"><td><code>step.len</code></td>
+<td>
+<p>   Numerical The step-length used to compute numerical derivaties of the log-likelihood</p>
+</td></tr>
+<tr valign="top"><td><code>stencil</code></td>
+<td>
+<p>   Numerical Number of points in the stencil used to compute the numerical derivaties of the log-likelihood (3, 5, 7 or 9). (default 5)</p>
+</td></tr>
+<tr valign="top"><td><code>lincomb.derived.correlation.matrix</code></td>
+<td>
+<p>   Logical If TRUE compute also the correlations for the derived linear combinations, if FALSE do not (Default FALSE)</p>
+</td></tr>
+<tr valign="top"><td><code>diagonal</code></td>
+<td>
+<p>   Numerical Expert use only! Add a this value on the diagonal of the joint precision matrix. (default 0.0)</p>
+</td></tr>
+<tr valign="top"><td><code>numint.maxfeval</code></td>
+<td>
+<p>   Numerical Maximum number of function evaluations in the the numerical integration for the hyperparameters. (Default 100000.)</p>
+</td></tr>
+<tr valign="top"><td><code>numint.relerr</code></td>
+<td>
+<p>   Numerical Relative error requirement in the the numerical integration for the hyperparameters. (Default 1e-5)</p>
+</td></tr>
+<tr valign="top"><td><code>numint.abserr</code></td>
+<td>
+<p>   Numerical Absolute error requirement in the the numerical integration for the hyperparameters. (Default 1e-6)</p>
+</td></tr>
+<tr valign="top"><td><code>cmin</code></td>
+<td>
+<p>   Numerical The minimum value for the negative Hessian from the likelihood. Increasing this value will stabalise the optimisation but can introduce bias. (Default -Inf)</p>
+</td></tr>
+<tr valign="top"><td><code>b.strategy</code></td>
+<td>
+<p>   Character If <code>cmin</code> is used, either keep the linear term (with <code>b.strategy="keep"</code>) or skip the contribution by setting the linear term to zero (<code>b.strategy="skip"</code>). The default value is <code>"skip"</code></p>
+</td></tr>
+<tr valign="top"><td><code>step.factor</code></td>
+<td>
+<p>   Numerical The step factor in the Newton-Raphson algorithm saying how large step to take (Default 1.0)</p>
+</td></tr>
+<tr valign="top"><td><code>global.node.factor</code></td>
+<td>
+<p>   Numerical The factor which defines the degree     required (how many neighbors), as a fraction of n-1, that is required to be     classified as a global node and numbered last (whatever the reordering routine     says). Here, n, is the size of the graph. (Disabled if larger than 1.) (default     2.0)</p>
+</td></tr>
+<tr valign="top"><td><code>global.node.degree</code></td>
+<td>
+<p>   Numerical The degree required (number of neighbors) to be classified as a global node and numbered last (whatever the reordering routine says). (default <code>.Machine$integer.max</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>stupid.search</code></td>
+<td>
+<p>   Logical Enable or disable the stupid-search-algorithm, if the Hessian calculations reveals that the mode is not found. (Default <code>TRUE</code>.)</p>
+</td></tr>
+<tr valign="top"><td><code>stupid.search.max.iter</code></td>
+<td>
+<p>   Numerical Maximum number of iterations allowed for the stupid-search-algorithm. (default 1000)</p>
+</td></tr>
+<tr valign="top"><td><code>stupid.search.factor</code></td>
+<td>
+<p>   Numerical Factor (&gt;=1) to increase the step-length with after each new interation. (default 1.05)</p>
+</td></tr>
+<tr valign="top"><td><code>control.vb</code></td>
+<td>
+<p>   List of arguments for various VB corrections. <code>enable</code>       Logical/Character Use this feature? If <code>"auto"</code> this will be selected   automatically. <code>strategy</code> Charactor What to correct, one of     &quot;mean&quot;,   &quot;more.to.come.later...&quot;. <code>verbose</code> Logical Be verbose or not.       <code>refinement</code> Integer Number of extra possible refinement iterations.     <code>max.correct</code> Numerical Bound the allowed correction     (<code>strategy="mean"</code>: <code>|diff.mean/stdev| &lt; max.correct</code>).     <code>hyperpar.correct</code> Logical Correct the marginal posterior for the     hyperparameters? <code>f.enable.limit</code> The size limit to correct for a <code>f()</code>     model component.</p>
+</td></tr>
+<tr valign="top"><td><code>num.gradient</code></td>
+<td>
+<p>   Character Set the numerical scheme to compute the gradient, one of <code>"forward"</code> or <code>"central"</code> (default).</p>
+</td></tr>
+<tr valign="top"><td><code>num.hessian</code></td>
+<td>
+<p>   Character Set the numerical scheme to compute the Hessian, one of <code>"forward"</code> or <code>"central"</code> (default).</p>
+</td></tr>
+<tr valign="top"><td><code>optimise.strategy</code></td>
+<td>
+<p>   Character THIS OPTION IS EXPERIMENTAL. Chose the optimiser strategy, one of <code>"plain"</code> or <code>"smart"</code> (default)</p>
+</td></tr>
+<tr valign="top"><td><code>use.directions</code></td>
+<td>
+<p>   THIS OPTION IS EXPERIMENTAL. Unless <code>FALSE</code> or <code>NULL</code>, use directions for computing gradient and Hessian, initialised with <code>use.directions</code> if a matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>constr.marginal.diagonal</code></td>
+<td>
+<p>   Add stability to <code>AQ^-1A^T</code> by adding a small diagonal term. (default <code>epsilon^0.5</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>improved.simplified.laplace</code></td>
+<td>
+<p>   If <code>TRUE</code> use an experimental improved variant, otherwise, use the standard one.</p>
+</td></tr>
+<tr valign="top"><td><code>parallel.linesearch</code></td>
+<td>
+<p>   Use serial (default) or parallel line-search (highly experimental for the moment)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The function <code>control.inla</code> is used to TAB-complete arguments and returns a list of given arguments.
+The function <code>inla.set.control.inla.default</code> returns a list with all the default values of all parameters within this control statement.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/control.update.html">control.update</a></code>, <code><a href="../../INLA/help/control.lincomb.html">control.lincomb</a></code>, <code><a href="../../INLA/help/control.group.html">control.group</a></code>, <code><a href="../../INLA/help/control.mix.html">control.mix</a></code>, <code><a href="../../INLA/help/control.pom.html">control.pom</a></code>, <code><a href="../../INLA/help/control.link.html">control.link</a></code>, <code><a href="../../INLA/help/control.expert.html">control.expert</a></code>, <code><a href="../../INLA/help/control.compute.html">control.compute</a></code>, <code><a href="../../INLA/help/control.lp.scale.html">control.lp.scale</a></code>, <code><a href="../../INLA/help/control.pardiso.default.html">control.pardiso.default</a></code>, <code><a href="../../INLA/help/control.bgev.default.html">control.bgev.default</a></code>, <code><a href="../../INLA/help/control.family.html">control.family</a></code>, <code><a href="../../INLA/help/control.fixed.html">control.fixed</a></code>, <code><a href="../../INLA/help/control.inla.html">control.inla</a></code>, <code><a href="../../INLA/help/control.predictor.html">control.predictor</a></code>, <code><a href="../../INLA/help/control.mode.html">control.mode</a></code>, <code><a href="../../INLA/help/control.hazard.html">control.hazard</a></code>, 
+<code><a href="../../INLA/help/inla.html">inla</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

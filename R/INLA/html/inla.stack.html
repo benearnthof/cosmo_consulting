@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Data stacking for advanced INLA models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.stack.remove.unused {INLA}"><tr><td>inla.stack.remove.unused {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Data stacking for advanced INLA models</h2>
+
+<h3>Description</h3>
+
+<p>Functions for combining data, effects and observation matrices into
+<code>inla.stack</code> objects, and extracting information from such objects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.stack.remove.unused(stack)
+
+inla.stack.compress(stack, remove.unused = TRUE)
+
+inla.stack(..., compress = TRUE, remove.unused = TRUE)
+
+inla.stack.sum(
+  data,
+  A,
+  effects,
+  tag = "",
+  compress = TRUE,
+  remove.unused = TRUE
+)
+
+inla.stack.join(..., compress = TRUE, remove.unused = TRUE)
+
+inla.stack.index(stack, tag)
+
+inla.stack.LHS(stack)
+
+inla.stack.RHS(stack)
+
+inla.stack.data(stack, ...)
+
+inla.stack.A(stack)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>stack</code></td>
+<td>
+<p>A <code>inla.data.stack</code> object, created by a call to
+<code>inla.stack</code>, <code>inla.stack.sum</code>, or <code>inla.stack.join</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>remove.unused</code></td>
+<td>
+<p>If <code>TRUE</code>, compress the model by removing rows of
+effects corresponding to all-zero columns in the <code>A</code> matrix (and
+removing those columns).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>For <code>inla.stack.join</code>, two or more data stacks of class
+<code>inla.data.stack</code>, created by a call to <code>inla.stack</code>,
+<code>inla.stack.sum</code>, or <code>inla.stack.join</code>. For
+<code>inla.stack.data</code>, a list of variables to be joined with the data list.</p>
+</td></tr>
+<tr valign="top"><td><code>compress</code></td>
+<td>
+<p>If <code>TRUE</code>, compress the model by removing duplicated
+rows of effects, replacing the corresponding A-matrix columns with a single
+column containing the sum.</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A list or codedata.frame of named data vectors. Scalars are
+expanded to match the number of rows in the A matrices, or any non-scalar
+data vectors. An error is given if the input is inconsistent.</p>
+</td></tr>
+<tr valign="top"><td><code>A</code></td>
+<td>
+<p>A list of observation matrices. Scalars are expanded to diagonal
+matrices matching the effect vector lengths. An error is given if the input
+is inconsistent or ambiguous.</p>
+</td></tr>
+<tr valign="top"><td><code>effects</code></td>
+<td>
+<p>A collection of effects/predictors.  Each list element
+corresponds to an observation matrix, and must either be a single vector, a
+list of vectors, or a <code>data.frame</code>. Single-element effect vectors are
+expanded to vectors matching the number of columns in the corresponding A
+matrix.  An error is given if the input is inconsistent or ombiguous.</p>
+</td></tr>
+<tr valign="top"><td><code>tag</code></td>
+<td>
+<p>A string specifying a tag for later identification.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For models with a single effects collection, the outer list container for
+<code>A</code> and <code>effects</code> may be omitted.
+</p>
+<p>Component size definitions:
+</p>
+
+<ul>
+<li> <p><i>n_l</i> effect blocks
+</p>
+</li>
+<li> <p><i>n_k</i> effects
+</p>
+</li>
+<li> <p><i>n_i</i> data values
+</p>
+</li>
+<li> <p><i>n_jl</i> effect size for block <i>l</i>
+</p>
+</li>
+<li> <p><i>n_j</i> <i>sum_l n_jl</i> total
+effect size
+</p>
+</li></ul>
+
+<p>Input: </p>
+
+<dl>
+<dt><code>data</code></dt><dd><p><i>(y1,&hellip;,y2)</i> <i>p</i>
+vectors, each of length <i>n_i</i></p>
+</dd>
+<dt><code>A</code></dt><dd><p><i>(A1,&hellip;,A2)</i> matrices of size
+<i>n_i by n_jl</i></p>
+</dd>
+<dt><code>effects</code></dt><dd><p><i>((x_[1,1],&hellip;,x_[n_k,1]),&hellip;(x_[1,n_l],&hellip;,x_[n_k,n_l]))</i>
+collections of effect
+vectors of length <i>n_jl</i> </p>
+</dd>
+</dl>
+
+<p style="text-align: center;"><i> predictor(y^1, &hellip;, y^p) ~ sum_{l=1}^{n_l} A^l sum_{k=1}^{n_k}
+g(k, x^{k,l}) = tilde{A} sum_{k=1}^{n_k} g(k, tilde{x}^k) </i></p>
+
+<p>where
+</p>
+<p style="text-align: center;"><i> tilde{A} = cbind( A^1, ..., A^{n_l} ) </i></p>
+
+<p>and
+</p>
+<p style="text-align: center;"><i> tilde{x}^k = rbind( x^{k,1}, ..., x^{k,n_l} ) </i></p>
+
+<p>and for each block <i>l</i>, any missing
+<i>x^{k,l}</i> is replaced by an <code>NA</code> vector.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data stack of class <code>inla.data.stack</code>.
+Elements: </p>
+
+<ul>
+<li><p><code>data</code> <i>=(y^1, &hellip;, y^p, tilde{x}^1, &hellip;,
+tilde{x}^{n_k})</i>
+</p>
+</li>
+<li><p><code>A</code> <i>=tilde{A}</i>
+</p>
+</li>
+<li><p><code>data.names</code> List
+of data names, length <i>p</i>
+</p>
+</li>
+<li><p><code>effect.names</code> List of effect names,
+length <i>n_k</i>
+</p>
+</li>
+<li><p><code>n.data</code> Data length, <i>n_i</i>
+</p>
+</li>
+<li><p><code>index</code>
+List indexed by <code>tag</code>s, each element indexing into <i>i=1, &hellip;,
+n_i</i> </p>
+</li></ul>
+
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>inla.stack.remove.unused</code>: Remove unused entries from an existing stack
+</p>
+</li>
+<li> <p><code>inla.stack.compress</code>: Compress an existing stack by removing duplicates
+</p>
+</li>
+<li> <p><code>inla.stack.sum</code>: Create data stack as a sum of predictors
+</p>
+</li>
+<li> <p><code>inla.stack.join</code>: Join two or more data stacks
+</p>
+</li>
+<li> <p><code>inla.stack.index</code>: Extract tagged indices
+</p>
+</li>
+<li> <p><code>inla.stack.LHS</code>: Extract data associated with the &quot;left hand side&quot; of the model
+(e.g. the data itself, <code>Ntrials</code>, <code>link</code>, <code>E</code>)
+</p>
+</li>
+<li> <p><code>inla.stack.RHS</code>: Extract data associated with the &quot;right hand side&quot; of the model
+(all the covariates/predictors)
+</p>
+</li>
+<li> <p><code>inla.stack.data</code>: Extract data for an inla call, and optionally join with other variables
+</p>
+</li>
+<li> <p><code>inla.stack.A</code>: Extract the &quot;A matrix&quot; for control.predictor
+</p>
+</li></ul>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>inla.stack.remove.unused</code>: Remove
+unused entries from an existing stack
+</p>
+</li>
+<li> <p><code>inla.stack.compress</code>: Compress an existing stack by removing
+duplicates
+</p>
+</li>
+<li> <p><code>inla.stack</code>: Shorthand for inla.stack.join and inla.stack.sum
+</p>
+</li>
+<li> <p><code>inla.stack.sum</code>: Create data stack as a sum of predictors
+</p>
+</li>
+<li> <p><code>inla.stack.join</code>: Join two or more data stacks
+</p>
+</li>
+<li> <p><code>inla.stack.index</code>: Extract tagged indices
+</p>
+</li>
+<li> <p><code>inla.stack.LHS</code>: Extract data associated with the &quot;left hand
+side&quot; of the model (e.g. the data itself, <code>Ntrials</code>, <code>link</code>,
+<code>E</code>)
+</p>
+</li>
+<li> <p><code>inla.stack.RHS</code>: Extract data associated with the &quot;right hand
+side&quot; of the model (all the covariates/predictors)
+</p>
+</li>
+<li> <p><code>inla.stack.data</code>: Extract data for an inla call, and optionally
+join with other variables
+</p>
+</li>
+<li> <p><code>inla.stack.A</code>: Extract the &quot;A matrix&quot; for control.predictor </p>
+</li></ul>
+
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.spde.make.A.html">inla.spde.make.A()</a></code>, <code><a href="../../INLA/help/inla.spde.make.index.html">inla.spde.make.index()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+n &lt;- 200
+loc &lt;- matrix(runif(n * 2), n, 2)
+mesh &lt;- inla.mesh.2d(
+    loc.domain = loc,
+    max.edge = c(0.05, 0.2)
+)
+proj.obs &lt;- inla.mesh.projector(mesh, loc = loc)
+proj.pred &lt;- inla.mesh.projector(mesh, loc = mesh$loc)
+spde &lt;- inla.spde2.pcmatern(mesh,
+    prior.range = c(0.01, 0.01),
+    prior.sigma = c(10, 0.01)
+)
+
+covar &lt;- rnorm(n)
+field &lt;- inla.qsample(n = 1, Q = inla.spde.precision(spde, theta = log(c(0.5, 1))))[, 1]
+y &lt;- 2 * covar + inla.mesh.project(proj.obs, field)
+
+A.obs &lt;- inla.spde.make.A(mesh, loc = loc)
+A.pred &lt;- inla.spde.make.A(mesh, loc = proj.pred$loc)
+stack.obs &lt;-
+    inla.stack(
+        data = list(y = y),
+        A = list(A.obs, 1),
+        effects = list(c(
+            list(Intercept = 1),
+            inla.spde.make.index("spatial", spde$n.spde)
+        ),
+        covar = covar
+        ),
+        tag = "obs"
+    )
+stack.pred &lt;-
+    inla.stack(
+        data = list(y = NA),
+        A = list(A.pred),
+        effects = list(c(
+            list(Intercept = 1),
+            inla.spde.make.index("spatial", mesh$n)
+        )),
+        tag = "pred"
+    )
+stack &lt;- inla.stack(stack.obs, stack.pred)
+
+formula &lt;- y ~ -1 + Intercept + covar + f(spatial, model = spde)
+result1 &lt;- inla(formula,
+    data = inla.stack.data(stack.obs, spde = spde),
+    family = "gaussian",
+    control.predictor = list(
+        A = inla.stack.A(stack.obs),
+        compute = TRUE
+    )
+)
+
+plot(y, result1$summary.fitted.values[inla.stack.index(stack.obs, "obs")$data, "mean"],
+    main = "Observations vs posterior predicted values at the data locations"
+)
+
+result2 &lt;- inla(formula,
+    data = inla.stack.data(stack, spde = spde),
+    family = "gaussian",
+    control.predictor = list(
+        A = inla.stack.A(stack),
+        compute = TRUE
+    )
+)
+
+field.pred &lt;- inla.mesh.project(
+    proj.pred,
+    result2$summary.fitted.values[inla.stack.index(stack, "pred")$data, "mean"]
+)
+field.pred.sd &lt;- inla.mesh.project(
+    proj.pred,
+    result2$summary.fitted.values[inla.stack.index(stack, "pred")$data, "sd"]
+)
+
+plot(field, field.pred, main = "True vs predicted field")
+abline(0, 1)
+image(inla.mesh.project(mesh,
+    field = field,
+    dims = c(200, 200)
+),
+main = "True field"
+)
+image(inla.mesh.project(mesh,
+    field = field.pred,
+    dims = c(200, 200)
+),
+main = "Posterior field mean"
+)
+image(inla.mesh.project(mesh,
+    field = field.pred.sd,
+    dims = c(200, 200)
+),
+main = "Prediction standard deviation"
+)
+plot(field, (field.pred - field) / 1,
+    main = "True field vs standardised prediction residuals"
+)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

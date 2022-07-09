@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Observation matrices for mesh models.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.spde.make.block.A {INLA}"><tr><td>inla.spde.make.block.A {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Observation matrices for mesh models.</h2>
+
+<h3>Description</h3>
+
+<p>Constructs observation/prediction weight matrices for numerical integration
+schemes for regional data problems.  Primarily intended for internal use by
+<code><a href="../../INLA/help/inla.spde.make.A.html">inla.spde.make.A()</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.spde.make.block.A(
+  A,
+  block,
+  n.block = max(block),
+  weights = NULL,
+  rescale = c("none", "count", "weights", "sum")
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>A</code></td>
+<td>
+<p>A precomputed observation/prediction matrix for locations that are
+to be joined.</p>
+</td></tr>
+<tr valign="top"><td><code>block</code></td>
+<td>
+<p>Indices specifying block groupings: Entries with the same
+<code>block</code> value are joined into a single row in the resulting matrix, and
+the <code>block</code> values are the row indices.</p>
+</td></tr>
+<tr valign="top"><td><code>n.block</code></td>
+<td>
+<p>The number of blocks.</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+<p>Optional scaling weights to be applied row-wise to the input
+<code>A</code> matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>rescale</code></td>
+<td>
+<p>Specifies what scaling method should be used when joining the
+rows of the <code>A</code> matrix as grouped by the <code>block</code> specification.
+</p>
+ <ul>
+<li> <p><code>'none'</code>: Straight sum, no rescaling.  </p>
+</li>
+<li>
+<p><code>'count'</code>: Divide by the number of entries in the block.  </p>
+</li>
+<li>
+<p><code>'weights'</code>: Divide by the sum of the <code>weight</code> values within each
+block.  </p>
+</li>
+<li> <p><code>'sum'</code>: Divide by the resulting row sums.  </p>
+</li></ul>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.spde.make.A.html">inla.spde.make.A()</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

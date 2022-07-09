@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: High-quality triangulations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.mesh.query {INLA}"><tr><td>inla.mesh.query {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>High-quality triangulations</h2>
+
+<h3>Description</h3>
+
+<p>Query information about an inla.mesh object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.mesh.query(mesh, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mesh</code></td>
+<td>
+<p>An <code>inla.mesh</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Query arguments.
+</p>
+
+<ul>
+<li><p> tt.neighbours Compute
+neighbour triangles for triangles; list of vectors: list(triangles, orders)
+</p>
+</li>
+<li><p> vt.neighbours Compute neighbour triangles for vertices; list of
+vectors: list(vertices, orders)
+</p>
+</li></ul>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list of query results.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.mesh.create.html">inla.mesh.create()</a></code>, <code><a href="../../INLA/help/inla.mesh.segment.html">inla.mesh.segment()</a></code>,
+<code><a href="../../INLA/help/inla.mesh.lattice.html">inla.mesh.lattice()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+loc &lt;- matrix(c(0.1, 0.15), 1, 2)
+lattice &lt;- inla.mesh.lattice(dims = c(10, 10))
+mesh &lt;- inla.mesh.create(loc = loc, lattice = lattice, extend = FALSE)
+
+vt &lt;- which(inla.mesh.query(mesh,
+    vt.neighbours = list(
+        mesh$idx$loc,
+        4:6
+    )
+)$vt.neighbours)
+
+mesh2 &lt;- inla.mesh.create(mesh$loc,
+    tv = mesh$graph$tv[vt, , drop = FALSE],
+    refine = FALSE, extend = FALSE
+)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

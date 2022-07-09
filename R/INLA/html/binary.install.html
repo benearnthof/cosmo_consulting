@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Install alternative binary builds</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.binary.install {INLA}"><tr><td>inla.binary.install {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Install alternative binary builds</h2>
+
+<h3>Description</h3>
+
+<p>Install alternative binary builds.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+    inla.binary.install(os = c("CentOS Linux-6", "CentOS Linux-7", "CentOS Linux-8",
+                               "CentOS Stream-8",
+                               "Fedora-33", "Fedora-34", "Fedora Linux-35",
+                               "Manjaro Linux",
+                               "Ubuntu-16.04", "Ubuntu-18.04", "Ubuntu-20.04"), 
+                        path = NULL, verbose = TRUE, md5.check = TRUE)
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>os</code></td>
+<td>
+<p>If <code>os</code> is given, install binary build for this <code>os</code>.
+If <code>os</code> is not given, chose <code>os</code> interactively
+among available builds.</p>
+</td></tr>
+<tr valign="top"><td><code>path</code></td>
+<td>
+<p>character. The install path. If <code>NULL</code> the path is derived from <code>INLA</code> package</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>Logical. Verbose output if <code>TRUE</code></p>
+</td></tr>
+<tr valign="top"><td><code>md5.check</code></td>
+<td>
+<p>Logical. If <code>TRUE</code>, stop if md5-checksum-file is not present
+or md5-checksum fail. If <code>FALSE</code>, ignore md5-checksum check.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Install a new binary for <code>os</code> unless
+<code>missing(os)</code>, for which the <code>os</code> is chosen
+interactively among the available builds.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Return <code>TRUE</code> if installation was sucessful and <code>FALSE</code> if not.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+   ## Not run: 
+     inla.binary.install()
+     inla.binary.install(os = "CentOS Linux-7")
+     inla.binary.install(os = "CentOS Linux-7",  path = "~/local/bin/inla.binary")
+   
+## End(Not run)
+ </pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

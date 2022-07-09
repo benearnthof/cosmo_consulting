@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Group or cluster covariates</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.group {INLA}"><tr><td>inla.group {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Group or cluster covariates</h2>
+
+<h3>Description</h3>
+
+<p><code>inla.group</code> group or cluster covariates so to reduce
+the number of unique values</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.group(x, n = 25, method = c("cut", "quantile"), idx.only = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>The vector of covariates to group.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Number of classes or bins to group into.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>Group either using bins with equal length intervals
+(<code>method = "cut"</code>), or equal distance in the &lsquo;probability&rsquo;
+scale using the quantiles (<code>method = "quantile"</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>idx.only</code></td>
+<td>
+<p>Option to return the index only and not the
+<code>method</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>inla.group</code> return the new grouped covariates where the classes
+are set to the median of all the covariates belonging to that group.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/f.html">f</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## this gives groups 3 and 8
+x = 1:10
+x.group = inla.group(x, n = 2)
+
+## this is the intended use, to reduce the number of unique values in
+## the of first argument of f()
+n = 100
+x = rnorm(n)
+y = x + rnorm(n)
+result = inla(y ~ f(inla.group(x, n = 20), model = "iid"), data=data.frame(y=y,x=x))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

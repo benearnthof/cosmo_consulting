@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Utility functions for the PC prior for correlation in AR(1)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for pc.cor1 {INLA}"><tr><td>pc.cor1 {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Utility functions for the PC prior for correlation in AR(1)</h2>
+
+<h3>Description</h3>
+
+<p>Functions to evaluate, sample, compute quantiles and
+percentiles of the PC prior for the correlation
+in the Gaussian AR(1) model where the base-model
+is correlation one.</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ inla.pc.rcor1(n, u, alpha, lambda)
+ inla.pc.dcor1(cor, u, alpha, lambda, log = FALSE)
+ inla.pc.qcor1(p, u, alpha, lambda)
+ inla.pc.pcor1(q, u, alpha, lambda)
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Number of observations</p>
+</td></tr>
+<tr valign="top"><td><code>u</code></td>
+<td>
+<p>The upper limit (see Details)</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>The probability going above the upper limit (see Details)</p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>The rate parameter (see Details)</p>
+</td></tr>
+<tr valign="top"><td><code>cor</code></td>
+<td>
+<p>Vector of correlations</p>
+</td></tr>
+<tr valign="top"><td><code>log</code></td>
+<td>
+<p>Logical. Return the density in natural or log-scale.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>Vector of probabilities</p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>Vector of quantiles</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The statement <code>Prob(cor &gt; u) = alpha</code> is used to
+determine <code>lambda</code> unless <code>lambda</code> is given.
+Either <code>lambda</code>  must be given,  or
+<code>u</code> AND <code>alpha</code>.
+</p>
+
+
+<h3>Value</h3>
+
+
+<p><code>inla.pc.dcor1</code> gives the density,
+<code>inla.pc.pcor1</code> gives the distribution function,
+<code>inla.pc.qcor1</code> gives the quantile function, and
+<code>inla.pc.rcor1</code> generates random deviates.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>See Also</h3>
+
+<p>inla.doc(&quot;pc.rho1&quot;)</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ cor = inla.pc.rcor1(100,  lambda = 1)
+ d = inla.pc.dcor1(cor, lambda = 1)
+ cor = inla.pc.qcor1(c(0.3, 0.7), u = 0.5, alpha=0.75)
+ inla.pc.pcor1(cor, u = 0.5, alpha=0.75)
+ </pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

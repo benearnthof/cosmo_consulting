@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Methods for projecting to/from an inla.mesh</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.mesh.project {INLA}"><tr><td>inla.mesh.project {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Methods for projecting to/from an inla.mesh</h2>
+
+<h3>Description</h3>
+
+<p>Calculate a lattice projection to/from an <code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.mesh.project(...)
+
+## S3 method for class 'inla.mesh'
+inla.mesh.project(mesh, loc = NULL, field = NULL, crs = NULL, ...)
+
+## S3 method for class 'inla.mesh.1d'
+inla.mesh.project(mesh, loc, field = NULL, ...)
+
+## S3 method for class 'inla.mesh.projector'
+inla.mesh.project(projector, field, ...)
+
+inla.mesh.projector(...)
+
+## S3 method for class 'inla.mesh'
+inla.mesh.projector(
+  mesh,
+  loc = NULL,
+  lattice = NULL,
+  xlim = NULL,
+  ylim = NULL,
+  dims = c(100, 100),
+  projection = NULL,
+  crs = NULL,
+  ...
+)
+
+## S3 method for class 'inla.mesh.1d'
+inla.mesh.projector(mesh, loc = NULL, xlim = mesh$interval, dims = 100, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments passed on to methods.</p>
+</td></tr>
+<tr valign="top"><td><code>mesh</code></td>
+<td>
+<p>An <code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code> or <code><a href="../../INLA/help/inla.mesh.1d.html">inla.mesh.1d()</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>loc</code></td>
+<td>
+<p>Projection locations.  Can be a matrix or a <code>SpatialPoints</code>
+or a <code>SpatialPointsDataFrame</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>field</code></td>
+<td>
+<p>Basis function weights, one per mesh basis function, describing
+the function to be avaluated at the projection locationssFunction values for
+on the mesh</p>
+</td></tr>
+<tr valign="top"><td><code>crs</code></td>
+<td>
+<p>An optional CRS or inla.CRS object associated with <code>loc</code>
+and/or <code>lattice</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>projector</code></td>
+<td>
+<p>An <code>inla.mesh.projector</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>lattice</code></td>
+<td>
+<p>An <code><a href="../../INLA/help/inla.mesh.lattice.html">inla.mesh.lattice()</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+<p>X-axis limits for a lattice. For R2 meshes, defaults to covering
+the domain.</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+<p>Y-axis limits for a lattice. For R2 meshes, defaults to covering
+the domain.</p>
+</td></tr>
+<tr valign="top"><td><code>dims</code></td>
+<td>
+<p>Lattice dimensions.</p>
+</td></tr>
+<tr valign="top"><td><code>projection</code></td>
+<td>
+<p>One of <code>c("default", "longlat", "longsinlat", "mollweide")</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The call <code>inla.mesh.project(mesh, loc, field=..., ...)</code>, is a shortcut
+to inla.mesh.project(inla.mesh.projector(mesh, loc), field).
+</p>
+
+
+<h3>Value</h3>
+
+<p>For <code>inla.mesh.project(mesh, ...)</code>, a list with projection
+information.  For <code>inla.mesh.projector(mesh, ...)</code>, an
+<code>inla.mesh.projector</code> object.  For <code>inla.mesh.project(projector, field, ...)</code>, a field projected from the mesh onto the locations given by
+the projector object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code>, <code><a href="../../INLA/help/inla.mesh.1d.html">inla.mesh.1d()</a></code>,
+<code><a href="../../INLA/help/inla.mesh.lattice.html">inla.mesh.lattice()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+n &lt;- 20
+loc &lt;- matrix(runif(n * 2), n, 2)
+mesh &lt;- inla.mesh.create(loc, refine = list(max.edge = 0.05))
+proj &lt;- inla.mesh.projector(mesh)
+field &lt;- cos(mesh$loc[, 1] * 2 * pi * 3) * sin(mesh$loc[, 2] * 2 * pi * 7)
+image(proj$x, proj$y, inla.mesh.project(proj, field))
+
+if (require(rgl)) {
+    plot(mesh, rgl = TRUE, col = field, draw.edges = FALSE, draw.vertices = FALSE)
+}
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

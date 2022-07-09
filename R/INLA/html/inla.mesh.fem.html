@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Finite element matrices</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.mesh.fem {INLA}"><tr><td>inla.mesh.fem {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Finite element matrices</h2>
+
+<h3>Description</h3>
+
+<p>Constructs finite element matrices for <code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code> and
+<code><a href="../../INLA/help/inla.mesh.1d.html">inla.mesh.1d()</a></code> objects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.mesh.fem(mesh, order = 2)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mesh</code></td>
+<td>
+<p>An <code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code> or <code><a href="../../INLA/help/inla.mesh.1d.html">inla.mesh.1d()</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>The model order.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list of sparse matrices based on basis functions <code>psi_i</code>:
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>c0 </code></td>
+<td>
+<p><code style="white-space: pre;">c0[i,j] = &lt; psi_i, 1 &gt;</code></p>
+</td></tr> <tr valign="top"><td><code>c1 </code></td>
+<td>
+<p><code style="white-space: pre;">c1[i,j] = &lt; psi_i, psi_j &gt;</code></p>
+</td></tr> <tr valign="top"><td><code>g1 </code></td>
+<td>
+<p><code style="white-space: pre;">g1[i,j] = &lt; grad psi_i, grad psi_j &gt;</code></p>
+</td></tr>
+<tr valign="top"><td><code>g2 </code></td>
+<td>
+<p><code>g2 = g1 * c0^-1 * g1</code></p>
+</td></tr> <tr valign="top"><td><code>gk </code></td>
+<td>
+<p><code>gk = g1 * (c0^-1 * g1)^(k-1)</code>, up to and including <code>k=order</code></p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

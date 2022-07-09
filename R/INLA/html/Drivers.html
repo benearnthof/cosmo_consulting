@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Time series with seasonal effect</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for Drivers {INLA}"><tr><td>Drivers {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Time series with seasonal effect</h2>
+
+<h3>Description</h3>
+
+<p>Montly total of car drivers killed or several injuried in England from
+January 1969 to December 1984
+</p>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 204 observations on the following 4 variables.
+</p>
+
+<dl>
+<dt>y</dt><dd><p>Number of deaths</p>
+</dd>
+<dt>belt</dt><dd><p>Indicator of weather the belt was compulsory to use
+(1) or not (0)</p>
+</dd>
+<dt>trend</dt><dd><p>time (in months)</p>
+</dd>
+<dt>seasonal</dt><dd><p>time (in months)</p>
+</dd>
+</dl>
+
+
+
+<h3>Details</h3>
+
+<p>NB: The last 12 lines of the data set have the first column set to
+<code>NULL</code> since these data where not observed but we want to predict them.
+</p>
+
+
+<h3>References</h3>
+
+<p>Rue, H and Held, L. (2005) <em>Gaussian Markov Random Fields -
+Theory and Applications</em> Chapman and Hall
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+data(Drivers)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

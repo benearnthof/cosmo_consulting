@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute the reordering using the GMRFLib implementation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for qreordering {INLA}"><tr><td>qreordering {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute the reordering using the GMRFLib implementation</h2>
+
+<h3>Description</h3>
+
+<p>This function compute the reordering (or find the best reordering)
+using the GMRFLib implementation</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+     inla.qreordering(graph, reordering = inla.reorderings())
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>A <code>(inla-)graph</code> object</p>
+</td></tr>
+<tr valign="top"><td><code>reordering</code></td>
+<td>
+<p>The name of the reordering algorithm to be used; either
+one of the names listed in <code>inla.reorderings()</code>.
+The default is &quot;auto&quot; which try several reordering algorithm
+and use the best one for this particular matrix.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>inla.qreordering</code> returns a list with the name of the reordering algorithm used or
+found, the reordering code for the reordering algorithm,
+the actual reordering and its inverse.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ g = system.file("demodata/germany.graph", package="INLA")
+ r = inla.qreordering(g)
+ m = inla.graph2matrix(g)
+ r = inla.qreordering(m)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

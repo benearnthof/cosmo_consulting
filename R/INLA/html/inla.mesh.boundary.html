@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Constraint segment extraction for inla.mesh</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.mesh.boundary {INLA}"><tr><td>inla.mesh.boundary {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Constraint segment extraction for inla.mesh</h2>
+
+<h3>Description</h3>
+
+<p>Constructs an list of <code>inla.mesh.segment</code> object from boundary or
+interior constraint information in an <code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code> object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.mesh.boundary(mesh, grp = NULL)
+
+inla.mesh.interior(mesh, grp = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mesh</code></td>
+<td>
+<p>An <code>inla.mesh</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>grp</code></td>
+<td>
+<p>Group indices to extract.  If <code>NULL</code>, all boundary/interior
+constrain groups are extracted.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list of <code>inla.mesh.segment</code> objects.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.mesh.segment.html">inla.mesh.segment()</a></code>, <code><a href="../../INLA/help/inla.mesh.create.html">inla.mesh.create()</a></code>,
+<code><a href="../../INLA/help/inla.mesh.create.helper.html">inla.mesh.create.helper()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+loc &lt;- matrix(runif(100 * 2) * 1000, 100, 2)
+mesh &lt;- inla.mesh.create.helper(points.domain = loc, max.edge = c(50, 500))
+boundary &lt;- inla.mesh.boundary(mesh)
+interior &lt;- inla.mesh.interior(mesh)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Default INLA plotting</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for plot.inla {INLA}"><tr><td>plot.inla {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Default INLA plotting</h2>
+
+<h3>Description</h3>
+
+<p>Takes am <code>inla</code> object produced by <code>inla</code> and plot the results
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ ## S3 method for class 'inla'
+plot(x,
+              plot.fixed.effects = TRUE,
+              plot.lincomb = TRUE,
+              plot.random.effects = TRUE,
+              plot.hyperparameters = TRUE,
+              plot.predictor = TRUE,
+              plot.q = TRUE,
+              plot.cpo = TRUE,
+              plot.prior = FALSE,
+              single = FALSE,
+              postscript = FALSE,
+              pdf = FALSE,
+              prefix = "inla.plots/figure-",
+              intern = FALSE,
+              debug = FALSE,
+              cex = 1.75,
+              ...)
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A fitted  <code>inla</code> object produced by <code>inla</code> </p>
+</td></tr>
+<tr valign="top"><td><code>plot.fixed.effects</code></td>
+<td>
+<p>Boolean indicating if posterior marginals
+for the fixed effects in the model should be plotted </p>
+</td></tr>
+<tr valign="top"><td><code>plot.lincomb</code></td>
+<td>
+<p>Boolean indicating if posterior marginals
+for the linear combinations should be plotted </p>
+</td></tr>
+<tr valign="top"><td><code>plot.random.effects</code></td>
+<td>
+<p>Boolean indicating if posterior mean and quantiles
+for the random effects in the model should be plotted  </p>
+</td></tr>
+<tr valign="top"><td><code>plot.hyperparameters</code></td>
+<td>
+<p>Boolean indicating if posterior marginals
+for the hyperparameters in the model should be plotted </p>
+</td></tr>
+<tr valign="top"><td><code>plot.predictor</code></td>
+<td>
+<p>Boolean indicating if posterior mean and quantiles
+for the linear predictor in the model should be plotted </p>
+</td></tr>
+<tr valign="top"><td><code>plot.q</code></td>
+<td>
+<p>Boolean indicating if precision matrix should be displayed</p>
+</td></tr>
+<tr valign="top"><td><code>plot.cpo</code></td>
+<td>
+<p>Boolean indicating if CPO/PIT valuesshould be plotted</p>
+</td></tr>
+<tr valign="top"><td><code>plot.prior</code></td>
+<td>
+<p>Plot also the prior density for the hyperparameters</p>
+</td></tr>
+<tr valign="top"><td><code>single</code></td>
+<td>
+<p>Boolean indicating if there should be more than one plot per page
+(FALSE) or just one (TRUE)</p>
+</td></tr>
+<tr valign="top"><td><code>postscript</code></td>
+<td>
+<p>Boolean indicating if postscript files should be produced instead</p>
+</td></tr>
+<tr valign="top"><td><code>pdf</code></td>
+<td>
+<p>Boolean indicating if PDF files should be produced instead</p>
+</td></tr>
+<tr valign="top"><td><code>prefix</code></td>
+<td>
+<p>The prefix for the created files. Additional numbering and suffix is added.</p>
+</td></tr>
+<tr valign="top"><td><code>intern</code></td>
+<td>
+<p>Plot also the hyperparameters in its internal scale.</p>
+</td></tr>
+<tr valign="top"><td><code>debug</code></td>
+<td>
+<p>Write some debug information</p>
+</td></tr>
+<tr valign="top"><td><code>cex</code></td>
+<td>
+<p>The <code>cex</code> parameter in <code>par()</code>. If set to <code>NULL</code> or <code>0</code>,
+then default values will be used for graphics parameters</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to <code>postscript()</code>, <code>pdf()</code> or <code>dev.new()</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The return value is a list of the files created (if any).</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a> </p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.html">inla</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+result = inla(...)
+plot(result)
+plot(result, single = TRUE, plot.prior = TRUE)
+plot(result, single = TRUE, pdf = TRUE, paper = "a4")
+   
+## End(Not run)
+ </pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

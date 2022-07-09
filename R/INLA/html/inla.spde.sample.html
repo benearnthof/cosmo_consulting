@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Sample from SPDE models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.spde.sample {INLA}"><tr><td>inla.spde.sample {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Sample from SPDE models</h2>
+
+<h3>Description</h3>
+
+<p>Old methods fo sampling from a SPDE model.  For new code, use
+<code><a href="../../INLA/help/inla.spde.precision.html">inla.spde.precision()</a></code> and <code><a href="../../INLA/help/inla.qsample.html">inla.qsample()</a></code> instead.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.spde.sample(...)
+
+## Default S3 method:
+inla.spde.sample(precision, seed = NULL, ...)
+
+## S3 method for class 'inla.spde'
+inla.spde.sample(spde, seed = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Parameters passed on to other methods.</p>
+</td></tr>
+<tr valign="top"><td><code>precision</code></td>
+<td>
+<p>A precision matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>The seed for the pseudo-random generator.</p>
+</td></tr>
+<tr valign="top"><td><code>spde</code></td>
+<td>
+<p>An <code>inla.spde</code> object.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.spde.precision.html">inla.spde.precision()</a></code>, <code><a href="../../INLA/help/inla.qsample.html">inla.qsample()</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

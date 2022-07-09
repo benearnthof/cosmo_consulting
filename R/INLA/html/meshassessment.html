@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Interactive mesh building and diagnostics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.mesh.assessment {INLA}"><tr><td>inla.mesh.assessment {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Interactive mesh building and diagnostics</h2>
+
+<h3>Description</h3>
+
+<p>Assess the finite element
+approximation errors in a mesh for interactive R sessions.
+More detailed assessment tools are in <code><a href="../../INLA/help/meshbuilder.html">meshbuilder</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.mesh.assessment(mesh)
+</pre>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a></p>
+
+
+<h3>See Also</h3>
+
+<p>inla.mesh.2d, inla.mesh.create, meshbuilder</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+bnd &lt;- inla.mesh.segment(cbind(c(0, 10, 10, 0, 0),
+                               c(0, 0, 10, 10, 0)), bnd = TRUE)
+mesh &lt;- inla.mesh.2d(boundary = bnd, max.edge = 1)
+out &lt;- inla.mesh.assessment(mesh, spatial.range = 3, alpha = 2)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

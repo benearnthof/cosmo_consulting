@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Plot CRS and inla.CRS objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for plot.inla.CRS {INLA}"><tr><td>plot.inla.CRS {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Plot CRS and inla.CRS objects</h2>
+
+<h3>Description</h3>
+
+<p>Plot the outline of a CRS or inla.CRS projection, with optional graticules
+(transformed parallels and meridians) and Tissot indicatrices.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'inla.CRS'
+plot(
+  x,
+  xlim = NULL,
+  ylim = NULL,
+  outline = TRUE,
+  graticule = c(15, 15, 45),
+  tissot = c(30, 30, 30),
+  asp = 1,
+  add = FALSE,
+  eps = 0.05,
+  ...
+)
+
+## S3 method for class 'CRS'
+plot(
+  x,
+  xlim = NULL,
+  ylim = NULL,
+  outline = TRUE,
+  graticule = c(15, 15, 45),
+  tissot = c(30, 30, 30),
+  asp = 1,
+  add = FALSE,
+  eps = 0.05,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A <code>CRS</code> or <code><a href="../../INLA/help/inla.CRS.html">inla.CRS()</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+<p>Optional x-axis limits.</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+<p>Optional y-axis limits.</p>
+</td></tr>
+<tr valign="top"><td><code>outline</code></td>
+<td>
+<p>Logical, if <code>TRUE</code>, draw the outline of the projection.</p>
+</td></tr>
+<tr valign="top"><td><code>graticule</code></td>
+<td>
+<p>Vector of length at most 3, to plot meridians with spacing
+<code>graticule[1]</code> degrees and parallels with spacing <code>graticule[2]</code>
+degrees. <code>graticule[3]</code> optionally specifies the spacing above and
+below the first and last parallel.  When <code>graticule[1]==0</code> no meridians
+are drawn, and when <code>graticule[2]==0</code> no parallels are drawn. Use
+<code>graticule=NULL</code> to skip drawing a graticule.</p>
+</td></tr>
+<tr valign="top"><td><code>tissot</code></td>
+<td>
+<p>Vector of length at most 3, to plot Tissot's indicatrices with
+spacing <code>tissot[1]</code> degrees and parallels with spacing <code>tissot[2]</code>
+degrees. <code>tissot[3]</code> specifices a scaling factor.  Use
+<code>tissot=NULL</code> to skip drawing a Tissot's indicatrices.</p>
+</td></tr>
+<tr valign="top"><td><code>asp</code></td>
+<td>
+<p>The aspect ratio for the plot, default 1.</p>
+</td></tr>
+<tr valign="top"><td><code>add</code></td>
+<td>
+<p>If <code>TRUE</code>, add the projecton plot to an existing plot.</p>
+</td></tr>
+<tr valign="top"><td><code>eps</code></td>
+<td>
+<p>Clipping tolerance for rudimentary boundary clipping</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments passed on to the internal calls to
+<code>plot</code> and <code>lines</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.CRS.html">inla.CRS()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+if (require(rgdal)) {
+    oblique &lt;- c(0, 45, 45, 0)
+    for (projtype in c("longlat", "lambert", "mollweide", "hammer")) {
+        plot(inla.CRS(projtype), main = projtype)
+        plot(inla.CRS(projtype, oblique = oblique), main = paste("oblique", projtype))
+    }
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

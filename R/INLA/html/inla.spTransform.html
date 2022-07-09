@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Wrapper method for 'sp::spTransform'</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.spTransform {INLA}"><tr><td>inla.spTransform {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Wrapper method for <code>sp::spTransform</code></h2>
+
+<h3>Description</h3>
+
+<p>Handles transformation of various inla objects accorting to coordinate
+reference systems of <code>sp::CRS</code> or <code>inla.CRS</code> class.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.spTransform(x, ...)
+
+## Default S3 method:
+inla.spTransform(x, crs0, crs1, passthrough = FALSE, ...)
+
+## S3 method for class 'SpatialPoints'
+inla.spTransform(x, CRSobj, passthrough = FALSE, ...)
+
+## S3 method for class 'SpatialPointsDataFrame'
+inla.spTransform(x, CRSobj, passthrough = FALSE, ...)
+
+## S3 method for class 'inla.mesh.lattice'
+inla.spTransform(x, CRSobj, passthrough = FALSE, ...)
+
+## S3 method for class 'inla.mesh.segment'
+inla.spTransform(x, CRSobj, passthrough = FALSE, ...)
+
+## S3 method for class 'inla.mesh'
+inla.spTransform(x, CRSobj, passthrough = FALSE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>The object that should be transformed from it's current CRS to a
+new CRS</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Potential additional arguments</p>
+</td></tr>
+<tr valign="top"><td><code>crs0</code></td>
+<td>
+<p>The source <code>sp::CRS</code> or <code>inla.CRS</code> object</p>
+</td></tr>
+<tr valign="top"><td><code>crs1</code></td>
+<td>
+<p>The target <code>sp::CRS</code> or <code>inla.CRS</code> object</p>
+</td></tr>
+<tr valign="top"><td><code>passthrough</code></td>
+<td>
+<p>default FALSE. Setting to TRUE allows objects with no CRS
+information to be passed through without transformation.</p>
+</td></tr>
+<tr valign="top"><td><code>CRSobj</code></td>
+<td>
+<p>The target <code>sp::CRS</code> or <code>inla.CRS</code> object</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>inla.spTransform.default</code> Low level transformation of raw coordinates.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The object is returned with its coordinates transformed
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.CRS.html">inla.CRS()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+if (require(rgdal)) {
+    latt &lt;- inla.mesh.lattice(-10:10, 40:60)
+    mesh1 &lt;- inla.mesh.create(
+        lattice = latt, extend = FALSE, refine = FALSE,
+        crs = inla.CRS("longlat")
+    )
+    mesh2 &lt;- inla.spTransform(mesh1, inla.CRS("lambert"))
+    summary(mesh1)
+    summary(mesh2)
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

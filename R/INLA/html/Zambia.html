@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Semiparametric regression</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for Zambia {INLA}"><tr><td>Zambia {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Semiparametric regression</h2>
+
+<h3>Description</h3>
+
+<p>Undernutrition of children in each region of Zambia is measured through a
+score computed on the basis of some anthropometric measures. The data set
+contains also other infomation about each child.
+</p>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 4847 observations on the following 10 variables.
+</p>
+ <dl>
+<dt>hazstd</dt><dd><p>standardised Z score of stunting</p>
+</dd>
+<dt>bmi</dt><dd><p>body mass index of the mother</p>
+</dd> <dt>agc</dt><dd><p>age of
+the child in months</p>
+</dd> <dt>district</dt><dd><p>district where the child lives</p>
+</dd>
+<dt>rcw</dt><dd><p>mother employment status with categories &quot;working&quot; (1)
+and &quot;not working&quot; (-1)</p>
+</dd> <dt>edu1</dt><dd><p>mother's educations status with
+categories &quot;complete primary but incomplete secondary &quot; (<code style="white-space: pre;">edu1=1)</code>,
+&quot;complete secondary or higher&quot; (<code>edu2=1</code>) and &quot;no education or
+incomplete primary&quot; (<code>edu1=edu2=-1</code>)</p>
+</dd> <dt>edu2</dt><dd><p>see above</p>
+</dd>
+<dt>tpr</dt><dd><p>locality of the domicile with categories &quot;urban&quot; (1) and
+&quot;rural&quot; (-1)</p>
+</dd> <dt>sex</dt><dd><p>gender of the child with categories &quot;male&quot;
+(1) and &quot;female&quot; (-1)</p>
+</dd> <dt>edu</dt><dd><p>DO NOT KNOW; check source</p>
+</dd> </dl>
+
+
+
+<h3>Source</h3>
+
+<p>BayesX Manual
+<a href="http://www.stat.uni-muenchen.de/~bayesx/bayesx.html">http://www.stat.uni-muenchen.de/~bayesx/bayesx.html</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+data(Zambia)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

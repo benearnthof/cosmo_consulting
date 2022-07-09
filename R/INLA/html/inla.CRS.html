@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a coordinate reference system object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.CRS {INLA}"><tr><td>inla.CRS {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a coordinate reference system object</h2>
+
+<h3>Description</h3>
+
+<p>Creates either a CRS object or an inla.CRS object, describing a coordinate
+reference system
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.CRS(
+  projargs = NULL,
+  doCheckCRSArgs = TRUE,
+  args = NULL,
+  oblique = NULL,
+  SRS_string = NULL,
+  ...
+)
+
+inla.wkt_predef()
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>projargs</code></td>
+<td>
+<p>Either 1) a projection argument string suitable as input to
+<code>sp::CRS</code>, or 2) an existing <code>CRS</code> object, or 3) a shortcut
+reference string to a predefined projection; run
+<code>names(inla.wkt_predef())</code> for valid predefined projections.</p>
+</td></tr>
+<tr valign="top"><td><code>doCheckCRSArgs</code></td>
+<td>
+<p>default TRUE, must be set to FALSE by package
+developers including <code>CRS</code> in an S4 class definition to avoid
+uncontrollable loading of the <code>rgdal</code> namespace.</p>
+</td></tr>
+<tr valign="top"><td><code>args</code></td>
+<td>
+<p>An optional list of name/value pairs to add to and/or override
+the PROJ4 arguments in <code>projargs</code>.  <code>name=value</code> is converted to
+<code>"+name=value"</code>, and <code>name=NA</code> is converted to <code>"+name"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>oblique</code></td>
+<td>
+<p>Vector of length at most 4 of rotation angles (in degrees)
+for an oblique projection, all values defaulting to zero. The values
+indicate (longitude, latitude, orientation, orbit), as explained in the
+Details section below.</p>
+</td></tr>
+<tr valign="top"><td><code>SRS_string</code></td>
+<td>
+<p>a WKT2 string defining the coordinate system; see
+<code>sp::CRS</code>. This takes precedence over <code>projargs</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional parameters. Not currently in use.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The first two elements of the <code>oblique</code> vector are the (longitude,
+latitude) coordinates for the oblique centre point. The third value
+(orientation) is a counterclockwise rotation angle for an observer looking
+at the centre point from outside the sphere. The fourth value is the
+quasi-longitude (orbit angle) for a rotation along the oblique observers
+equator.
+</p>
+<p>Simple oblique: <code>oblique=c(0, 45)</code>
+</p>
+<p>Polar: <code>oblique=c(0, 90)</code>
+</p>
+<p>Quasi-transversal: <code>oblique=c(0, 0, 90)</code>
+</p>
+<p>Satellite orbit viewpoint: <code>oblique=c(lon0-time*v1, 0, orbitangle, orbit0+time*v2)</code>, where <code>lon0</code> is the longitude at which a satellite
+orbit crosses the equator at <code>time=0</code>, when the satellite is at an
+angle <code>orbit0</code> further along in its orbit.  The orbital angle relative
+to the equatorial plane is <code>orbitangle</code>, and <code>v1</code> and <code>v2</code>
+are the angular velocities of the planet and the satellite, respectively.
+Note that &quot;forward&quot; from the satellite's point of view is &quot;to the right&quot; in
+the projection.
+</p>
+<p>When <code>oblique[2]</code> or <code>oblique[3]</code> are non-zero, the resulting
+projection is only correct for perfect spheres.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Either an <code>sp::CRS</code> object or an <code>inla.CRS</code> object,
+depending on if the coordinate reference system described by the parameters
+can be expressed with a pure <code>sp::CRS</code> object or not.
+</p>
+<p>An S3 <code>inla.CRS</code> object is a list, usually (but not necessarily)
+containing at least one element: </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>crs </code></td>
+<td>
+<p>The basic <code>sp::CRS</code>
+object</p>
+</td></tr>
+</table>
+<p><code>inla.wkt_predef</code> returns a WKT2 string defining a projection
+</p>
+<p><code>inla.wkt_predef</code> returns a WKT2 string defining a projection
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../sp/help/CRS-class.html">sp::CRS()</a></code>, <code><a href="../../INLA/help/crs_wkt.html">crs_wkt()</a></code>,
+<code><a href="../../INLA/help/inla.sp_get_crs.html">inla.sp_get_crs()</a></code> <code><a href="../../INLA/help/plot.CRS.html">plot.CRS()</a></code>,
+<code><a href="../../INLA/help/inla.identical.CRS.html">inla.identical.CRS()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+
+if (require(rgdal)) {
+    crs1 &lt;- inla.CRS("longlat_globe")
+    crs2 &lt;- inla.CRS("lambert_globe")
+    crs3 &lt;- inla.CRS("mollweide_norm")
+    crs4 &lt;- inla.CRS("hammer_globe")
+    crs5 &lt;- inla.CRS("sphere")
+    crs6 &lt;- inla.CRS("globe")
+}
+## Not run: 
+names(inla.wkt_predef())
+
+## End(Not run)
+
+## Not run: 
+names(inla.wkt_predef())
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

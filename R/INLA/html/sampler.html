@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Produce samples from the approximated joint posterior for the...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.hyperpar.sample {INLA}"><tr><td>inla.hyperpar.sample {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Produce samples from the approximated joint posterior for the hyperparameters</h2>
+
+<h3>Description</h3>
+
+<p>Produce samples from the approximated joint posterior for the hyperparameters</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.hyperpar.sample(n, result, intern=FALSE, improve.marginals = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Integer. Number of samples required.</p>
+</td></tr>
+<tr valign="top"><td><code>result</code></td>
+<td>
+<p>An <code>inla</code>-object,  f.ex the output from an <code>inla</code>-call.</p>
+</td></tr>
+<tr valign="top"><td><code>intern</code></td>
+<td>
+<p>Logical. If <code>TRUE</code> then produce samples in the
+internal scale for the hyperparmater, if <code>FALSE</code> then produce
+samples in the user-scale. (For example log-precision (intern)
+and precision (user-scale))</p>
+</td></tr>
+<tr valign="top"><td><code>improve.marginals</code></td>
+<td>
+<p>Logical. If <code>TRUE</code>, then improve the samples taking into account
+possible better marginal estimates for the hyperparameters in <code>result</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+
+<p>A matrix where each sample is a row. The contents of the column
+is described in the rownames.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+n = 100
+r = inla(y ~ 1 + f(idx), data = data.frame(y=rnorm(n), idx = 1:n))
+ns = 500
+x = inla.hyperpar.sample(ns, r)
+
+rr = inla.hyperpar(r)
+xx = inla.hyperpar.sample(ns, rr, improve.marginals=TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

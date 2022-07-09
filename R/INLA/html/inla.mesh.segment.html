@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Constraint segments for inla.mesh Constructs...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.mesh.segment {INLA}"><tr><td>inla.mesh.segment {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Constraint segments for inla.mesh
+Constructs <code>inla.mesh.segment</code> objects that can be used to specify
+boundary and interior constraint edges in calls to <code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code>.</h2>
+
+<h3>Description</h3>
+
+<p>Constraint segments for inla.mesh
+</p>
+<p>Constructs <code>inla.mesh.segment</code> objects that can be used to specify
+boundary and interior constraint edges in calls to <code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.mesh.segment(...)
+
+## Default S3 method:
+inla.mesh.segment(
+  loc = NULL,
+  idx = NULL,
+  grp = NULL,
+  is.bnd = TRUE,
+  crs = NULL,
+  ...
+)
+
+## S3 method for class 'inla.mesh.segment'
+inla.mesh.segment(..., grp.default = 0)
+
+inla.contour.segment(
+  x = seq(0, 1, length.out = nrow(z)),
+  y = seq(0, 1, length.out = ncol(z)),
+  z,
+  nlevels = 10,
+  levels = pretty(range(z, na.rm = TRUE), nlevels),
+  groups = seq_len(length(levels)),
+  positive = TRUE,
+  eps = NULL,
+  crs = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional parameters.  When joining segments, a list of
+<code>inla.mesh.segment</code> objects.</p>
+</td></tr>
+<tr valign="top"><td><code>loc</code></td>
+<td>
+<p>Matrix of point locations.</p>
+</td></tr>
+<tr valign="top"><td><code>idx</code></td>
+<td>
+<p>Segment index sequence vector or index pair matrix.  The indices
+refer to the rows of <code>loc</code>.  If <code>loc==NULL</code>, the indices will be
+interpreted as indices into the point specification supplied to
+<code><a href="../../INLA/help/inla.mesh.create.html">inla.mesh.create()</a></code>.  If <code>is.bnd==TRUE</code>, defaults to linking
+all the points in <code>loc</code>, as <code>c(1:nrow(loc),1L)</code>, otherwise
+<code>1:nrow(loc)</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>grp</code></td>
+<td>
+<p>Vector of group labels for each segment.  Set to <code>NULL</code> to
+let the labels be chosen automatically in a call to
+<code><a href="../../INLA/help/inla.mesh.create.html">inla.mesh.create()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>is.bnd</code></td>
+<td>
+<p><code>TRUE</code> if the segments are boundary segments, otherwise
+<code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>crs</code></td>
+<td>
+<p>An optional <code>CRS</code> or <code>inla.CRS</code> object</p>
+</td></tr>
+<tr valign="top"><td><code>grp.default</code></td>
+<td>
+<p>When joining segments, use this group label for segments
+that have <code>grp=NULL</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>x, y, z, nlevels, levels</code></td>
+<td>
+<p>Parameters specifying a set of surface contours,
+with syntax described in <code><a href="../../graphics/html/contour.html">contour()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>groups</code></td>
+<td>
+<p>Vector of group ID:s, one for each contour level.</p>
+</td></tr>
+<tr valign="top"><td><code>positive</code></td>
+<td>
+<p><code>TRUE</code> if the contours should encircle positive level
+excursions in a counter clockwise direction.</p>
+</td></tr>
+<tr valign="top"><td><code>eps</code></td>
+<td>
+<p>Tolerance for <code><a href="../../INLA/help/inla.simplify.curve.html">inla.simplify.curve()</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An <code>inla.mesh.segment</code> object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.mesh.create.html">inla.mesh.create()</a></code>, <code><a href="../../INLA/help/inla.mesh.2d.html">inla.mesh.2d()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Create a square boundary and a diagonal interior segment
+loc.bnd &lt;- matrix(c(0, 0, 1, 0, 1, 1, 0, 1), 4, 2, byrow = TRUE)
+loc.int &lt;- matrix(c(0.9, 0.1, 0.1, 0.6), 2, 2, byrow = TRUE)
+segm.bnd &lt;- inla.mesh.segment(loc.bnd)
+segm.int &lt;- inla.mesh.segment(loc.int, is.bnd = FALSE)
+
+## Points to be meshed
+loc &lt;- matrix(runif(10 * 2), 10, 2) * 0.9 + 0.05
+mesh &lt;- inla.mesh.create(loc,
+    boundary = segm.bnd,
+    interior = segm.int,
+    refine = list()
+)
+plot(mesh)
+## Not run: 
+mesh &lt;- inla.mesh.create(loc, interior = list(segm.bnd, segm.int))
+plot(mesh)
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

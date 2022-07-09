@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Functions which operates on marginals</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for marginal {INLA}"><tr><td>marginal {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Functions which operates on marginals</h2>
+
+<h3>Description</h3>
+
+<p>Density, distribution function, quantile function, random
+generation, hpd-interval, interpolation, expectations, mode and transformations of
+marginals obtained by <code>inla</code> or <code>inla.hyperpar()</code>.
+These functions computes the density (inla.dmarginal),
+the distribution function (inla.pmarginal),
+the quantile function (inla.qmarginal),
+random generation (inla.rmarginal),
+spline smoothing (inla.smarginal),
+computes expected values (inla.emarginal),
+computes the mode (inla.mmarginal),
+transforms the marginal (inla.tmarginal), and provide summary statistics (inla.zmarginal).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ inla.dmarginal(x, marginal, log = FALSE)
+ inla.pmarginal(q, marginal, normalize = TRUE, len = 2048L)
+ inla.qmarginal(p, marginal, len = 2048L)
+ inla.rmarginal(n, marginal)
+ inla.hpdmarginal(p, marginal, len = 2048L)
+ inla.smarginal(marginal, log = FALSE, extrapolate = 0.0, keep.type = FALSE, factor=15L)
+ inla.emarginal(fun, marginal, ...)
+ inla.mmarginal(marginal)
+ inla.tmarginal(fun, marginal, n=2048L, h.diff = .Machine[["double.eps"]]^(1.0/3.0),
+                method = c("quantile", "linear"))
+ inla.zmarginal(marginal, silent = FALSE)
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>marginal</code></td>
+<td>
+<p>A marginal object from either <code>inla</code> or
+<code>inla.hyperpar()</code>, which is either <code>list(x=c(), y=c())</code>
+with density values <code>y</code> at locations <code>x</code>, or a
+<code>matrix(,n,2)</code> for which the density values are the second
+column and the locations in the first column.
+The<code>inla.hpdmarginal()</code>-function
+assumes a unimodal density.</p>
+</td></tr>
+<tr valign="top"><td><code>fun</code></td>
+<td>
+<p>A (vectorised) function like <code>function(x) exp(x)</code> to
+compute the expectation against, or which define the transformation
+new = fun(old)</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Evaluation points</p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>Quantiles</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>Probabilities</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>The number of observations. If <code>length(n) &gt; 1</code>, the
+length is taken to be the number required.</p>
+</td></tr>
+<tr valign="top"><td><code>h.diff</code></td>
+<td>
+<p>The step-length for the numerical differeniation inside <code>inla.tmarginal</code></p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments to be passed to function which
+expectation is to be computed.</p>
+</td></tr>
+<tr valign="top"><td><code>log</code></td>
+<td>
+<p>Return density or interpolated density in log-scale?</p>
+</td></tr>
+<tr valign="top"><td><code>normalize</code></td>
+<td>
+<p>Renormalise the density after interpolation?</p>
+</td></tr>
+<tr valign="top"><td><code>len</code></td>
+<td>
+<p>Number of locations used to interpolate the distribution
+function.</p>
+</td></tr>
+<tr valign="top"><td><code>keep.type</code></td>
+<td>
+<p>If <code>FALSE</code> then return a <code>list(x=, y=)</code>,  otherwise if <code>TRUE</code>,
+then return a matrix if the input is a matrix</p>
+</td></tr>
+<tr valign="top"><td><code>extrapolate</code></td>
+<td>
+<p>How much to extrapolate on each side when computing the
+interpolation. In fraction of the range.</p>
+</td></tr>
+<tr valign="top"><td><code>factor</code></td>
+<td>
+<p>The number of points after interpolation is <code>factor</code> times the original number of points;
+which is argument <code>n</code> in <code>spline</code></p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>Which method should be used to layout points for where the transformation is computed.</p>
+</td></tr>
+<tr valign="top"><td><code>silent</code></td>
+<td>
+<p>Output the result visually (TRUE) or just through the call.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+
+<p><code>inla.smarginal</code> returns <code>list=c(x=c(), y=c())</code> of
+interpolated values do extrapolation using the factor given,
+and the remaining function returns what they say they should do.  </p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.html">inla</a></code>, <code><a href="../../INLA/help/inla.hyperpar.html">inla.hyperpar</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ ## a simple linear regression example
+ n = 10
+ x = rnorm(n)
+ sd = 0.1
+ y = 1+x + rnorm(n,sd=sd)
+ res = inla(y ~ 1 + x, data = data.frame(x,y),
+            control.family=list(initial = log(1/sd^2L),fixed=TRUE))
+
+ ## chose a marginal and compare the with the results computed by the
+ ## inla-program
+ r = res$summary.fixed["x",]
+ m = res$marginals.fixed$x
+
+ ## compute the 95% HPD interval
+ inla.hpdmarginal(0.95, m)
+
+ x = seq(-6, 6, len = 1000)
+ y = dnorm(x)
+ inla.hpdmarginal(0.95, list(x=x, y=y))
+
+ ## compute the the density for exp(r), version 1
+ r.exp = inla.tmarginal(exp, m)
+ ## or version 2
+ r.exp = inla.tmarginal(function(x) exp(x), m)
+
+ ## to plot the marginal, we use the inla.smarginal, which interpolates (in
+ ## log-scale). Compare with some samples.
+ plot(inla.smarginal(m), type="l")
+ s = inla.rmarginal(1000, m)
+ hist(inla.rmarginal(1000, m), add=TRUE, prob=TRUE)
+ lines(density(s), lty=2)
+
+ m1 = inla.emarginal(function(x) x, m)
+ m2 = inla.emarginal(function(x) x^2L, m)
+ stdev = sqrt(m2 - m1^2L)
+ q = inla.qmarginal(c(0.025,0.975), m)
+
+ ## inla-program results
+ print(r)
+
+ ## inla.marginal-results (they shouldn't be perfect!)
+ print(c(mean=m1, sd=stdev, "0.025quant" = q[1], "0.975quant" = q[2L]))
+ ## using the buildt-in function
+ inla.zmarginal(m)
+ </pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Approximate variance-compensating basis functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.spde2.matern.sd.basis {INLA}"><tr><td>inla.spde2.matern.sd.basis {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Approximate variance-compensating basis functions</h2>
+
+<h3>Description</h3>
+
+<p>Calculates an approximate basis for <code>tau</code> and <code>kappa</code> for an
+<code>inla.spde2.matern</code> model where <code>tau</code> is a rescaling parameter.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.spde2.matern.sd.basis(
+  mesh,
+  B.sd,
+  B.range,
+  method = 1,
+  local.offset.compensation = FALSE,
+  alpha = 2,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mesh</code></td>
+<td>
+<p>An <code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>B.sd</code></td>
+<td>
+<p>Desired basis for log-standard deviations.</p>
+</td></tr>
+<tr valign="top"><td><code>B.range</code></td>
+<td>
+<p>Desired basis for spatial range.</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>Construction method selector.  Expert option only.</p>
+</td></tr>
+<tr valign="top"><td><code>local.offset.compensation</code></td>
+<td>
+<p>If <code>FALSE</code>, only compensate in the
+average for the <code>tau</code> offset.</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>The model <code>alpha</code> parameter.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional parameters passed on to internal
+<code>inla.spde2.matern</code> calls.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>List of basis specifications </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>B.tau </code></td>
+<td>
+<p>Basis for
+<code>log(tau)</code></p>
+</td></tr> <tr valign="top"><td><code>B.kappa </code></td>
+<td>
+<p>Basis for <code>log(kappa)</code></p>
+</td></tr></table>
+<p> Intended for
+passing on to <code><a href="../../INLA/help/inla.spde2.matern.html">inla.spde2.matern()</a></code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.spde2.matern.html">inla.spde2.matern()</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

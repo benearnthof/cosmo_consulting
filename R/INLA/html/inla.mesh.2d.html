@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: High-quality triangulations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.mesh.2d {INLA}"><tr><td>inla.mesh.2d {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>High-quality triangulations</h2>
+
+<h3>Description</h3>
+
+<p>Create a triangle mesh based on initial point locations, specified or
+automatic boundaries, and mesh quality parameters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.mesh.2d(
+  loc = NULL,
+  loc.domain = NULL,
+  offset = NULL,
+  n = NULL,
+  boundary = NULL,
+  interior = NULL,
+  max.edge = NULL,
+  min.angle = NULL,
+  cutoff = 1e-12,
+  max.n.strict = NULL,
+  max.n = NULL,
+  plot.delay = NULL,
+  crs = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>loc</code></td>
+<td>
+<p>Matrix of point locations to be used as initial triangulation
+nodes.  Can alternatively be a <code>SpatialPoints</code> or
+<code>SpatialPointsDataFrame</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>loc.domain</code></td>
+<td>
+<p>Matrix of point locations used to determine the domain
+extent.  Can alternatively be a <code>SpatialPoints</code> or
+<code>SpatialPointsDataFrame</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>offset</code></td>
+<td>
+<p>The automatic extension distance.  One or two values, for an
+inner and an optional outer extension.  If negative, interpreted as a factor
+relative to the approximate data diameter (default=-0.10???)</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>The number of initial nodes in the automatic extensions
+(default=16)</p>
+</td></tr>
+<tr valign="top"><td><code>boundary</code></td>
+<td>
+<p>A list of one or two <code><a href="../../INLA/help/inla.mesh.segment.html">inla.mesh.segment()</a></code> objects
+describing domain boundaries.</p>
+</td></tr>
+<tr valign="top"><td><code>interior</code></td>
+<td>
+<p>An <code><a href="../../INLA/help/inla.mesh.segment.html">inla.mesh.segment()</a></code> object describing desired
+interior edges.</p>
+</td></tr>
+<tr valign="top"><td><code>max.edge</code></td>
+<td>
+<p>The largest allowed triangle edge length.  One or two
+values.</p>
+</td></tr>
+<tr valign="top"><td><code>min.angle</code></td>
+<td>
+<p>The smallest allowed triangle angle.  One or two values.
+(Default=21)</p>
+</td></tr>
+<tr valign="top"><td><code>cutoff</code></td>
+<td>
+<p>The minimum allowed distance between points.  Point at most as
+far apart as this are replaced by a single vertex prior to the mesh
+refinement step.</p>
+</td></tr>
+<tr valign="top"><td><code>max.n.strict</code></td>
+<td>
+<p>The maximum number of vertices allowed, overriding
+<code>min.angle</code> and <code>max.edge</code> (default=-1, meaning no limit).  One or
+two values, where the second value gives the number of additional vertices
+allowed for the extension.</p>
+</td></tr>
+<tr valign="top"><td><code>max.n</code></td>
+<td>
+<p>The maximum number of vertices allowed, overriding
+<code>max.edge</code> only (default=-1, meaning no limit).  One or two values,
+where the second value gives the number of additional vertices allowed for
+the extension.</p>
+</td></tr>
+<tr valign="top"><td><code>plot.delay</code></td>
+<td>
+<p>On Linux (and Mac if appropriate X11 libraries are
+installed), specifying a nonnegative numeric value activates a rudimentary
+plotting system in the underlying <code>fmesher</code> program, showing the
+triangulation algorithm at work, with waiting time factor <code>plot.delay</code>
+between each step.
+</p>
+<p>On all systems, specifying any negative value activates displaying the
+result after each step of the multi-step domain extension algorithm.</p>
+</td></tr>
+<tr valign="top"><td><code>crs</code></td>
+<td>
+<p>An optional <code>CRS</code> or <code>inla.CRS</code> object</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An <code>inla.mesh</code> object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.mesh.create.html">inla.mesh.create()</a></code>, <code><a href="../../INLA/help/inla.delaunay.html">inla.delaunay()</a></code>,
+<code><a href="../../INLA/help/inla.nonconvex.hull.html">inla.nonconvex.hull()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+loc &lt;- matrix(runif(10 * 2), 10, 2)
+
+if (require("splancs")) {
+    boundary &lt;- list(
+        inla.nonconvex.hull(loc, 0.1, 0.15),
+        inla.nonconvex.hull(loc, 0.2, 0.2)
+    )
+    offset &lt;- NULL
+} else {
+    boundary &lt;- NULL
+    offset &lt;- c(0.1, 0.2)
+}
+mesh &lt;- inla.mesh.2d(loc, boundary = boundary, offset = offset, max.edge = c(0.05, 0.1))
+
+plot(mesh)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

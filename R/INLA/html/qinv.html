@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Computes (parts of) the inverse of a SPD sparse matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for qinv {INLA}"><tr><td>qinv {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Computes (parts of) the inverse of a SPD sparse matrix</h2>
+
+<h3>Description</h3>
+
+<p>This routine use the GMRFLib implementation
+which compute parts of the inverse of a SPD sparse matrix.
+The diagonal and values for the neighbours in the inverse, are provided.</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+     inla.qinv(Q, constr, reordering = INLA::inla.reorderings(), num.threads = NULL)
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>Q</code></td>
+<td>
+<p>A SPD matrix,  either as a (dense) matrix or sparseMatrix.</p>
+</td></tr>
+<tr valign="top"><td><code>constr</code></td>
+<td>
+<p>Optional linear constraints;
+see <code>?INLA::f</code> and argument <code>extraconstr</code></p>
+</td></tr>
+<tr valign="top"><td><code>reordering</code></td>
+<td>
+<p>The type of reordering algorithm to be used for <code>TAUCS</code>;
+either one of the names listed in <code>inla.reorderings()</code>
+or the output from <code>inla.qreordering(Q)</code>.
+The default is &quot;auto&quot; which try several reordering algorithm and use the best one for this particular matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>num.threads</code></td>
+<td>
+<p>Maximum number of threads the
+<code>inla</code>-program will use, or as 'A:B' defining the number threads in the
+outer (A) and inner (B) layer for nested parallelism. </p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>inla.qinv</code> returns a <code>sparseMatrix</code> of type <code>dgTMatrix</code> with the
+diagonal and values for the neigbours in the inverse. Note that the full inverse is NOT provided!
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+ ## dense matrix example
+ n = 10
+ A = matrix(runif(n^2), n, n)
+ Q = A %*% t(A)
+ print(mean(abs(inla.qinv(Q) - solve(Q))))
+
+ ## sparse matrix example
+ rho = 0.9
+ Q = toeplitz(c(1+rho^2, -rho,  rep(0, n-3), -rho)) / (1-rho^2)
+ Q = inla.as.dgTMatrix(Q)
+ Q.inv = inla.qinv(Q)
+
+ ## compute the marginal variances as a vector from a precision matrix
+ marginal.variances = diag(inla.qinv(Q))
+
+ ## read the sparse matrix from a file in the 'i, j, value' format
+ filename = tempfile()
+ write(t(cbind(Q@i+1L,  Q@j+1L,  Q@x)), ncol=3, file=filename)
+ Qinv = inla.qinv(filename)
+ unlink(filename)
+ </pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Group-wise model criticism using node-splitting</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for cut {INLA}"><tr><td>cut {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Group-wise model criticism using node-splitting</h2>
+
+<h3>Description</h3>
+
+<p>This function performs group-wise, cross-validatory
+model assessment for an INLA model using so-called node-splitting
+(Marshall and Spiegelhalter, 2007; Presanis et al, 2013).
+The user inputs an object of class <code>inla</code> (i.e. a result
+of a call to <code>inla()</code>) as well as  a variable name (<code>split.by</code>) specifying a grouping:
+Data points that share the same value of <code>split.by</code> are in the same group.
+The function then checks whether each group is an &quot;outlier&quot;, or in conflict with
+the remaining groups, using the methodology described in Ferkingstad et al (2017).
+The result is a vector containing a p-value for each group, corresponding to a test
+for each group <code>i</code>, where the null hypothesis is that group <code>i</code> is
+consistent with the other groups except <code>i</code> (so a small p-value is evidence
+that the group is an &quot;outlier&quot;). See Ferkingstad et al (2017) for further details.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+     inla.cut(result, split.by, mc.cores = NULL, debug=FALSE)
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>result</code></td>
+<td>
+<p>An object of class <code>inla</code>, i.e. a result of a call to <code>inla()</code></p>
+</td></tr>
+<tr valign="top"><td><code>split.by</code></td>
+<td>
+<p>The name of the variable to group by. Data points that have
+the same value of <code>split.by</code> are in the same group.</p>
+</td></tr>
+<tr valign="top"><td><code>mc.cores</code></td>
+<td>
+<p>The number of cores to use in <code>parallel::mclapply</code>. If
+<code>is.null(mc.cores)</code>, then check <code>getOption("mc.cores")</code>
+and <code>inla.getOption("num.threads")</code> in that order.</p>
+</td></tr>
+<tr valign="top"><td><code>debug</code></td>
+<td>
+<p>Print debugging information if <code>TRUE</code>, default is <code>FALSE</code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A numeric vector of p-values, corresponding to a test
+for each group <code>i</code> where the null hypothesis is that group <code>i</code> is
+consistent with the other groups except <code>i</code>. A small p-value for a group
+indicates that the group is an &quot;outlier&quot; (in conflict with remaining groups).
+</p>
+<p>This function is EXPERIMENTAL!!!
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Egil Ferkingstad <a href="mailto:egil.ferkingstad@gmail.com">egil.ferkingstad@gmail.com</a> and Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>References</h3>
+
+<p>Ferkingstad, E., Held, L. and Rue, H. (2017). Fast and accurate Bayesian
+model criticism and conflict diagnostics using R-INLA. arXiv preprint
+arXiv:1708.03272, available at http://arxiv.org/abs/1708.03272.
+Published in Stat, 6:331-344 (2017).
+</p>
+<p>Marshall, E. C. and Spiegelhalter, D. J. (2007). Identifying outliers
+in Bayesian hierarchical models: a simulation-based approach.
+Bayesian Analysis, 2(2):409-444.
+</p>
+<p>Presanis, A. M., Ohlssen, D., Spiegelhalter,
+D. J., De Angelis, D., et al. (2013). Conflict diagnostics
+in directed acyclic graphs, with applications in Bayesian evidence synthesis.
+Statistical Science, 28(3):376-397.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ ## See http://www.r-inla.org/examples/case-studies/ferkingstad-2017 and Ferkingstad et al (2017).
+ </pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

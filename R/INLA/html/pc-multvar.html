@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Multivariate PC priors</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for pc.multvar {INLA}"><tr><td>pc.multvar {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Multivariate PC priors</h2>
+
+<h3>Description</h3>
+
+<p>Functions to evaluate and simulate from
+multivariate PC priors: The simplex and sphere case</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ inla.pc.multvar.h.default(x, inverse = FALSE, derivative = FALSE)
+ inla.pc.multvar.simplex.r(n = NULL, lambda = 1, h = inla.pc.multvar.h.default, b = NULL)
+ inla.pc.multvar.simplex.d(x = NULL, lambda = 1, log = FALSE, h = inla.pc.multvar.h.default, b = NULL)
+ inla.pc.multvar.sphere.r(n = NULL, lambda = 1, h = inla.pc.multvar.h.default, H = NULL)
+ inla.pc.multvar.sphere.d(x = NULL, lambda = 1, log = FALSE, h = inla.pc.multvar.h.default, H = NULL)
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Samples to evaluate. If input is a matrix then each row is a sample. If input is
+a vector then this is the sample.</p>
+</td></tr>
+<tr valign="top"><td><code>inverse</code></td>
+<td>
+<p>Compute the inverse of the h()-function.</p>
+</td></tr>
+<tr valign="top"><td><code>derivative</code></td>
+<td>
+<p>Compute the derivative of the h()-function. (derivative of the inverse
+function is not used).</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Number of samples to generate.</p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>The lambda-parameter in the PC-prior.</p>
+</td></tr>
+<tr valign="top"><td><code>log</code></td>
+<td>
+<p>Evaluate the density in log-scale or ordinary scale.</p>
+</td></tr>
+<tr valign="top"><td><code>h</code></td>
+<td>
+<p>The h()-function,  defaults to <code>inla.pc.multvar.h.default</code>. See that code
+for an example of how to write a user-spesific function.</p>
+</td></tr>
+<tr valign="top"><td><code>b</code></td>
+<td>
+<p>The b-vector (gradient) in the expression for the simplex option,  <code>d(xi) = h(b^T xi)</code></p>
+</td></tr>
+<tr valign="top"><td><code>H</code></td>
+<td>
+<p>The H(essian)-matrix in the expression for the sphere option,  <code>d(xi) =
+            h(1/2 *xi^T H xi)</code>. If <code>H</code> is a vector, then it is interpreted as the
+diagonal of a (sparse) diagonal matrix.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>These functions implements multivariate PC-priors of the simplex and sphere type.
+</p>
+
+
+<h3>Value</h3>
+
+
+<p><code>inla.pc.multvar.simplex.r</code> generate samples from the simplex case, and
+<code>inla.pc.multvar.simplex.d</code> evaluate the density.
+<code>inla.pc.multvar.sphere.r</code> generate samples from the sphere case,  and
+<code>inla.pc.multvar.sphere.d</code> evaluate the density.
+<code>inla.pc.multvar.h.default</code> implements the default h()-function and illustrate how
+to code your own spesific one, if needed.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

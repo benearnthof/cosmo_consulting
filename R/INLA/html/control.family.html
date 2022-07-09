@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Control variables in control.family</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for control.family {INLA}"><tr><td>control.family {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Control variables in control.family</h2>
+
+<h3>Description</h3>
+
+<p>Control variables in <code>control.family</code> for use in <code>inla</code></p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.set.control.family.default(...)
+control.family(beta.censor.value, cenpoisson.I, control.bgev, control.link, control.mix, control.pom, dummy, fixed, gev.scale.xi, hyper, initial, link, param, prior, sn.shape.max, variant)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Possible arguments</p>
+</td></tr>
+<tr valign="top"><td><code>dummy</code></td>
+<td>
+<p>   A dummy argument that can be used as a workaround</p>
+</td></tr>
+<tr valign="top"><td><code>hyper</code></td>
+<td>
+<p>   Definition of the hyperparameters</p>
+</td></tr>
+<tr valign="top"><td><code>initial</code></td>
+<td>
+<p>   (OBSOLETE!) Initial value for the hyperparameter(s) of the likelihood in the internal scale.</p>
+</td></tr>
+<tr valign="top"><td><code>prior</code></td>
+<td>
+<p>   (OBSOLETE!) The name of the prior distribution(s) for othe hyperparameter(s).</p>
+</td></tr>
+<tr valign="top"><td><code>param</code></td>
+<td>
+<p>   (OBSOLETE!) The parameters for the prior distribution</p>
+</td></tr>
+<tr valign="top"><td><code>fixed</code></td>
+<td>
+<p>   (OBSOLETE!) Boolean variable(s) to say if the hyperparameter(s) is fixed or random.</p>
+</td></tr>
+<tr valign="top"><td><code>link</code></td>
+<td>
+<p>   (OBSOLETE! Use <code>control.link=list(model=)</code> instead.) The link function to use.</p>
+</td></tr>
+<tr valign="top"><td><code>sn.shape.max</code></td>
+<td>
+<p>   Maximum value for the shape-parameter for Skew Normal observations (default 5.0)</p>
+</td></tr>
+<tr valign="top"><td><code>gev.scale.xi</code></td>
+<td>
+<p>   (Expert option, do not use unless you know what you are doing.) The internal scaling of the shape-parameter for the GEV distribution. (default 0.1)</p>
+</td></tr>
+<tr valign="top"><td><code>control.bgev</code></td>
+<td>
+<p>   See <code>?control.bgev</code></p>
+</td></tr>
+<tr valign="top"><td><code>cenpoisson.I</code></td>
+<td>
+<p>   The censoring interval for the censored Poisson</p>
+</td></tr>
+<tr valign="top"><td><code>beta.censor.value</code></td>
+<td>
+<p>   The censor value for the Beta-likelihood <code>(0 &lt;= beta.censor.value &lt; 1/2)</code></p>
+</td></tr>
+<tr valign="top"><td><code>variant</code></td>
+<td>
+<p>   This variable is used to give options for various variants of the likelihood, like chosing different parameterisations for example. See the relevant likelihood documentations for options (does only apply to some likelihoods).</p>
+</td></tr>
+<tr valign="top"><td><code>control.mix</code></td>
+<td>
+<p>   See <code>?control.mix</code></p>
+</td></tr>
+<tr valign="top"><td><code>control.pom</code></td>
+<td>
+<p>   See <code>?control.pom</code></p>
+</td></tr>
+<tr valign="top"><td><code>control.link</code></td>
+<td>
+<p>   See <code>?control.link</code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The function <code>control.family</code> is used to TAB-complete arguments and returns a list of given arguments.
+The function <code>inla.set.control.family.default</code> returns a list with all the default values of all parameters within this control statement.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/control.update.html">control.update</a></code>, <code><a href="../../INLA/help/control.lincomb.html">control.lincomb</a></code>, <code><a href="../../INLA/help/control.group.html">control.group</a></code>, <code><a href="../../INLA/help/control.mix.html">control.mix</a></code>, <code><a href="../../INLA/help/control.pom.html">control.pom</a></code>, <code><a href="../../INLA/help/control.link.html">control.link</a></code>, <code><a href="../../INLA/help/control.expert.html">control.expert</a></code>, <code><a href="../../INLA/help/control.compute.html">control.compute</a></code>, <code><a href="../../INLA/help/control.lp.scale.html">control.lp.scale</a></code>, <code><a href="../../INLA/help/control.pardiso.default.html">control.pardiso.default</a></code>, <code><a href="../../INLA/help/control.bgev.default.html">control.bgev.default</a></code>, <code><a href="../../INLA/help/control.family.html">control.family</a></code>, <code><a href="../../INLA/help/control.fixed.html">control.fixed</a></code>, <code><a href="../../INLA/help/control.inla.html">control.inla</a></code>, <code><a href="../../INLA/help/control.predictor.html">control.predictor</a></code>, <code><a href="../../INLA/help/control.mode.html">control.mode</a></code>, <code><a href="../../INLA/help/control.hazard.html">control.hazard</a></code>, 
+<code><a href="../../INLA/help/inla.html">inla</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

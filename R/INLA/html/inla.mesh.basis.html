@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Basis functions for inla.mesh</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.mesh.basis {INLA}"><tr><td>inla.mesh.basis {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Basis functions for inla.mesh</h2>
+
+<h3>Description</h3>
+
+<p>Calculate basis functions on a 1d or 2d <code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.mesh.basis(
+  mesh,
+  type = "b.spline",
+  n = 3,
+  degree = 2,
+  knot.placement = "uniform.area",
+  rot.inv = TRUE,
+  boundary = "free",
+  free.clamped = TRUE,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mesh</code></td>
+<td>
+<p>An <code>inla.mesh.1d</code> or <code>inla.mesh</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p><code>b.spline</code> (default) for B-spline basis functions,
+<code>sph.harm</code> for spherical harmonics (available opnly for meshes on the
+sphere)</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>For B-splines, the number of basis functions in each direction (for
+1d meshes <code>n</code> must be a scalar, and for planar 2d meshes a 2-vector).
+For spherical harmonics, <code>n</code> is the maximal harmonic order.</p>
+</td></tr>
+<tr valign="top"><td><code>degree</code></td>
+<td>
+<p>Degree of B-spline polynomials.  See
+<code><a href="../../INLA/help/inla.mesh.1d.html">inla.mesh.1d()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>knot.placement</code></td>
+<td>
+<p>For B-splines on the sphere, controls the latitudinal
+placements of knots. <code>"uniform.area"</code> (default) gives uniform spacing
+in sin(latitude), <code>"uniform.latitude"</code> gives uniform spacing in
+latitudes.</p>
+</td></tr>
+<tr valign="top"><td><code>rot.inv</code></td>
+<td>
+<p>For spherical harmonics on a sphere, <code>rot.inv=TRUE</code>
+gives the rotationally invariant subset of basis functions.</p>
+</td></tr>
+<tr valign="top"><td><code>boundary</code></td>
+<td>
+<p>Boundary specification, default is free boundaries.  See
+<code><a href="../../INLA/help/inla.mesh.1d.html">inla.mesh.1d()</a></code> for more information.</p>
+</td></tr>
+<tr valign="top"><td><code>free.clamped</code></td>
+<td>
+<p>If <code>TRUE</code> and <code>boundary</code> is <code>"free"</code>, the
+boundary basis functions are clamped to 0/1 at the interval boundary by
+repeating the boundary knots.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.mesh.1d.html">inla.mesh.1d()</a></code> <code><a href="../../INLA/help/inla.mesh.2d.html">inla.mesh.2d()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+n &lt;- 100
+loc &lt;- matrix(runif(n * 2), n, 2)
+mesh &lt;- inla.mesh.2d(loc, max.edge = 0.05)
+basis &lt;- inla.mesh.basis(mesh, n = c(4, 5))
+
+proj &lt;- inla.mesh.projector(mesh)
+image(proj$x, proj$y, inla.mesh.project(proj, basis[, 7]))
+
+if (require(rgl)) {
+    plot(mesh, rgl = TRUE, col = basis[, 7], draw.edges = FALSE, draw.vertices = FALSE)
+}
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

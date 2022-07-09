@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Check which mesh triangles are inside a polygon</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.over_sp_mesh {INLA}"><tr><td>inla.over_sp_mesh {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Check which mesh triangles are inside a polygon</h2>
+
+<h3>Description</h3>
+
+<p>Wrapper for the <code><a href="../../sp/help/over.html">sp::over()</a></code> method to find triangle centroids
+or vertices inside <code>sp</code> polygon objects
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.over_sp_mesh(x, y, type = c("centroid", "vertex"), ignore.CRS = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>geometry (typically a <code><a href="../../sp/help/SpatialPolygons.html">sp::SpatialPolygons()</a></code> object) for the queries</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>an <code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code> object</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>the query type; either <code>'centroid'</code> (default, for triangle centroids),
+or <code>'vertex'</code> (for mesh vertices)</p>
+</td></tr>
+<tr valign="top"><td><code>ignore.CRS</code></td>
+<td>
+<p>logical; whether to ignore the coordinate system information in <code>x</code> and <code>y</code>
+(default <code>FALSE</code>)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A vector of triangle indices (when <code>type</code> is <code>'centroid'</code>) or
+vertex indices (when <code>type</code> is <code>'vertex'</code>)
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Haakon Bakka, <a href="mailto:bakka@r-inla.org">bakka@r-inla.org</a>, and Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Create a polygon and a mesh
+obj &lt;- sp::SpatialPolygons(list(Polygons(list(Polygon(rbind(
+    c(0, 0),
+    c(50, 0),
+    c(50, 50),
+    c(0, 50)
+))),
+ID = 1
+)),
+proj4string = inla.CRS("longlat_globe")
+)
+mesh &lt;- inla.mesh.create(globe = 2, crs = inla.CRS("sphere"))
+
+## 3 vertices found in the polygon
+inla.over_sp_mesh(obj, mesh, type = "vertex")
+
+## 3 triangles found in the polygon
+inla.over_sp_mesh(obj, mesh)
+
+## Multiple transformations can lead to slightly different results due to edge cases
+## 4 triangles found in the polygon
+inla.over_sp_mesh(obj, inla.spTransform(mesh, CRSobj = inla.CRS("mollweide_norm")), ignore.CRS = FALSE)
+
+## Ignoring mismatching coordinate systems is rarely useful
+## 20 triangles "found in" the polygon
+inla.over_sp_mesh(obj, inla.spTransform(mesh, CRSobj = inla.CRS("mollweide_norm")), ignore.CRS = TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

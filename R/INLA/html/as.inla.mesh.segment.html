@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert 'sp' curve objects to 'inla.mesh.segment' objects.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for as.inla.mesh.segment {INLA}"><tr><td>as.inla.mesh.segment {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert <code>sp</code> curve objects to <code>inla.mesh.segment</code> objects.</h2>
+
+<h3>Description</h3>
+
+<p>Convert <code>sp</code> curve objects to <code>inla.mesh.segment</code> objects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+as.inla.mesh.segment(sp, ...)
+
+inla.sp2segment(sp, ...)
+
+## S3 method for class 'SpatialPoints'
+as.inla.mesh.segment(sp, reverse = FALSE, grp = NULL, is.bnd = TRUE, ...)
+
+## S3 method for class 'SpatialPointsDataFrame'
+as.inla.mesh.segment(sp, ...)
+
+## S3 method for class 'Line'
+as.inla.mesh.segment(sp, reverse = FALSE, crs = NULL, ...)
+
+## S3 method for class 'Lines'
+as.inla.mesh.segment(sp, join = TRUE, crs = NULL, ...)
+
+## S3 method for class 'SpatialLines'
+as.inla.mesh.segment(sp, join = TRUE, grp = NULL, ...)
+
+## S3 method for class 'SpatialLinesDataFrame'
+as.inla.mesh.segment(sp, ...)
+
+## S3 method for class 'SpatialPolygons'
+as.inla.mesh.segment(sp, join = TRUE, grp = NULL, ...)
+
+## S3 method for class 'SpatialPolygonsDataFrame'
+as.inla.mesh.segment(sp, ...)
+
+## S3 method for class 'Polygons'
+as.inla.mesh.segment(sp, join = TRUE, crs = NULL, ...)
+
+## S3 method for class 'Polygon'
+as.inla.mesh.segment(sp, crs = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>sp</code></td>
+<td>
+<p>An <code>sp</code> polygon object of class <code>Polygon</code>,
+<code>Polygons</code>, <code>SpatialPolygons</code>, or <code>SpatialPolygonsDataFrame</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments passed on to other methods.</p>
+</td></tr>
+<tr valign="top"><td><code>reverse</code></td>
+<td>
+<p>Logical, indicating if the line sequence should be traversed
+backwards.</p>
+</td></tr>
+<tr valign="top"><td><code>grp</code></td>
+<td>
+<p>Group ID specification for each polygon, as used by
+<code><a href="../../INLA/help/inla.mesh.segment.html">inla.mesh.segment()</a></code>, one ID per polygon.</p>
+</td></tr>
+<tr valign="top"><td><code>crs</code></td>
+<td>
+<p>An optional <code>CRS</code> or <code>inla.CRS</code> object</p>
+</td></tr>
+<tr valign="top"><td><code>join</code></td>
+<td>
+<p>If <code>TRUE</code>, join multiple polygons into a single segment
+(possibly non-simply connected).</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A <code><a href="../../INLA/help/inla.mesh.segment.html">inla.mesh.segment()</a></code> object, or a list of
+<code><a href="../../INLA/help/inla.mesh.segment.html">inla.mesh.segment()</a></code> objects.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.mesh.segment.html">inla.mesh.segment()</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert indexes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for idx {INLA}"><tr><td>idx {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert indexes</h2>
+
+<h3>Description</h3>
+
+<p>Convert indexes given by to triplet '(idx, group,
+replicate)' to the (one-dimensional) index used in the grouped and
+replicated model</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.idx(idx, n = max(idx),
+         group = rep(1, length(idx)), ngroup = max(group),
+         replicate = rep(1, length(idx)),  nrep = max(replicate))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>idx</code></td>
+<td>
+<p>The index within the basic model. (Legal values from &lsquo;1&rsquo; to &lsquo;n&rsquo;.)</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>The length &lsquo;n&rsquo; of the basic model.</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>The index within group. (Legal values from &lsquo;1&rsquo; to &lsquo;ngroup&rsquo;.)</p>
+</td></tr>
+<tr valign="top"><td><code>ngroup</code></td>
+<td>
+<p>Number of groups.</p>
+</td></tr>
+<tr valign="top"><td><code>replicate</code></td>
+<td>
+<p>The index within replication. (Legal values from
+&lsquo;1&rsquo; to &lsquo;nrep&rsquo;.)</p>
+</td></tr>
+<tr valign="top"><td><code>nrep</code></td>
+<td>
+<p>Number of replications.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+
+<p><code>inla.idx</code> returns indexes in the range &lsquo;1&rsquo; to &lsquo;n*ngroup*nrep&rsquo;
+representing where the triplet &lsquo;(idx,group,replicate)&rsquo; is stored
+internally in the full grouped and replicated model.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+##TODO
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

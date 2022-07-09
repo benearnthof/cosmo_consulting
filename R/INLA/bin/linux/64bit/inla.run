@@ -1,0 +1,65 @@
+#!/bin/bash
+
+cmd=$(readlink -e "$0")
+DIR=$(readlink -e $(dirname "$cmd"))
+tmp=$(basename "$0")
+prog=${tmp%%.run}
+
+DR=""
+if [ ! -z ${R_HOME+x} ]; then 
+    d="$R_HOME/lib"
+    if [ -d "$d" ]; then
+	DR=$d
+    fi
+fi
+
+D=""
+for d in {,/usr}/lib64 /usr/lib64/R/lib {,/usr}/lib/x86_64-linux-gnu {,/usr}/lib; do
+    if [ -d "$d" ]; then
+	if [ -z "$D" ]; then
+	    D="$d"
+	else
+	    D="$D:$d"
+	fi
+    fi
+done
+
+for f in $DIR/first/lib*.so*; do
+    case "$f" in
+	$DIR/first/libjemalloc.so*)
+	    export LD_PRELOAD="$f";;
+    esac
+done
+
+if [ -n "${INLA_NATIVE_LD_LIBRARY_PATH}" ]; then
+    ## so we can revert back to old behaviour
+    export LD_LIBRARY_PATH="$DIR/first:$D:$DIR:$LD_LIBRARY_PATH"
+else
+    ## this is the new default, is that we use the libs used when we
+    ## build. Try to use libR from system by default
+    export LD_LIBRARY_PATH="$DIR/first:$DR:$DIR:$D:$LD_LIBRARY_PATH"
+fi
+export PARDISOLICMESSAGE=1
+export OMP_NESTED=TRUE
+export MALLOC_CONF='abort_conf:true,background_thread:true,metadata_thp:auto'
+if [ -n "${INLA_DEBUG}" ]; then
+    echo "*** $0 *** MALLOC_CONF=$MALLOC_CONF"
+    echo "*** $0 *** LD_PRELOAD=$LD_PRELOAD"
+    echo "*** $0 *** LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
+    ldd -r "$DIR/$prog"
+fi
+
+## set default levels for nested openmp
+nt="-t0:1"
+for arg in "$@"; do 
+    case "$arg" in
+	-t*) nt="$arg";;
+    esac
+done
+eval $("$DIR/$prog" $nt -mopenmp | grep ^export)
+if [ -n "${INLA_DEBUG}" ]; then
+    set | grep ^OMP_ | while read v; do echo "*** $0 *** $v"; done
+    echo " *** $0 *** exec $DIR/$prog $@"
+fi
+
+exec "$DIR/$prog" "$@"

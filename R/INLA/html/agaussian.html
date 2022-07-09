@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Aggregate Gaussian into an equivalent observation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for aggregate.gaussian {INLA}"><tr><td>aggregate.gaussian {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Aggregate Gaussian into an equivalent observation</h2>
+
+<h3>Description</h3>
+
+<p>Aggreagate Gaussians observerd with the same mean and precision,
+into an eqv triplet, for use with <code>family="agaussian"</code></p>
+
+
+<h3>Usage</h3>
+
+<pre>
+     inla.agaussian(y, s = NULL)
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>Repeated observations. If <code>y</code> is a matrix,  then each row represents
+repeated observations. if <code>y</code> is a list,  then each element of the list is
+a vector of repeated observations. If <code>y</code> is a vector,  then the whole vector
+represents repeated observations. The optional scaling <code>s</code>,  must have 
+the same format as <code>y</code>,  ie <code>matrix</code> or <code>vector</code>.
+<code>NA</code>'s in <code>y</code> (and <code>s</code>) are removed and not used or counted.
+If <code>s</code> is given, then the <code>NA</code>-pattern in <code>y</code> and <code>s</code> must be the same.</p>
+</td></tr>
+<tr valign="top"><td><code>s</code></td>
+<td>
+<p>Optinonal fixed scaling of the precisions. Must be in the same format as <code>y</code>,  and
+have the same <code>NA</code>-pattern. See the documentation for details.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The output is a <code>inla.mdata</code>-object ready for use
+with <code>family="agaussian"</code>. See the example in the documentation.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  A = matrix(1:25,5,5)
+  inla.agaussian(A)
+
+  A[1,-1] = NA
+  A[2,-(2:3)] = NA
+  inla.agaussian(A)
+ </pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

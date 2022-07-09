@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Coordinate mappings for 'inla.mesh' projections.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.mesh.map.lim {INLA}"><tr><td>inla.mesh.map.lim {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Coordinate mappings for <code>inla.mesh</code> projections.</h2>
+
+<h3>Description</h3>
+
+<p>Calculates coordinate mappings for <code>inla.mesh</code> projections.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.mesh.map.lim(
+  loc = NULL,
+  projection = c("default", "longlat", "longsinlat", "mollweide")
+)
+
+inla.mesh.map(
+  loc,
+  projection = c("default", "longlat", "longsinlat", "mollweide"),
+  inverse = TRUE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>loc</code></td>
+<td>
+<p>Coordinates to be mapped.</p>
+</td></tr>
+<tr valign="top"><td><code>projection</code></td>
+<td>
+<p>The projection type.</p>
+</td></tr>
+<tr valign="top"><td><code>inverse</code></td>
+<td>
+<p>If <code>TRUE</code>, <code>loc</code> are map coordinates and
+coordinates in the mesh domain are calculated.  If <code>FALSE</code>, <code>loc</code>
+are coordinates in the mesh domain and the forward map projection is
+calculated.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>For <code>inla.mesh.map.lim</code>, a list: </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>xlim </code></td>
+<td>
+<p>X axis limits in
+the map domain</p>
+</td></tr> <tr valign="top"><td><code>ylim </code></td>
+<td>
+<p>Y axis limits in the map domain</p>
+</td></tr></table>
+<p> No attempt is
+made to find minimal limits for partial spherical domains.
+</p>
+
+
+<h3>Functions</h3>
+
+
+<ul>
+<li> <p><code>inla.mesh.map.lim</code>: Projection extent limit calculations
+</p>
+</li></ul>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.mesh.project.html">inla.mesh.project()</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

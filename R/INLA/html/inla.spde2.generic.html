@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Generic spde2 model creation.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.spde2.generic {INLA}"><tr><td>inla.spde2.generic {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Generic spde2 model creation.</h2>
+
+<h3>Description</h3>
+
+<p>Creates and inla.spde2 object describing the internal structure of an
+<code>'spde2'</code> model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.spde2.generic(
+  M0,
+  M1,
+  M2,
+  B0,
+  B1,
+  B2,
+  theta.mu,
+  theta.Q,
+  transform = c("logit", "log", "identity"),
+  theta.initial = theta.mu,
+  fixed = rep(FALSE, length(theta.mu)),
+  theta.fixed = theta.initial[fixed],
+  BLC = cbind(0, diag(nrow = length(theta.mu))),
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>M0</code></td>
+<td>
+<p>The symmetric <code>M0</code> matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>M1</code></td>
+<td>
+<p>The square <code>M1</code> matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>M2</code></td>
+<td>
+<p>The symmetric <code>M2</code> matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>B0</code></td>
+<td>
+<p>Basis definition matrix for <i>phi0</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>B1</code></td>
+<td>
+<p>Basis definition matrix for <i>phi1</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>B2</code></td>
+<td>
+<p>Basis definition matrix for <i>phi2</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>theta.mu</code></td>
+<td>
+<p>Prior expectation for the <i>theta</i> vector</p>
+</td></tr>
+<tr valign="top"><td><code>theta.Q</code></td>
+<td>
+<p>Prior precision for the <i>theta</i> vector</p>
+</td></tr>
+<tr valign="top"><td><code>transform</code></td>
+<td>
+<p>Transformation link for <i>phi2</i>.  Valid settings
+are <code>"logit"</code>, <code>"log"</code>, and <code>"identity"</code></p>
+</td></tr>
+<tr valign="top"><td><code>theta.initial</code></td>
+<td>
+<p>Initial value for the <i>theta</i> vector.
+Default <code>theta.mu</code></p>
+</td></tr>
+<tr valign="top"><td><code>fixed</code></td>
+<td>
+<p>Logical vector.  For every <code>TRUE</code> value, treat the
+corresponding <code>theta</code> value as known.</p>
+</td></tr>
+<tr valign="top"><td><code>theta.fixed</code></td>
+<td>
+<p>Vector holding the values of fixed <code>theta</code> values.
+Default <code style="white-space: pre;">=theta.initial[fixed]</code></p>
+</td></tr>
+<tr valign="top"><td><code>BLC</code></td>
+<td>
+<p>Basis definition matrix for linear combinations of <code>theta</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional parameters, currently unused.</p>
+</td></tr>
+<tr valign="top"><td><code>spde</code></td>
+<td>
+<p>An <code>inla.sdpe2</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>theta</code></td>
+<td>
+<p>parameter values to be mapped.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>For <code>inla.spde2.generic</code>, an <code><a href="../../INLA/help/inla.spde2.html">inla.spde2()</a></code> object.
+</p>
+<p>For <code>inla.spde2.theta2phi0/1/2</code>, a vector of <i>phi</i> values.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.spde2.models.html">inla.spde2.models()</a></code>, <code><a href="../../INLA/help/inla.spde2.matern.html">inla.spde2.matern()</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Generate samples, and functions thereof, from an approximated...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.sample {INLA}"><tr><td>inla.sample {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Generate samples, and functions thereof, from an approximated posterior of a fitted model</h2>
+
+<h3>Description</h3>
+
+<p>This function generate samples, and functions of those,
+from an approximated posterior of a fitted model (an inla-object)</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+     inla.posterior.sample(n = 1L, result, selection = list(),
+                           intern = FALSE,
+                           use.improved.mean = TRUE, skew.corr = TRUE,
+                           add.names = TRUE, seed = 0L, num.threads = NULL,
+                           parallel.configs = TRUE,  verbose=FALSE)
+     inla.posterior.sample.eval(fun, samples, return.matrix = TRUE, ...)
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Number of samples.</p>
+</td></tr>
+<tr valign="top"><td><code>result</code></td>
+<td>
+<p>The inla-object, ie the output from an <code>inla</code>-call.
+The <code>inla</code>-object must be created with
+<code>control.compute=list(config=TRUE)</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>selection</code></td>
+<td>
+<p>Select what part of the sample to return. By default, the whole sample
+is returned. <code>selection</code> is a named list with the name of the components of
+the sample, and what indices of them to return. Names include <code>APredictor</code>,
+<code>Predictor</code>, <code>(Intercept)</code>,  and otherwise names in the formula.
+The values of the list, is interpreted as indices. If they
+are negative, they are interpreted as 'not', a zero is interpreted as 'all',  and
+positive indices are interpreted as 'only'. The names of elements of each samples
+refer to the indices in the full sample. </p>
+</td></tr>
+<tr valign="top"><td><code>intern</code></td>
+<td>
+<p>Logical. If <code>TRUE</code> then produce samples in the
+internal scale for the hyperparmater, if <code>FALSE</code> then produce
+samples in the user-scale. (For example log-precision (intern)
+and precision (user-scale))</p>
+</td></tr>
+<tr valign="top"><td><code>use.improved.mean</code></td>
+<td>
+<p>Logical. If <code>TRUE</code> then use the
+marginal mean values when constructing samples. If <code>FALSE</code>
+then use the mean in the Gaussian approximations.</p>
+</td></tr>
+<tr valign="top"><td><code>skew.corr</code></td>
+<td>
+<p>Logical. If <code>TRUE</code> then correct samples for skewness,
+if <code>FALSE</code>,  do not correct samples for skewness (ie use the
+Gaussian).</p>
+</td></tr>
+<tr valign="top"><td><code>add.names</code></td>
+<td>
+<p>Logical. If <code>TRUE</code> then add name for each elements of each
+sample. If <code>FALSE</code>, only add name for the first sample.
+(This save space.)</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>See the same argument in <code>?inla.qsample</code> for further
+information. In order to produce reproducible results,  you
+ALSO need to make sure the RNG in R is in the same state,
+see example below.  When <code>seed</code> is non-zero,
+<code>num.threads</code> is forced to &quot;1:1&quot; and parallel.configs is
+set to <code>FALSE</code>, since parallel sampling would not produce
+a reproducible sequence of pseudo-random numbers.</p>
+</td></tr>
+<tr valign="top"><td><code>num.threads</code></td>
+<td>
+<p>The number of threads to use in the format 'A:B' defining the number threads in the
+outer (A) and inner (B) layer for nested parallelism. A '0' will be replaced
+intelligently.
+<code>seed!=0</code> requires serial comptuations.</p>
+</td></tr>
+<tr valign="top"><td><code>parallel.configs</code></td>
+<td>
+<p>Logical. If <code>TRUE</code> and not on Windows,
+then try to run each configuration in
+parallel (not Windows) using <code>A</code> threads (see <code>num.threads</code>),
+where each of them is using <code>B:0</code> threads.</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>Logical. Run in verbose mode or not.</p>
+</td></tr>
+<tr valign="top"><td><code>fun</code></td>
+<td>
+<p>The function to evaluate for each sample. Upon entry, the variable names
+defined in the model are defined as the value of the sample.
+The list of names are defined in <code>result$misc$configs$contents</code> where
+<code>result</code> is an <code>inla</code>-object. This includes predefined names for
+for the linear predictor (<code>Predictor</code> and <code>APredictor</code>),  and the
+intercept (<code>(Intercept)</code> or <code>Intercept</code>).
+The hyperparameters are defined as <code>theta</code>,  no matter if they are in the
+internal scale or not. The function <code>fun</code> can also return a vector.
+To simplify usage, <code>fun</code> can also be a vector character's. In this case
+<code>fun</code> it is interpreted as (strict) variable
+names, and a function is created that return these variables:
+if argument <code>fun</code> equals <code>c("Intercept", "a[1:2]")</code>,  then this is equivalent to
+pass <code>function() return(c(get('Intercept'), get('a[1:2]')))</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>samples</code></td>
+<td>
+<p><code>samples</code> is the output from <code>inla.posterior.sample()</code></p>
+</td></tr>
+<tr valign="top"><td><code>return.matrix</code></td>
+<td>
+<p>Logical. If <code>TRUE</code>,  then return the samples of <code>fun</code>
+as matrix,  otherwise,  as a list.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments to <code>fun</code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The hyperparameters are sampled from the configurations used to do the
+numerical integration, hence if you want a higher resolution, you need to
+to change the <code>int.stratey</code> variable and friends. The latent field is
+sampled from the Gaussian approximation conditioned on the hyperparameters,
+but with a correction for the mean (default),
+and optional (and by default) corrected for the estimated skewness.
+</p>
+<p>The log.density report is only correct when there is no constraints.
+With constraints, it correct the Gaussian part of the sample for the constraints.
+</p>
+<p>After the sample is (optional) skewness corrected, the log.density
+is is not exact for correcting for constraints, but the error is very
+small in most cases.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>inla.posterior.sample</code> returns a list of the samples,
+where each sample is a list with
+names <code>hyperpar</code> and <code>latent</code>, and with their marginal
+densities in <code>logdens$hyperpar</code> and <code>logdens$latent</code>
+and the joint density is in <code>logdens$joint</code>.
+<code>inla.posterior.sample.eval</code> return a list or a matrix of
+<code>fun</code> applied to each sample.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a> and Cristian Chiuchiolo <a href="mailto:cristian.chiuchiolo@kaust.edu.sa">cristian.chiuchiolo@kaust.edu.sa</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  r = inla(y ~ 1 ,data = data.frame(y=rnorm(1)), control.compute = list(config=TRUE))
+  samples = inla.posterior.sample(2,r)
+
+  ## reproducible results:
+  inla.seed = as.integer(runif(1)*.Machine$integer.max)
+  set.seed(12345)
+  x = inla.posterior.sample(10, r, seed = inla.seed, num.threads="1:1")
+  set.seed(12345)
+  xx = inla.posterior.sample(10, r, seed = inla.seed, num.threads="1.1")
+  all.equal(x, xx)
+
+ set.seed(1234)
+ n = 25
+ xx = rnorm(n)
+ yy = rev(xx)
+ z = runif(n)
+ y = rnorm(n)
+ r = inla(y ~ 1 + z + f(xx) + f(yy, copy="xx"),
+         data = data.frame(y, z, xx, yy),
+         control.compute = list(config=TRUE),
+         family = "gaussian")
+ r.samples = inla.posterior.sample(10, r)
+
+ fun = function(...) {
+     mean(xx) - mean(yy)
+ }
+ f1 = inla.posterior.sample.eval(fun, r.samples)
+
+ fun = function(...) {
+     c(exp(Intercept), exp(Intercept + z))
+ }
+ f2 = inla.posterior.sample.eval(fun, r.samples)
+
+ fun = function(...) {
+     return (theta[1]/(theta[1] + theta[2]))
+ }
+ f3 = inla.posterior.sample.eval(fun, r.samples)
+
+ ## Predicting nz new observations, and
+ ## comparing the estimated one with the true one
+ set.seed(1234)
+ n = 100
+ alpha = beta = s = 1
+ z = rnorm(n)
+ y = alpha + beta * z + rnorm(n, sd = s)
+ r = inla(y ~ 1 + z,
+         data = data.frame(y, z),
+         control.compute = list(config=TRUE),
+         family = "gaussian")
+ r.samples = inla.posterior.sample(10^3, r)
+
+ ## just return samples of the intercept
+ intercepts = inla.posterior.sample.eval("Intercept", r.samples)
+
+ nz = 3
+ znew = rnorm(nz)
+ fun = function(zz = NA) {
+     ## theta[1] is the precision
+     return (Intercept + z * zz +
+             rnorm(length(zz), sd = sqrt(1/theta[1])))
+ }
+ par(mfrow=c(1, nz))
+ f1 = inla.posterior.sample.eval(fun, r.samples, zz = znew)
+ for(i in 1:nz) {
+     hist(f1[i, ], n = 100, prob = TRUE)
+     m = alpha + beta * znew[i]
+     xx = seq(m-4*s, m+4*s, by = s/100)
+     lines(xx, dnorm(xx, mean=m, sd = s), lwd=2)
+ }
+
+ ## 
+ ## Be aware that using non-clean variable names might be a little tricky
+ ## 
+ n &lt;- 100
+ X &lt;- matrix(rnorm(n^2), n, 2)
+ x &lt;- X[, 1]
+ xx &lt;- X[, 2]
+ xxx &lt;- x*xx
+ 
+ y &lt;- 1 + 2*x + 3*xx + 4*xxx + rnorm(n, sd = 0.01)
+ 
+ r &lt;- inla(y ~ X[, 1]*X[, 2],
+           data = list(y = y, X = X),
+           control.compute = list(config = TRUE))
+ print(round(dig = 4, r$summary.fixed[,"mean"]))
+ 
+ sam &lt;- inla.posterior.sample(100, r)
+ sam.extract &lt;- inla.posterior.sample.eval(
+     (function(...) {
+         beta.1 &lt;- get("X[, 1]")
+         beta.2 &lt;- get("X[, 2]")
+         beta.12 &lt;- get("X[, 1]:X[, 2]")
+         return(c(Intercept, beta.1, beta.2, beta.12))
+     }), sam)
+ print(round(dig = 4, rowMeans(sam.extract)))
+ 
+ ## a simpler form can also be used here, and in the examples below
+ sam.extract &lt;- inla.posterior.sample.eval(
+                c("Intercept", "X[, 1]", "X[, 2]", "X[, 1]:X[, 2]"), sam)
+ print(round(dig = 4, rowMeans(sam.extract)))
+
+ r &lt;- inla(y ~ x + xx + xxx,
+           data = list(y = y, x = x, xx = xx, xxx = xxx), 
+           control.compute = list(config = TRUE))
+ 
+ sam &lt;- inla.posterior.sample(100, r)
+ sam.extract &lt;- inla.posterior.sample.eval(
+     (function(...) {
+         return(c(Intercept, x, xx, xxx))
+     }), sam)
+ print(round(dig = 4, rowMeans(sam.extract)))
+
+ sam.extract &lt;- inla.posterior.sample.eval(c("Intercept", "x", "xx", "xxx"), sam)
+ print(round(dig = 4, rowMeans(sam.extract)))
+
+ r &lt;- inla(y ~ x*xx,
+           data = list(y = y, x = x, xx = xx), 
+           control.compute = list(config = TRUE))
+ 
+ sam &lt;- inla.posterior.sample(100, r)
+ sam.extract &lt;- inla.posterior.sample.eval(
+     (function(...) {
+         return(c(Intercept, x, xx, get("x:xx")))
+     }), sam)
+ print(round(dig = 4, rowMeans(sam.extract)))
+
+ sam.extract &lt;- inla.posterior.sample.eval(c("Intercept", "x", "xx", "x:xx"), sam)
+ print(round(dig = 4, rowMeans(sam.extract)))
+ </pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

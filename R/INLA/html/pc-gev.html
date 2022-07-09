@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Utility functions for the PC prior for the 'tail' parameter...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for pc.gevtail {INLA}"><tr><td>pc.gevtail {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Utility functions for the PC prior for the <code>tail</code> parameter in the GEV likelihood</h2>
+
+<h3>Description</h3>
+
+<p>Functions to evaluate, sample, compute quantiles and
+percentiles of the PC prior for the <code>tail</code> parameter
+in the GEV likelihood</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ inla.pc.rgevtail(n, lambda = 7)
+ inla.pc.dgevtail(xi, lambda = 7, log = FALSE)
+ inla.pc.qgevtail(p, lambda = 7)
+ inla.pc.pgevtail(q, lambda = 7)
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Number of observations</p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>The rate parameter in the PC-prior</p>
+</td></tr>
+<tr valign="top"><td><code>xi</code></td>
+<td>
+<p>Vector of evaluation points, where <code>1&gt;xi&gt;0</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>log</code></td>
+<td>
+<p>Logical. Return the density in natural or log-scale.</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>Vector of probabilities</p>
+</td></tr>
+<tr valign="top"><td><code>q</code></td>
+<td>
+<p>Vector of quantiles</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This gives the PC prior for the <code>tail</code> parameter for the GEV likelihood,
+where <code>xi=0</code> is the base model.
+</p>
+
+
+<h3>Value</h3>
+
+
+<p><code>inla.pc.dgevtail</code> gives the density,
+<code>inla.pc.pgevtail</code> gives the distribution function,
+<code>inla.pc.qgevtail</code> gives the quantile function, and
+<code>inla.pc.rgevtail</code> generates random deviates.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>See Also</h3>
+
+<p>inla.doc(&quot;pc.gevtail&quot;)</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ xi = inla.pc.rgevtail(100,  lambda = 7)
+ d = inla.pc.dgevtail(xi, lambda = 7)
+ xi = inla.pc.qgevtail(0.5, lambda = 7)
+ inla.pc.pgevtail(xi, lambda = 7)
+ </pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

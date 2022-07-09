@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Link functions in INLA</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for link {INLA}"><tr><td>link {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Link functions in INLA</h2>
+
+<h3>Description</h3>
+
+<p>Define link-functions and its inverse</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ inla.link.log(x, inverse=FALSE)
+ inla.link.invlog(x, inverse=FALSE)
+ inla.link.neglog(x, inverse=FALSE)
+ inla.link.invneglog(x, inverse=FALSE)
+ inla.link.logit(x, inverse=FALSE)
+ inla.link.invlogit(x, inverse=FALSE)
+ inla.link.probit(x, inverse=FALSE)
+ inla.link.invprobit(x, inverse=FALSE)
+ inla.link.cloglog(x, inverse=FALSE)
+ inla.link.invcloglog(x, inverse=FALSE)
+ inla.link.loglog(x, inverse=FALSE)
+ inla.link.invloglog(x, inverse=FALSE)
+ inla.link.tan(x, inverse=FALSE)
+ inla.link.invtan(x, inverse=FALSE)
+ inla.link.cauchit(x, inverse=FALSE)
+ inla.link.invcauchit(x, inverse=FALSE)
+ inla.link.identity(x, inverse=FALSE)
+ inla.link.invidentity(x, inverse=FALSE)
+ inla.link.inverse(x, inverse=FALSE)
+ inla.link.invinverse(x, inverse=FALSE)
+ inla.link.robit(x, df=7, inverse=FALSE)
+ inla.link.invrobit(x, df=7, inverse=FALSE)
+ inla.link.sn(x, intercept=0.5, skew=0, a=0, inverse=FALSE)
+ inla.link.invsn(x, intercept=0.5, skew=0, a=0, inverse=FALSE)
+ inla.link.invalid(x, inverse=FALSE)
+ inla.link.invinvalid(x, inverse=FALSE)
+ inla.link.invqpoisson(x, inverse = FALSE, quantile = 0.5)
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>The argument. A numeric vector.</p>
+</td></tr>
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>The degrees of freedom for the Student-t</p>
+</td></tr>
+<tr valign="top"><td><code>inverse</code></td>
+<td>
+<p>Logical. Use the link (<code>inverse=FALSE</code>)
+or its inverse (<code>inverse=TRUE</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>intercept</code></td>
+<td>
+<p>The quantile level for the intercept in the Skew-Normal link</p>
+</td></tr>
+<tr valign="top"><td><code>skew</code></td>
+<td>
+<p>The skewness in the Skew-Normal.
+Not both of <code>skew</code> and <code>a</code> can be given.</p>
+</td></tr>
+<tr valign="top"><td><code>a</code></td>
+<td>
+<p>The <code>a</code>-paraeter in the Skew-Normal.
+Not both of <code>skew</code> and <code>a</code> can be given.</p>
+</td></tr>
+<tr valign="top"><td><code>quantile</code></td>
+<td>
+<p>The quantile level for quantile links</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Return the values of the link-function or its inverse.</p>
+
+
+<h3>Note</h3>
+
+<p>The <code>inv</code>-functions are redundant,  as
+<code>inla.link.invlog(x) = inla.link.log(x, inverse=TRUE)</code>
+and so on,  but they are simpler to use a arguments
+to other functions.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

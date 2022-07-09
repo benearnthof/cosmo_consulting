@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Numerical evaluation of Matern and related covariance...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.matern.cov {INLA}"><tr><td>inla.matern.cov {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Numerical evaluation of Matern and related covariance functions.</h2>
+
+<h3>Description</h3>
+
+<p>Calculates covariance and correlation functions for Matern models and
+related oscillating SPDE models, on <i>R^d</i> and on the sphere,
+<i>S^2</i>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.matern.cov(
+  nu,
+  kappa,
+  x,
+  d = 1,
+  corr = FALSE,
+  norm.corr = FALSE,
+  theta,
+  epsilon = 1e-08
+)
+
+inla.matern.cov.s2(nu, kappa, x, norm.corr = FALSE, theta = 0, freq.max = NULL)
+
+inla.matern.cov.s2.unstable(
+  nu,
+  kappa,
+  x,
+  norm.corr = FALSE,
+  theta = 0,
+  freq.max = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>nu</code></td>
+<td>
+<p>The Matern smoothness parameter.</p>
+</td></tr>
+<tr valign="top"><td><code>kappa</code></td>
+<td>
+<p>The spatial scale parameter.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>Distance values.</p>
+</td></tr>
+<tr valign="top"><td><code>d</code></td>
+<td>
+<p>Space dimension; the domain is <i>R^d</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>corr</code></td>
+<td>
+<p>If <code>TRUE</code>, calculate correlations, otherwise calculate
+covariances.  Only used for pure Matern models (i.e. with
+<i>theta=0</i>).</p>
+</td></tr>
+<tr valign="top"><td><code>norm.corr</code></td>
+<td>
+<p>If <code>TRUE</code>, normalise by the estimated variance, giving
+approximate correlations.</p>
+</td></tr>
+<tr valign="top"><td><code>theta</code></td>
+<td>
+<p>Oscillation strength parameter.</p>
+</td></tr>
+<tr valign="top"><td><code>epsilon</code></td>
+<td>
+<p>Tolerance for detecting points close to distance zero.</p>
+</td></tr>
+<tr valign="top"><td><code>freq.max</code></td>
+<td>
+<p>The maximum allowed harmonic order. Current default 40, to
+be changed to a dynamic choice based on error bounds.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>On <i>R^d</i>, the models are <em>defined</em> by the spectral density
+given by
+</p>
+<p style="text-align: center;"><i>S(w) = 1 / ( (2&pi;)^d * (kappa^4 + 2 kappa^2 * cos(pi * theta) * |w|^2 +
+|w|^4)^((nu + d/2)/2) )</i></p>
+
+<p>On <i>S^2</i>, the models are <em>defined</em> by the spectral
+coefficients
+</p>
+<p style="text-align: center;"><i>S(k) = (2k+1) / (4 pi (kappa^4 + 2 kappa^2 cos(pi theta) k(k+1) +
+k^2(k+1)^2)^((&nu; + 1)/2) )</i></p>
+
+<p><code>inla.matern.cov.s2.unstable</code> is an old implementation using
+<code>orthopolynom::legendre.polynomials</code> and <code>orthopolynom::polynomial.values</code>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

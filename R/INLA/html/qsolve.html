@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Solves linear SPD systems</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for qsolve {INLA}"><tr><td>qsolve {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Solves linear SPD systems</h2>
+
+<h3>Description</h3>
+
+<p>This routine use the GMRFLib implementation
+to solve linear systems with a SPD matrix.</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+     inla.qsolve(Q, B, reordering = inla.reorderings(), method = c("solve", "forward", "backward"))
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>Q</code></td>
+<td>
+<p>A SPD matrix,  either as a (dense) matrix or sparse-matrix</p>
+</td></tr></table>
+<p>.
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>B</code></td>
+<td>
+<p>The right hand side matrix, either as a (dense) matrix or  sparse-matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>reordering</code></td>
+<td>
+<p>The type of reordering algorithm to be used for <code>TAUCS</code>;
+either one of the names listed in <code>inla.reorderings()</code>
+or the output from <code>inla.qreordering(Q)</code>.
+The default is &quot;auto&quot; which try several reordering
+algorithm and use the best one for this particular matrix (using the TAUCS library).</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>The system to solve, one of <code>"solve"</code>,
+<code>"forward"</code> or <code>"backward"</code>. Let <code>Q = L L^T</code>,
+where <code>L</code> is lower triangular
+(the Cholesky triangle),  then <code>method="solve"</code> solves <code>L L^T X = B</code> or
+equivalently <code>Q X = B</code>,  <code>method="forward"</code> solves <code>L X = B</code>,  and
+<code>method="backward"</code> solves <code>L^T X  = B</code>. </p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>inla.qsolve</code> returns a matrix <code>X</code>,
+which is the solution of <code>Q X = B</code>,  <code>L X = B</code> or <code>L^T X = B</code>
+depending on the value of <code>method</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ n = 10
+ nb &lt;- n-1
+ QQ = matrix(rnorm(n^2), n, n)
+ QQ &lt;- QQ %*% t(QQ)
+
+ Q = inla.as.sparse(QQ)
+ B = matrix(rnorm(n*nb), n, nb)
+
+ X = inla.qsolve(Q, B, method = "solve")
+ XX = inla.qsolve(Q, B, method = "solve", reordering = inla.qreordering(Q))
+ print(paste("err solve1", sum(abs( Q %*% X - B))))
+ print(paste("err solve2", sum(abs( Q %*% XX - B))))
+
+ ## the forward and backward solve is tricky, as after permutation and with Q=LL', then L is
+ ## lower triangular, but L in the orginal ordering is not lower triangular. if the rhs is iid
+ ## noise, this is not important. to control the reordering, then the 'taucs' library must be
+ ## used.
+ inla.setOption(smtp = 'taucs')
+
+ ## case 1. use the matrix as is, no reordering
+ r &lt;- "identity"
+ L = t(chol(Q))
+ X = inla.qsolve(Q, B, method = "forward", reordering = r)
+ XX = inla.qsolve(Q, B, method = "backward", reordering = r)
+ print(paste("err forward ", sum(abs(L %*% X - B))))
+ print(paste("err backward", sum(abs(t(L) %*% XX - B))))
+
+ ## case 2. use a reordering from the library
+ r &lt;- inla.qreordering(Q)
+ im &lt;- r$ireordering
+ m &lt;- r$reordering
+ print(cbind(idx = 1:n, m, im) )
+ Qr &lt;- Q[im, im]
+ L = t(chol(Qr))[m, m]
+
+ X = inla.qsolve(Q, B, method = "forward", reordering = r)
+ XX = inla.qsolve(Q, B, method = "backward", reordering = r)
+ print(paste("err forward ", sum(abs( L %*% X - B))))
+ print(paste("err backward", sum(abs( t(L) %*% XX - B))))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

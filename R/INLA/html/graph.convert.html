@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: INLA utility functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for geobugs2inla {INLA}"><tr><td>geobugs2inla {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>INLA utility functions</h2>
+
+<h3>Description</h3>
+
+<p>Various utility functions for INLA</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+     inla.geobugs2inla(adj, num, graph.file="graph.dat")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>adj</code></td>
+<td>
+<p>A vector listing the ID numbers of the adjacent areas for
+each area. This is a sparse representation of the full adjacency
+matrix for the study region, and can be generated using the Adjacency
+Tool from the Map menu in GeoBUGS.</p>
+</td></tr>
+<tr valign="top"><td><code>num</code></td>
+<td>
+<p>A vector of length N (the total number of areas) giving the
+number of neighbours n.i for each area.</p>
+</td></tr>
+<tr valign="top"><td><code>graph.file</code></td>
+<td>
+<p>Name of the file of the new graph in the INLA
+format.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The return value is the name of the graph-file created.</p>
+
+
+<h3>Note</h3>
+
+<p>These are all the same function,  and the two different names are due to backward-compatibility</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.html">inla</a></code>, <code><a href="../../INLA/help/inla.surv.html">inla.surv</a></code>, <code><a href="../../INLA/help/hyperpar.inla.html">hyperpar.inla</a></code></p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

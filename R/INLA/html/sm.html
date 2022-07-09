@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert a matrix or sparse matrix into the sparse formate...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.as.sparse {INLA}"><tr><td>inla.as.sparse {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert a matrix or sparse matrix into the sparse formate used by INLA</h2>
+
+<h3>Description</h3>
+
+<p>Convert a matrix or sparse matrix into the sparse format used by INLA (dgTMatrix)</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ inla.as.sparse(...)
+ inla.as.dgTMatrix(A, unique = TRUE, na.rm = FALSE, zeros.rm = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>The arguments. The matrix or sparse matrix,  and the additonal arguments</p>
+</td></tr>
+<tr valign="top"><td><code>A</code></td>
+<td>
+<p>The matrix</p>
+</td></tr>
+<tr valign="top"><td><code>unique</code></td>
+<td>
+<p>Logical. If <code>TRUE</code>, then ensure that the internal representation is unique and
+there are no duplicated entries.
+(Do not change this unless you know what you are doing.)</p>
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>Replace <code>NA</code>'s in the matrix with zeros.</p>
+</td></tr>
+<tr valign="top"><td><code>zeros.rm</code></td>
+<td>
+<p>Remove zeros in the matrix.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+
+<p><code>inla.as.sparse</code> and <code>inla.as.dgTMatrix</code> is the same function.
+The returned value is a sparse matrix in the <code>dgTMatrix</code>-format.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ A = matrix(1:9, 3, 3)
+ inla.as.sparse(A)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

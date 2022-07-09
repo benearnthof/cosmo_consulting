@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: PC-prior for dof in a standarized Student-t</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for pc.ddof {INLA}"><tr><td>pc.ddof {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>PC-prior for dof in a standarized Student-t</h2>
+
+<h3>Description</h3>
+
+<p>A function to evaluate the PC-prior for the degrees of freedom
+in a standarized Student-t distribution</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+     inla.pc.ddof(dof, lambda, u, alpha, log=FALSE)
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dof</code></td>
+<td>
+<p>Degrees of freedom</p>
+</td></tr>
+<tr valign="top"><td><code>log</code></td>
+<td>
+<p>Logical. Return the density or the log-density</p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>The optional value of <code>lambda</code>,  instead of defining it implicitely
+through <code>u</code> and <code>alpha</code></p>
+</td></tr>
+<tr valign="top"><td><code>u</code></td>
+<td>
+<p>The upper value of dof used to elicitate <code>lambda</code>,  <code>Prob(dof &lt; u) = alpha</code></p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>The probability <code>alpha</code> used to elicitate <code>lambda</code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>These functions implements the PC-prior for the dof in a standarized Student-t
+distribution (ie. with unit variance and <code>dof</code> &gt; 2).
+Either <code>lambda</code>, or <code>u</code> AND <code>alpha</code> must be given.
+Due the internal tabulation, <code>dof</code> must be larger than 2.0025.
+</p>
+
+
+<h3>Value</h3>
+
+
+<p><code>inla.pc.ddof</code> returns the prior density for given <code>dof</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

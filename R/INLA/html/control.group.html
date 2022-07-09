@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Control variables in control.group</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for control.group {INLA}"><tr><td>control.group {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Control variables in control.group</h2>
+
+<h3>Description</h3>
+
+<p>Control variables in <code>control.group</code> for use in <code>inla</code></p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.set.control.group.default(...)
+control.group(adjust.for.con.comp, cyclic, fixed, graph, hyper, initial, model, order, param, prior, scale.model)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Possible arguments</p>
+</td></tr>
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>   Group model (one of 'exchangable', 'exchangablepos', 'ar1', 'ar', 'rw1', 'rw2', 'besag', or 'iid')</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>   Defines the <code>order</code> of the model: for model <code>ar</code> this defines the order p, in AR(p). Not used for other models at the time being.</p>
+</td></tr>
+<tr valign="top"><td><code>cyclic</code></td>
+<td>
+<p>   Make the group model cyclic? (Only applies to models 'ar1', 'rw1' and 'rw2')</p>
+</td></tr>
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>   The graph spesification (Only applies to model 'besag')</p>
+</td></tr>
+<tr valign="top"><td><code>scale.model</code></td>
+<td>
+<p>   Scale the intrinsic model (RW1, RW2, BESAG) so the generalized variance is 1. (Default <code>TRUE</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>adjust.for.con.comp</code></td>
+<td>
+<p>   Adjust for connected components when <code>scale.model=TRUE</code>? (default <code>TRUE</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>hyper</code></td>
+<td>
+<p>   Definition of the hyperparameter(s)</p>
+</td></tr>
+<tr valign="top"><td><code>initial</code></td>
+<td>
+<p>   (OBSOLETE!) The initial value for the group correlation or precision in the internal scale.</p>
+</td></tr>
+<tr valign="top"><td><code>fixed</code></td>
+<td>
+<p>   (OBSOLETE!) A boolean variable if the group correction or precision is assumed to be fixed or random.</p>
+</td></tr>
+<tr valign="top"><td><code>prior</code></td>
+<td>
+<p>   (OBSOLETE!) The name of the prior distribution for the group correlation or precision in the internal scale</p>
+</td></tr>
+<tr valign="top"><td><code>param</code></td>
+<td>
+<p>   (OBSOLETE!) Prior parameters</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The function <code>control.group</code> is used to TAB-complete arguments and returns a list of given arguments.
+The function <code>inla.set.control.group.default</code> returns a list with all the default values of all parameters within this control statement.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/control.update.html">control.update</a></code>, <code><a href="../../INLA/help/control.lincomb.html">control.lincomb</a></code>, <code><a href="../../INLA/help/control.group.html">control.group</a></code>, <code><a href="../../INLA/help/control.mix.html">control.mix</a></code>, <code><a href="../../INLA/help/control.pom.html">control.pom</a></code>, <code><a href="../../INLA/help/control.link.html">control.link</a></code>, <code><a href="../../INLA/help/control.expert.html">control.expert</a></code>, <code><a href="../../INLA/help/control.compute.html">control.compute</a></code>, <code><a href="../../INLA/help/control.lp.scale.html">control.lp.scale</a></code>, <code><a href="../../INLA/help/control.pardiso.default.html">control.pardiso.default</a></code>, <code><a href="../../INLA/help/control.bgev.default.html">control.bgev.default</a></code>, <code><a href="../../INLA/help/control.family.html">control.family</a></code>, <code><a href="../../INLA/help/control.fixed.html">control.fixed</a></code>, <code><a href="../../INLA/help/control.inla.html">control.inla</a></code>, <code><a href="../../INLA/help/control.predictor.html">control.predictor</a></code>, <code><a href="../../INLA/help/control.mode.html">control.mode</a></code>, <code><a href="../../INLA/help/control.hazard.html">control.hazard</a></code>, 
+<code><a href="../../INLA/help/inla.html">inla</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

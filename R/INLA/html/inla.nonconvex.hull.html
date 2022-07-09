@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Nonconvex set extensions.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.nonconvex.hull {INLA}"><tr><td>inla.nonconvex.hull {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Nonconvex set extensions.</h2>
+
+<h3>Description</h3>
+
+<p>Constructs a nonconvex boundary for a point set using morphological
+operations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.nonconvex.hull(
+  points,
+  convex = -0.15,
+  concave = convex,
+  resolution = 40,
+  eps = NULL,
+  crs = NULL
+)
+
+inla.nonconvex.hull.basic(
+  points,
+  convex = -0.15,
+  resolution = 40,
+  eps = NULL,
+  crs = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>points</code></td>
+<td>
+<p>2D point coordinates (2-column matrix).  Can alternatively be
+a <code>SpatialPoints</code> or <code>SpatialPointsDataFrame</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>convex</code></td>
+<td>
+<p>The desired extension radius.  Also determines the smallest
+allowed convex curvature radius.  Negative values are interpreted as
+fractions of the approximate initial set diameter.</p>
+</td></tr>
+<tr valign="top"><td><code>concave</code></td>
+<td>
+<p>The desired minimal concave curvature radius. Default is
+<code>concave=convex</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>resolution</code></td>
+<td>
+<p>The internal computation resolution.  A warning will be
+issued when this needs to be increased for higher accuracy, with the
+required resolution stated.</p>
+</td></tr>
+<tr valign="top"><td><code>eps</code></td>
+<td>
+<p>The polygonal curve simplification tolerance used for simplifying
+the resulting boundary curve.  See <code><a href="../../INLA/help/inla.simplify.curve.html">inla.simplify.curve()</a></code> for
+details.</p>
+</td></tr>
+<tr valign="top"><td><code>crs</code></td>
+<td>
+<p>An optional <code>CRS</code> or <code>inla.CRS</code> object</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Morphological dilation by <code>convex</code>, followed by closing by
+<code>concave</code>, with minimum concave curvature radius <code>concave</code>.  If
+the dilated set has no gaps of width between </p>
+<p style="text-align: center;"><i>2*convex*(sqrt(1+2*concave/convex) - 1)</i></p>
+<p> and <i>2*concave</i>, then the minimum convex curvature radius is
+<code>convex</code>.  Special case <code>concave=0</code> delegates to
+<code>inla.nonconvex.hull.basic</code>
+</p>
+<p>The implementation is based on the identity </p>
+<p style="text-align: center;"><i>dilation(a) &amp; closing(b) = dilation(a+b) &amp;
+erosion(b)</i></p>
+<p> where all operations are with respect to disks with the
+specified radii.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An <code><a href="../../INLA/help/inla.mesh.segment.html">inla.mesh.segment()</a></code> object.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Requires <code>nndistF</code> from the <code>splancs</code> package.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+if (require(splancs)) {
+    loc &lt;- matrix(runif(20), 10, 2)
+    boundary &lt;- inla.nonconvex.hull(loc, convex = 0.2)
+    lines(boundary, add = FALSE)
+    points(loc)
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

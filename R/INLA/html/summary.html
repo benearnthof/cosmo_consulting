@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Summary for a INLA fit</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for summary.inla {INLA}"><tr><td>summary.inla {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2> Summary for a INLA fit </h2>
+
+<h3>Description</h3>
+
+<p>Takes a fitted <code>inla</code> or <code>surv.inla</code> object produced by
+<code>inla</code> or  <code>surv.inla</code> and produces
+a summary from it.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'inla'
+summary(object, digits = 3L, include.lincomb = TRUE, ...)
+## S3 method for class 'summary.inla'
+print(x, digits = 3L, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>  a fitted <code>inla</code> object as produced by
+<code>inla</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a <code>summary.inla</code> object produced by <code>summary.inla</code></p>
+</td></tr>
+<tr valign="top"><td><code>digits</code></td>
+<td>
+<p>Integer Number of digits</p>
+</td></tr>
+<tr valign="top"><td><code>include.lincomb</code></td>
+<td>
+<p>Logcial Include the summary for the the linear combinations or not</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p> other arguments.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Posterior mean and standard deviation (together with quantiles or
+cdf) are printed for the fixed effects in the model.
+</p>
+<p>For the random effects the function <code>summary()</code> prints the
+posterior mean and standard deviations for the hyperparameters
+</p>
+<p>If the option <code>short.summary</code> is set to <code>TRUE</code> using
+<code>inla.setOption</code>,
+then  a less verbose summary
+variant will be used,  which might be
+more suitable for Markdown documents.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>summary.inla</code> returns an object of class <code>summary.inla</code>, a
+list of components to print.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Sara Martino and Havard Rue</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="../../INLA/help/inla.html">inla</a></code> </p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

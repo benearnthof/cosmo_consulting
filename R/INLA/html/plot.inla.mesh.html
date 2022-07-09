@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Draw a triangulation mesh object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for plot.inla.mesh {INLA}"><tr><td>plot.inla.mesh {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Draw a triangulation mesh object</h2>
+
+<h3>Description</h3>
+
+<p>Plots an <code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code> object using either standard graphics or
+with <code>rgl</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'inla.mesh'
+plot(
+  x,
+  col = "white",
+  t.sub = 1:nrow(mesh$graph$tv),
+  add = FALSE,
+  lwd = 1,
+  xlim = range(mesh$loc[, 1]),
+  ylim = range(mesh$loc[, 2]),
+  main = NULL,
+  rgl = FALSE,
+  size = 2,
+  draw.vertices = FALSE,
+  vertex.color = "black",
+  draw.edges = TRUE,
+  edge.color = rgb(0.3, 0.3, 0.3),
+  draw.segments = draw.edges,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>An <code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>col</code></td>
+<td>
+<p>Color specification.  A single named color, a vector of scalar
+values, or a matrix of RGB values.  Requires <code>rgl=TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>t.sub</code></td>
+<td>
+<p>Optional triangle index subset to be drawn.</p>
+</td></tr>
+<tr valign="top"><td><code>add</code></td>
+<td>
+<p>If <code>TRUE</code>, adds to the current plot instead of starting a
+new one.</p>
+</td></tr>
+<tr valign="top"><td><code>lwd</code></td>
+<td>
+<p>Line width for triangle edges.</p>
+</td></tr>
+<tr valign="top"><td><code>xlim</code></td>
+<td>
+<p>X-axis limits.</p>
+</td></tr>
+<tr valign="top"><td><code>ylim</code></td>
+<td>
+<p>Y-axis limits.</p>
+</td></tr>
+<tr valign="top"><td><code>main</code></td>
+<td>
+<p>The main plot title.  If not specified, a default title is
+generated based on the mesh type.</p>
+</td></tr>
+<tr valign="top"><td><code>rgl</code></td>
+<td>
+<p>When <code>TRUE</code>, generates an <code>rgl</code> plot instead of a
+generic graphics plot.  Allows 3D plotting and color surface plotting.</p>
+</td></tr>
+<tr valign="top"><td><code>size</code></td>
+<td>
+<p>Size of vertex points in <code>rgl</code> plotting. See
+<code>rgl.material</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>draw.vertices</code></td>
+<td>
+<p>If <code>TRUE</code>, draw triengle vertices.</p>
+</td></tr>
+<tr valign="top"><td><code>vertex.color</code></td>
+<td>
+<p>Color specification for all vertices.</p>
+</td></tr>
+<tr valign="top"><td><code>draw.edges</code></td>
+<td>
+<p>If <code>TRUE</code>, draw triangle edges.</p>
+</td></tr>
+<tr valign="top"><td><code>edge.color</code></td>
+<td>
+<p>Color specification for all edges.</p>
+</td></tr>
+<tr valign="top"><td><code>draw.segments</code></td>
+<td>
+<p>If <code>TRUE</code>, draw boundary and interior constraint
+edges more prominently.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further graphics parameters, interpreted by the respective
+plotting systems.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/plot.inla.trimesh.html">plot.inla.trimesh()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+mesh &lt;- inla.mesh.create(globe = 10)
+plot(mesh)
+
+if (require(rgl)) {
+    plot(mesh, rgl = TRUE, col = mesh$loc[, 1])
+}
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

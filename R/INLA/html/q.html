@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Control and view a remote inla-queue</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.qstat {INLA}"><tr><td>inla.qstat {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Control and view a remote inla-queue</h2>
+
+<h3>Description</h3>
+
+<p>Control and view a remote inla-queue of submitted jobs
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.qget(id, remove = TRUE)
+inla.qdel(id)
+inla.qstat(id)
+inla.qlog(id)
+inla.qnuke()
+## S3 method for class 'inla.q'
+summary(object,...)
+## S3 method for class 'inla.q'
+print(x,...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>The job-id which is the output from <code>inla</code> when the job is submitted,  the
+job-number or job-name. For <code>inla.qstat</code>, <code>id</code> is optional and if omitted
+all the jobs will be listed.</p>
+</td></tr>
+<tr valign="top"><td><code>remove</code></td>
+<td>
+<p>Logical If FALSE, leave the job on the server after retrival,
+otherwise remove it (default).</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>An <code>inla.q</code>-object which is the output from <code>inla.qstat</code></p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>An <code>inla.q</code>-object  which is the output from <code>inla.qstat</code></p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p> other arguments.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>inla.qstat</code> show job(s) on the server,
+<code>inla.qget</code> fetch the results (and by default remove
+the files on the server),  <code>inla.qdel</code> removes
+a job on the server and <code>inla.qnuke</code> remove all jobs on the server.
+<code>inla.qlog</code> fetches the logfile only.
+</p>
+<p>The recommended procedure is to use <code>r=inla(...,
+inla.call="submit")</code> and then do <code>r=inla.qget(r)</code> at a later
+stage.  If the job is not finished, then <code>r</code> will not be
+overwritten and this step can be repeated.  The reason for this
+procedure, is that some information usually stored in the result
+object does not go through the remote server, hence have to be
+appended to the results that are retrieved from the server. Hence
+doing <code>r=inla(..., inla.call="submit")</code> and then later retrive
+it using <code>r=inla.qget(1)</code>, say, then <code>r</code> does not contain
+all the usual information.  All the main results are there, but
+administrative information which is required to call
+<code>inla.hyperpar</code> or <code>inla.rerun</code> are not there.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>inla.qstat</code> returns an <code>inla.q</code>-object with information about current jobs.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="../../INLA/help/inla.html">inla</a></code> </p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+r = inla(y~1, data = data.frame(y=rnorm(10)), inla.call="submit")
+inla.qstat()
+r = inla.qget(r, remove=FALSE)
+inla.qdel(1)
+inla.qnuke()
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

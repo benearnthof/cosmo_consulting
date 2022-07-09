@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create an mdata-object for INLA</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.mdata {INLA}"><tr><td>inla.mdata {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>
+Create an mdata-object for INLA
+</h2>
+
+<h3>Description</h3>
+
+<p>This defines an mdata-object for matrix valued response-families
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.mdata(y, ...)
+is.inla.mdata(object)
+as.inla.mdata(object)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>The response vector/matrix</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional vectors/matrics of same length as <code>y</code></p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>Any <code>R</code>-object</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>An mdata object</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>inla.mdata</code>.  There is method for <code>print</code>.
+</p>
+<p><code>is.inla.mdata</code> returns <code>TRUE</code> if <code>object</code>
+inherits from class <code>inla.mdata</code>, otherwise <code>FALSE</code>.
+</p>
+<p><code>as.inla.mdata</code> returns an object of class <code>inla.mdata</code>
+</p>
+
+
+<h3>Note</h3>
+
+<p>It is often required to set <code>Y=inla.mdata(...)</code> and then
+define the formula as <code>Y~...</code>,  especially when used with
+<code>inla.stack</code>.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.html">inla</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

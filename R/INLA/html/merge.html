@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Merge a mixture of 'inla'-objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.merge {INLA}"><tr><td>inla.merge {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Merge a mixture of <code>inla</code>-objects</h2>
+
+<h3>Description</h3>
+
+<p>Merge a mixture of <code>inla</code>-objects</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+     ## S3 method for class 'inla'
+merge(x, y, ..., prob = rep(1,  length(loo)),
+                          mc.cores = NULL, verbose = FALSE)
+     inla.merge(loo, prob = rep(1,  length(loo)), verbose = FALSE)
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>An <code>inla</code>-object to be merged</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>An <code>inla</code>-object to be merged</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional <code>inla</code>-objects to be merged</p>
+</td></tr>
+<tr valign="top"><td><code>loo</code></td>
+<td>
+<p>List of <code>inla</code>-objects to be merged</p>
+</td></tr>
+<tr valign="top"><td><code>prob</code></td>
+<td>
+<p>The mixture of (possibly unnormalized) probabilities</p>
+</td></tr>
+<tr valign="top"><td><code>mc.cores</code></td>
+<td>
+<p>The number of cores to use in <code>parallel::mclapply</code>. If
+<code>is.null(mc.cores)</code>, then check <code>getOption("mc.cores")</code>
+and <code>inla.getOption("num.threads")</code> in that order.</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>Turn on verbose-output or not</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The function <code>merge.inla</code> implements method <code>merge</code> for
+<code>inla</code>-objects. <code>merge.inla</code> is a wrapper for the function
+<code>inla.merge</code>. The interface is slightly different, <code>merge.inla</code>
+is more tailored for interactive use, whereas <code>inla.merge</code> is better
+in general code.
+</p>
+<p><code>inla.merge</code> is intented for merging a mixture of <code>inla</code>-objects,
+each run with the same formula and settings, except for a set of
+hyperparameters that are fixed to different values. Using this function,
+we can then integrate over these hyperparameters using (unnormalized)
+integration weights
+<code>prob</code>. The main objects to be merged,  are the summary statistics
+and marginal densities (like for hyperparameters, fixed,  random,  etc).
+Not all entries in the object can be merged, and by default these
+are inheritated from the first object in the list,
+while some are just set to  <code>NULL</code>.
+Those objectes that are merged,
+will be listed if run with option <code>verbose=TRUE</code>.
+</p>
+<p>Note that merging hyperparameter in the user-scale is prone to
+discretization error in general, so it is more stable to convert
+the marginal of the hyperparameter from the merged internal scale
+to the user-scale. (This is not done by this function.)
+</p>
+
+
+<h3>Value</h3>
+
+<p>A merged <code>inla</code>-object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ set.seed(123)
+ n = 100
+ y = rnorm(n)
+ y[1:10] = NA
+ x = rnorm(n)
+ z1 = runif(n)
+ z2 = runif(n)*n
+ idx = 1:n
+ idx2 = 1:n
+ lc1 = inla.make.lincomb(idx = c(1, 2, 3))
+ names(lc1) = "lc1"
+ lc2 = inla.make.lincomb(idx = c(0, 1, 2, 3))
+ names(lc2) = "lc2"
+ lc3 = inla.make.lincomb(idx = c(0, 0, 1, 2, 3))
+ names(lc3) = "lc3"
+ lc = c(lc1, lc2, lc3)
+ rr = list()
+ for (logprec in c(0, 1, 2))
+     rr[[length(rr)+1]] = inla(y ~ 1 + x + f(idx, z1) + f(idx2, z2),
+              lincomb = lc,
+              control.family = list(hyper = list(prec = list(initial = logprec))),
+              control.predictor = list(compute = TRUE, link = 1),
+              data = data.frame(y, x, idx, idx2, z1, z2))
+ r = inla.merge(rr, prob = seq_along(rr), verbose=TRUE)
+ summary(r)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

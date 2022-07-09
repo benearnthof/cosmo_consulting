@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: SPDE result extraction from INLA estimation results</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.spde.result {INLA}"><tr><td>inla.spde.result {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>SPDE result extraction from INLA estimation results</h2>
+
+<h3>Description</h3>
+
+<p>Exctract field and parameter values and distributions for an
+<code>inla.spde</code> SPDE effect from an inla result object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.spde.result(...)
+
+inla.spde1.result(inla, name, spde, do.transform = TRUE, ...)
+
+## S3 method for class 'inla.spde1'
+inla.spde.result(inla, name, spde, do.transform = TRUE, ...)
+
+inla.spde2.result(inla, name, spde, do.transform = TRUE, ...)
+
+## S3 method for class 'inla.spde2'
+inla.spde.result(inla, name, spde, do.transform = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to and from other methods.</p>
+</td></tr>
+<tr valign="top"><td><code>inla</code></td>
+<td>
+<p>An <code>inla</code> object obtained from a call to <code><a href="../../INLA/help/inla.html">inla()</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>A character string with the name of the SPDE effect in the inla
+formula.</p>
+</td></tr>
+<tr valign="top"><td><code>spde</code></td>
+<td>
+<p>The <code>inla.spde</code> object used for the effect in the inla
+formula. (Note: this could have been stored in the inla output, but isn't.)
+Usually the result of a call to <code><a href="../../INLA/help/inla.spde2.matern.html">inla.spde2.matern()</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>do.transform</code></td>
+<td>
+<p>If <code>TRUE</code>, also calculate marginals transformed to
+user-scale.  Setting to <code>FALSE</code> is useful for large non-stationary
+models, as transforming many marginal densities is time-consuming.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>For <code>inla.spde2</code> models, a list, where the nominal range and
+variance are defined as the values that would have been obtained with a
+stationary model and no boundary effects: </p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>marginals.kappa </code></td>
+<td>
+<p>Marginal
+densities for kappa</p>
+</td></tr> <tr valign="top"><td><code>marginals.log.kappa </code></td>
+<td>
+<p>Marginal densities for
+log(kappa)</p>
+</td></tr> <tr valign="top"><td><code>marginals.log.range.nominal </code></td>
+<td>
+<p>Marginal densities for
+log(range)</p>
+</td></tr> <tr valign="top"><td><code>marginals.log.tau </code></td>
+<td>
+<p>Marginal densities for log(tau)</p>
+</td></tr>
+<tr valign="top"><td><code>marginals.log.variance.nominal </code></td>
+<td>
+<p>Marginal densities for log(variance)</p>
+</td></tr>
+<tr valign="top"><td><code>marginals.range.nominal </code></td>
+<td>
+<p>Marginal densities for range</p>
+</td></tr>
+<tr valign="top"><td><code>marginals.tau </code></td>
+<td>
+<p>Marginal densities for tau</p>
+</td></tr> <tr valign="top"><td><code>marginals.theta
+</code></td>
+<td>
+<p>Marginal densities for the theta parameters</p>
+</td></tr> <tr valign="top"><td><code>marginals.values
+</code></td>
+<td>
+<p>Marginal densities for the field values</p>
+</td></tr> <tr valign="top"><td><code>marginals.variance.nominal
+</code></td>
+<td>
+<p>Marginal densities for variance</p>
+</td></tr> <tr valign="top"><td><code>summary.hyperpar </code></td>
+<td>
+<p>The SPDE related
+part of the inla hyperpar output summary</p>
+</td></tr> <tr valign="top"><td><code>summary.log.kappa </code></td>
+<td>
+<p>Summary
+statistics for log(kappa)</p>
+</td></tr> <tr valign="top"><td><code>summary.log.range.nominal </code></td>
+<td>
+<p>Summary
+statistics for log(range)</p>
+</td></tr> <tr valign="top"><td><code>summary.log.tau </code></td>
+<td>
+<p>Summary statistics for
+log(tau)</p>
+</td></tr> <tr valign="top"><td><code>summary.log.variance.nominal </code></td>
+<td>
+<p>Summary statistics for
+log(kappa)</p>
+</td></tr> <tr valign="top"><td><code>summary.theta </code></td>
+<td>
+<p>Summary statistics for the theta
+parameters</p>
+</td></tr> <tr valign="top"><td><code>summary.values </code></td>
+<td>
+<p>Summary statistics for the field values</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.spde.models.html">inla.spde.models()</a></code>, <code><a href="../../INLA/help/inla.spde2.matern.html">inla.spde2.matern()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+loc &lt;- matrix(runif(100 * 2), 100, 2)
+mesh &lt;- inla.mesh.create.helper(points.domain = loc, max.edge = c(0.1, 0.5))
+spde &lt;- inla.spde2.matern(mesh)
+index &lt;- inla.spde.make.index("spatial", mesh$n, n.repl = 2)
+spatial.A &lt;- inla.spde.make.A(mesh, loc,
+    index = rep(1:nrow(loc), 2),
+    repl = rep(1:2, each = nrow(loc))
+)
+## Toy example with no spatial correlation (range=zero)
+y &lt;- 10 + rnorm(100 * 2)
+stack &lt;- inla.stack(
+    data = list(y = y),
+    A = list(spatial.A),
+    effects = list(c(index, list(intercept = 1))),
+    tag = "tag"
+)
+data &lt;- inla.stack.data(stack, spde = spde)
+formula &lt;- y ~ -1 + intercept + f(spatial,
+    model = spde,
+    replicate = spatial.repl
+)
+result &lt;- inla(formula,
+    family = "gaussian", data = data,
+    control.predictor = list(A = inla.stack.A(stack))
+)
+spde.result &lt;- inla.spde.result(result, "spatial", spde)
+plot(spde.result$marginals.range.nominal[[1]], type = "l")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

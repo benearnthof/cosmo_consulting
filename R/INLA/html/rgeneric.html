@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: rgeneric models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for rgeneric.define {INLA}"><tr><td>rgeneric.define {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>rgeneric models</h2>
+
+<h3>Description</h3>
+
+<p>A framework for defining latent models in R</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.rgeneric.define(model = NULL, debug = FALSE, compile = TRUE, optimize = FALSE, ...)
+inla.rgeneric.iid.model(
+        cmd = c("graph", "Q", "mu", "initial", "log.norm.const", "log.prior", "quit"),
+        theta = NULL)
+inla.rgeneric.ar1.model(
+        cmd = c("graph", "Q", "mu", "initial", "log.norm.const", "log.prior", "quit"),
+        theta = NULL)
+inla.rgeneric.ar1.model.opt(
+        cmd = c("graph", "Q", "mu", "initial", "log.norm.const", "log.prior", "quit"),
+        theta = NULL)
+inla.rgeneric.wrapper(
+        cmd = c("graph", "Q", "mu", "initial", "log.norm.const", "log.prior", "quit"),
+        model, theta = NULL)
+inla.rgeneric.q(
+        rmodel,
+        cmd = c("graph", "Q", "mu", "initial", "log.norm.const", "log.prior", "quit"),
+        theta = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>The definition of the model; see <code>inla.rgeneric.ar1.model</code></p>
+</td></tr>
+<tr valign="top"><td><code>rmodel</code></td>
+<td>
+<p>The rgeneric model-object, the output of <code>inla.rgeneric.define</code></p>
+</td></tr>
+<tr valign="top"><td><code>debug</code></td>
+<td>
+<p>Logical. Turn on/off debugging</p>
+</td></tr>
+<tr valign="top"><td><code>compile</code></td>
+<td>
+<p>Logical. Compile the definition of the model or not.</p>
+</td></tr>
+<tr valign="top"><td><code>optimze</code></td>
+<td>
+<p>Logical. With this option <code>TRUE</code>, then <code>model</code>
+pass only the values of <code>Q</code> and not the whole matrix.
+Please see the vignette for details and
+<code>inla.rgeneric.ar1.model.opt</code> for an example.</p>
+</td></tr>
+<tr valign="top"><td><code>cmd</code></td>
+<td>
+<p>An allowed request</p>
+</td></tr>
+<tr valign="top"><td><code>theta</code></td>
+<td>
+<p>Values of theta</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Named list of variables that defines the environment of <code>model</code></p>
+</td></tr>
+<tr valign="top"><td><code>debug</code></td>
+<td>
+<p>Logical. Enable debug output</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+
+<p>This allows a latent model to be
+defined in <code>R</code>.
+See <code>inla.rgeneric.ar1.model</code> and
+<code>inla.rgeneric.iid.model</code> and the documentation for
+worked out examples of how to define latent models in  this way.
+This will be somewhat slow and is intended for special cases and
+protyping. The function <code>inla.rgeneric.wrapper</code> is for
+internal use only.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

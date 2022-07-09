@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Old SPDE model objects for INLA</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.spde1.create {INLA}"><tr><td>inla.spde1.create {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Old SPDE model objects for INLA</h2>
+
+<h3>Description</h3>
+
+<p>Create an <code>inla.spde1</code> model object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.spde1.create(
+  mesh,
+  model = c("matern", "imatern", "matern.osc"),
+  param = NULL,
+  ...
+)
+
+inla.spde1.matern(mesh, ...)
+
+inla.spde1.imatern(mesh, ...)
+
+inla.spde1.matern.osc(mesh, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mesh</code></td>
+<td>
+<p>The mesh to build the model on, as an <code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code>
+object.</p>
+</td></tr>
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p>The name of the model.</p>
+</td></tr>
+<tr valign="top"><td><code>param</code></td>
+<td>
+<p>Model specific parameters.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional parameters passed on to other methods.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Note: This is an old spde object format retained for backwards
+compatibility.  Please use <code><a href="../../INLA/help/inla.spde2.html">inla.spde2()</a></code> models for new code.
+</p>
+<p>This method constructs an object for SPDE models.  Currently implemented:
+</p>
+<p><code>model="matern"</code>
+</p>
+<p style="text-align: center;"><i>(kappa^2(u)-Delta)^(alpha/2)
+(tau(u) x(u)) = W(u)</i></p>
+<p style="text-align: center;"><i>(kappa^2(u)-Delta)^(alpha/2) (tau(u)
+x(u)) = W(u)</i></p>
+
+<p><code>param</code>: </p>
+ <ul>
+<li><p><code>alpha</code> = 1 or 2 </p>
+</li>
+<li><p><code>basis.T</code> =
+Matrix of basis functions for <i>log tau(u)</i>
+</p>
+</li>
+<li><p><code>basis.K</code> = Matrix of basis functions for
+<i>log kappa^2(u)</i> </p>
+</li></ul>
+
+<p><code>model="imatern"</code>
+</p>
+<p style="text-align: center;"><i>(-Delta)^(alpha/2) (tau(u) x(u)) =
+W(u)</i></p>
+<p style="text-align: center;"><i>(-Delta)^(alpha/2) (tau(u) x(u)) = W(u)</i></p>
+
+<p><code>param</code>: </p>
+ <ul>
+<li><p><code>alpha</code> = 1 or 2 </p>
+</li>
+<li><p><code>basis.T</code> =
+Matrix of basis functions for <i>log tau(u)</i> </p>
+</li></ul>
+
+
+
+<h3>Value</h3>
+
+<p>An <code>inla.spde1</code> object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.spde2.matern.html">inla.spde2.matern()</a></code>, <code><a href="../../INLA/help/inla.mesh.2d.html">inla.mesh.2d()</a></code>,
+<code><a href="../../INLA/help/inla.mesh.basis.html">inla.mesh.basis()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+n &lt;- 100
+field.fcn &lt;- function(loc) (10 * cos(2 * pi * 2 * (loc[, 1] + loc[, 2])))
+loc &lt;- matrix(runif(n * 2), n, 2)
+## One field, 2 observations per location
+idx.y &lt;- rep(1:n, 2)
+y &lt;- field.fcn(loc[idx.y, ]) + rnorm(length(idx.y))
+
+mesh &lt;- inla.mesh.create(loc, refine = list(max.edge = 0.05))
+spde &lt;- inla.spde1.create(mesh, model = "matern")
+data &lt;- list(y = y, field = mesh$idx$loc[idx.y])
+formula &lt;- y ~ -1 + f(field, model = spde)
+result &lt;- inla(formula, data = data, family = "normal")
+
+## Plot the mesh structure:
+plot(mesh)
+
+if (require(rgl)) {
+    ## Plot the posterior mean:
+    plot(mesh,
+        rgl = TRUE,
+        result$summary.random$field[, "mean"],
+        color.palette = colorRampPalette(c("blue", "green", "red"))
+    )
+    ## Plot residual field:
+    plot(mesh,
+        rgl = TRUE,
+        result$summary.random$field[, "mean"] - field.fcn(mesh$loc),
+        color.palette = colorRampPalette(c("blue", "green", "red"))
+    )
+}
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

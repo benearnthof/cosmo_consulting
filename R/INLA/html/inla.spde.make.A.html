@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Observation/prediction matrices for mesh models.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.spde.make.A {INLA}"><tr><td>inla.spde.make.A {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Observation/prediction matrices for mesh models.</h2>
+
+<h3>Description</h3>
+
+<p>Constructs observation/prediction weight matrices for models based on
+<code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code> and <code><a href="../../INLA/help/inla.mesh.1d.html">inla.mesh.1d()</a></code> objects.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.spde.make.A(
+  mesh = NULL,
+  loc = NULL,
+  index = NULL,
+  group = NULL,
+  repl = 1L,
+  n.spde = NULL,
+  n.group = NULL,
+  n.repl = NULL,
+  group.mesh = NULL,
+  weights = NULL,
+  A.loc = NULL,
+  A.group = NULL,
+  group.index = NULL,
+  block = NULL,
+  n.block = NULL,
+  block.rescale = c("none", "count", "weights", "sum"),
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mesh</code></td>
+<td>
+<p>An <code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code> or <code><a href="../../INLA/help/inla.mesh.1d.html">inla.mesh.1d()</a></code> object
+specifying a function basis on a mesh domain.  Alternatively, an
+<code>inla.spde</code> object that includes a mesh (e.g. from
+<code><a href="../../INLA/help/inla.spde2.matern.html">inla.spde2.matern()</a></code>).</p>
+</td></tr>
+<tr valign="top"><td><code>loc</code></td>
+<td>
+<p>Observation/prediction coordinates.  <code>mesh</code> and <code>loc</code>
+defines a matrix <code>A.loc</code> of mapping weights between basis function
+weights and field values.  If <code>loc</code> is <code>NULL</code>, <code>A.loc</code> is
+defined as <code>Diagonal(n.spde, 1)</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>index</code></td>
+<td>
+<p>For each observation/prediction value, an index into
+<code>loc</code>.  Default is <code>seq_len(nrow(A.loc))</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>For each observation/prediction value, an index into the group
+model.</p>
+</td></tr>
+<tr valign="top"><td><code>repl</code></td>
+<td>
+<p>For each observation/prediction value, the replicate index.</p>
+</td></tr>
+<tr valign="top"><td><code>n.spde</code></td>
+<td>
+<p>The number of basis functions in the mesh model. (Note: may be
+different than the number of mesh vertices/nodes/knots.)</p>
+</td></tr>
+<tr valign="top"><td><code>n.group</code></td>
+<td>
+<p>The size of the group model.</p>
+</td></tr>
+<tr valign="top"><td><code>n.repl</code></td>
+<td>
+<p>The total number of replicates.</p>
+</td></tr>
+<tr valign="top"><td><code>group.mesh</code></td>
+<td>
+<p>An optional <code><a href="../../INLA/help/inla.mesh.1d.html">inla.mesh.1d()</a></code> object for the
+group model.</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+<p>Optional scaling weights to be applied row-wise to the
+resulting matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>A.loc</code></td>
+<td>
+<p>Optional precomputed observation/prediction matrix.
+<code>A.loc</code> can be specified instead of <code>mesh</code>+<code>loc</code>, optionally
+with <code>index</code> supplied.</p>
+</td></tr>
+<tr valign="top"><td><code>A.group</code></td>
+<td>
+<p>Optional precomputed observation/prediction matrix for the
+group model. <code>A.group</code> can be specified instead of <code>group</code> and/or
+<code>group.mesh</code>, optionally with <code>group.index</code> supplied.</p>
+</td></tr>
+<tr valign="top"><td><code>group.index</code></td>
+<td>
+<p>For each observation/prediction value, an index into the
+rows of <code>A.group</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>block</code></td>
+<td>
+<p>Optional indices specifying block groupings: Entries with the
+same <code>block</code> value are joined into a single row in the resulting
+matrix, and the <code>block</code> values are the row indices.  This is intended
+for construction of approximate integration schemes for regional data
+problems. See <code><a href="../../INLA/help/inla.spde.make.block.A.html">inla.spde.make.block.A()</a></code> for details.</p>
+</td></tr>
+<tr valign="top"><td><code>n.block</code></td>
+<td>
+<p>The number of blocks.</p>
+</td></tr>
+<tr valign="top"><td><code>block.rescale</code></td>
+<td>
+<p>Specifies what scaling method should be used when
+joining entries as grouped by a <code>block</code> specification.  See
+<code><a href="../../INLA/help/inla.spde.make.block.A.html">inla.spde.make.block.A()</a></code> for details.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional parameters.  Currently unused.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.spde.make.index.html">inla.spde.make.index()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+loc &lt;- matrix(runif(10000 * 2) * 1000, 10000, 2)
+mesh &lt;- inla.mesh.2d(
+    loc = loc,
+    cutoff = 50,
+    max.edge = c(50, 500)
+)
+A &lt;- inla.spde.make.A(mesh, loc = loc)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

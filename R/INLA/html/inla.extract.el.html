@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Extract elements by matching name from container objects.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.extract.el {INLA}"><tr><td>inla.extract.el {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Extract elements by matching name from container objects.</h2>
+
+<h3>Description</h3>
+
+<p>Extract elements by wildcard name matching from a <code>data.frame</code>,
+<code>list</code>, or <code>matrix</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.extract.el(M, ...)
+
+## S3 method for class 'matrix'
+inla.extract.el(M, match, by.row = TRUE, ...)
+
+## S3 method for class 'data.frame'
+inla.extract.el(M, match, by.row = TRUE, ...)
+
+## S3 method for class 'list'
+inla.extract.el(M, match, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>M</code></td>
+<td>
+<p>A container object.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments, not used.</p>
+</td></tr>
+<tr valign="top"><td><code>match</code></td>
+<td>
+<p>A regex defining the matching criterion.</p>
+</td></tr>
+<tr valign="top"><td><code>by.row</code></td>
+<td>
+<p>If <code>TRUE</code>, extract data by row, otherwise by column.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

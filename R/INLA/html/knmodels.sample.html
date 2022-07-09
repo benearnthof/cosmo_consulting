@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Spacetime interaction models sampler function</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.knmodels.sample {INLA}"><tr><td>inla.knmodels.sample {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Spacetime interaction models sampler function</h2>
+
+<h3>Description</h3>
+
+<p>It implements the sampling method for the models in Knorr-Held, L. (2000)
+considering the algorithm 3.1 in Rue &amp; Held (2005) book.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.knmodels.sample(
+  graph,
+  m,
+  type = 4,
+  intercept = 0,
+  tau.t = 1,
+  phi.t = 0.7,
+  tau.s = 1,
+  phi.s = 0.7,
+  tau.st = 1,
+  ev.t = NULL,
+  ev.s = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>Model graph definition</p>
+</td></tr>
+<tr valign="top"><td><code>m</code></td>
+<td>
+<p>Time dimention.</p>
+</td></tr>
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>Integer from 1 to 4 to identify one of the four interaction
+type.</p>
+</td></tr>
+<tr valign="top"><td><code>intercept</code></td>
+<td>
+<p>A constant to be added to the linear predictor</p>
+</td></tr>
+<tr valign="top"><td><code>tau.t</code></td>
+<td>
+<p>Precision parameter for the main temporal effect.</p>
+</td></tr>
+<tr valign="top"><td><code>phi.t</code></td>
+<td>
+<p>Mixing parameter in the <code>bym2</code> model assumed for the main
+temporal effect.</p>
+</td></tr>
+<tr valign="top"><td><code>tau.s</code></td>
+<td>
+<p>Precision parameter for the main spatial effect.</p>
+</td></tr>
+<tr valign="top"><td><code>phi.s</code></td>
+<td>
+<p>Mixing parameter in the <code>bym2</code> model assumed for the main
+spatial effect.</p>
+</td></tr>
+<tr valign="top"><td><code>tau.st</code></td>
+<td>
+<p>Precision parameter for the spacetime effect.</p>
+</td></tr>
+<tr valign="top"><td><code>ev.t</code></td>
+<td>
+<p>Eigenvalues and eigenvectors of the temporal precision matrix
+structure.</p>
+</td></tr>
+<tr valign="top"><td><code>ev.s</code></td>
+<td>
+<p>Eigenvalues and eigenvectors of the spatial precision matrix
+structure.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list with the following elements
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>time</code></td>
+<td>
+<p>The time index for
+each obervation, with length equals m<em>n.</em>
+\itemspaceThe spatial index for
+each obervation, with length equals mn.</p>
+</td></tr>
+<tr valign="top"><td><code>spacetime</code></td>
+<td>
+<p>The spacetime
+index for each obervation, with length equals m*n.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A list with the
+following elements</p>
+</td></tr>
+<tr valign="top"><td><code>t.iid</code></td>
+<td>
+<p>The unstructured main temporal effect
+part.</p>
+</td></tr>
+<tr valign="top"><td><code>t.str</code></td>
+<td>
+<p>The structured main temporal effect part.</p>
+</td></tr>
+<tr valign="top"><td><code>t</code></td>
+<td>
+<p>The
+main temporal effect with length equals 2m.</p>
+</td></tr>
+<tr valign="top"><td><code>s.iid</code></td>
+<td>
+<p>The unstructured
+main spatial effect part.</p>
+</td></tr>
+<tr valign="top"><td><code>s.str</code></td>
+<td>
+<p>The structured main spatial effect
+part.</p>
+</td></tr>
+<tr valign="top"><td><code>s</code></td>
+<td>
+<p>The main spatial effect with length equals 2n.</p>
+</td></tr>
+<tr valign="top"><td><code>st</code></td>
+<td>
+<p>The spacetime interaction effect with length <code>m*n</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>eta</code></td>
+<td>
+<p>The linear predictor with length <code>n*m</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Elias T. Krainski
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.knmodels.html">inla.knmodels</a></code> for model fitting
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Define general Gaussian models in the INLA formula</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for f {INLA}"><tr><td>f {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Define general Gaussian models in the INLA formula </h2>
+
+<h3>Description</h3>
+
+<p>Function used for defining of smooth and spatial terms within <code>inla</code> model
+formulae. The function does not evaluate anything - it
+exists purely to help set up a model. The function specifies one
+smooth function in the linear predictor (see <code><a href="../../INLA/help/inla.list.models.html">inla.list.models</a></code>) as
+</p>
+<p style="text-align: center;"><i>weight*f(var)</i></p>
+
+
+
+<h3>Usage</h3>
+
+<pre>
+    f(...,
+         model = "iid",
+         copy=NULL,
+         same.as = NULL,
+         n=NULL,
+         nrep = NULL,
+         replicate = NULL,
+         ngroup = NULL,
+         group = NULL,
+         control.group = inla.set.control.group.default(),
+         hyper = NULL,
+         initial=NULL,
+         prior=NULL,
+         param = NULL,
+         fixed = NULL,
+         season.length=NULL,
+         constr = NULL,
+         extraconstr=list(A=NULL, e=NULL),
+         values=NULL,
+         cyclic = NULL,
+         diagonal = NULL,
+         graph=NULL,
+         graph.file=NULL,
+         cdf=NULL,
+         quantiles=NULL,
+         Cmatrix=NULL,
+         rankdef=NULL,
+         Z = NULL,
+         nrow = NULL,
+         ncol = NULL,
+         nu = NULL,
+         bvalue = NULL,
+         spde.prefix = NULL,
+         spde2.prefix = NULL,
+         spde2.transform = c("logit", "log", "identity"),
+         spde3.prefix = NULL,
+         spde3.transform = c("logit", "log", "identity"),
+         mean.linear = inla.set.control.fixed.default()$mean,
+         prec.linear = inla.set.control.fixed.default()$prec,
+         compute = TRUE,
+         of=NULL,
+         precision = exp(14),
+         range = NULL,
+         adjust.for.con.comp = TRUE,
+         order = NULL,
+         scale = NULL,
+         strata = NULL,
+         rgeneric = NULL,
+         cgeneric = NULL,
+         scale.model = NULL,
+         args.slm = list(rho.min = NULL, rho.max = NULL,
+                         X = NULL, W = NULL, Q.beta = NULL),
+         args.ar1c = list(Z = NULL, Q.beta = NULL),
+         args.intslope = list(subject = NULL, strata = NULL, covariates = NULL),
+         vb.correct = NULL,
+         locations = NULL,
+         debug = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p> Name of the covariate and, possibly of the
+weights vector. NB: order counts!!!! The first specified
+term is the covariate and the second one is the vector of
+weights (which can be negative).</p>
+</td></tr>
+<tr valign="top"><td><code>model</code></td>
+<td>
+<p> A string indicating the choosen model. The
+default is <code>iid</code>. See
+<code>names(inla.models()$latent)</code> for a list of possible
+alternatives and <code><a href="../../INLA/help/inla.doc.html">inla.doc</a></code> for detailed docs.</p>
+</td></tr>
+<tr valign="top"><td><code>copy</code></td>
+<td>
+<p>TODO</p>
+</td></tr>
+<tr valign="top"><td><code>same.as</code></td>
+<td>
+<p>TODO</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>An optional argument which defines the dimension
+of the model if this is different from
+<code>length(sort(unique(covariate)))</code></p>
+</td></tr>
+<tr valign="top"><td><code>nrep</code></td>
+<td>
+<p>TODO</p>
+</td></tr>
+<tr valign="top"><td><code>replicate</code></td>
+<td>
+<p>We need to write documentation here</p>
+</td></tr>
+<tr valign="top"><td><code>ngroup</code></td>
+<td>
+<p>TODO</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>TODO</p>
+</td></tr>
+<tr valign="top"><td><code>control.group</code></td>
+<td>
+<p>TODO</p>
+</td></tr>
+<tr valign="top"><td><code>hyper</code></td>
+<td>
+<p>Specification of the hyperparameter, fixed or
+random, initial values, priors and its parameters. See
+<code>?inla.models</code> for the list of hyparameters for each
+model and its default options or
+use <code>inla.doc()</code> for
+detailed info on the family and
+supported prior distributions.</p>
+</td></tr>
+<tr valign="top"><td><code>initial</code></td>
+<td>
+<p>THIS OPTION IS OBSOLETE; use
+<code>hyper</code>!!! Vector indicating the starting values for
+the optimization algorithm. The length of the vector
+depends on the number of hyperparamters in the choosen
+<code>model</code>. If <code>fixed=T</code> the value at which the
+parameters are fixed is determines through <code>initial</code>.
+See <code>inla.models()$latent$'model name'</code> to have info
+about the choosen model.</p>
+</td></tr>
+<tr valign="top"><td><code>prior</code></td>
+<td>
+<p>THIS OPTION IS OBSOLETE; use <code>hyper</code>!!!
+Prior distribution(s) for the hyperparameters of the
+!random model. The default value depends on the type of
+model, see !<a href="www.r-inla.org">www.r-inla.org</a> for a detailed
+description of the models. See
+<code>names(inla.models()$priors)</code> for possible prior
+choices</p>
+</td></tr>
+<tr valign="top"><td><code>param</code></td>
+<td>
+<p>THIS OPTION IS OBSOLETE; use <code>hyper</code>!!!
+Vector indicating the parameters <i>a</i> and <i>b</i>
+of the prior distribution for the hyperparameters. The
+length of the vector depends on the choosen <code>model</code>.
+See <code>inla.models()$latent$'model name'</code> to have info
+about the choosen model.</p>
+</td></tr>
+<tr valign="top"><td><code>fixed</code></td>
+<td>
+<p>THIS OPTION IS OBSOLETE; use <code>hyper</code>!!!
+Vector of boolean variables indicating wheater the
+hyperparameters of the model are fixed or random. The
+length of the vector depends on the choosen <code>model</code>
+See <code>inla.models()$latent$'model name'</code> to have info
+about the choosen model.</p>
+</td></tr>
+<tr valign="top"><td><code>season.length</code></td>
+<td>
+<p>Lenght of the seasonal compoment
+(ONLY if <code>model="seasonal"</code>) </p>
+</td></tr>
+<tr valign="top"><td><code>constr</code></td>
+<td>
+<p>A boolean variable indicating whater to set
+a sum to 0 constraint on the term. By default the sum to 0
+constraint is imposed on all intrinsic models
+(&quot;iid&quot;,&quot;rw1&quot;,&quot;rw1&quot;,&quot;besag&quot;, etc..).</p>
+</td></tr>
+<tr valign="top"><td><code>extraconstr</code></td>
+<td>
+<p>This argument defines extra linear
+constraints. The argument is a list with two elements, a
+matrix <code>A</code> and a vector <code>e</code>, which defines the
+extra constraint <code>Ax = e</code>; for example
+<code>extraconstr = list(A = A, e=e)</code>. The number of
+columns of <code>A</code> must correspond to the length of this
+<code>f</code>-model.  Note that this constraint comes
+additional to the sum-to-zero constraint defined if
+<code>constr = TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>values</code></td>
+<td>
+<p>An optional vector giving all values
+assumed by the covariate for which we want estimated the
+effect. It must be a numeric vector, a vector of factors
+or <code>NULL</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>cyclic</code></td>
+<td>
+<p>A boolean specifying wheather the model is
+cyclical. Only valid for &quot;rw1&quot; and &quot;rw2&quot; models, is
+cyclic=T then the sum to 0 constraint is removed. For the
+correct form of the grah file see <cite>Martino and Rue
+(2008)</cite>.</p>
+</td></tr>
+<tr valign="top"><td><code>diagonal</code></td>
+<td>
+<p>An extra constant added to the diagonal of
+the precision matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>Defines the graph-object either as a file with
+a graph-description, an <code>inla.graph</code>-object, or as a
+(sparse) symmetric matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>graph.file</code></td>
+<td>
+<p>THIS OPTION IS OBSOLETE AND REPLACED BY
+THE MORE GENERAL ARGUMENT <code>graph</code>. PLEASE CHANGE YOUR
+CODE.
+Name of the file containing the graph
+of the model; see
+<a href="www.r-inla.org/faq">www.r-inla.org/faq</a>.</p>
+</td></tr>
+<tr valign="top"><td><code>cdf</code></td>
+<td>
+<p>A vector of maximum 10 values between 0 and 1
+<i>x(0), x(1),&hellip;</i>. The function
+returns, for each posterior marginal the probabilities
+</p>
+<p style="text-align: center;"><i>Prob(X&lt;x(p))</i></p>
+ </td></tr>
+<tr valign="top"><td><code>quantiles</code></td>
+<td>
+<p>A vector of maximum 10 quantiles,
+<i>p(0), p(1),&hellip;</i> to compute for
+each posterior marginal. The function returns, for each
+posterior marginal, the values
+<i>x(0), x(1),&hellip;</i> such that
+</p>
+<p style="text-align: center;"><i>Prob(X&lt;x)=p</i></p>
+</td></tr>
+<tr valign="top"><td><code>Cmatrix</code></td>
+<td>
+<p>The specification of the precision matrix
+for the generic,  generic3 or z models (up to a scaling constant).
+<code>Cmatrix</code> is either a
+(dense) matrix, a matrix created using
+<code>Matrix::sparseMatrix()</code>, or a filename which stores the
+non-zero elements of <code>Cmatrix</code>, in three columns:
+<code>i</code>, <code>j</code> and <code>Qij</code>. In case of the generic3 model,
+it is a list of such specifications.</p>
+</td></tr>
+<tr valign="top"><td><code>rankdef</code></td>
+<td>
+<p>A number <b>defining</b> the rank
+deficiency of the model, with sum-to-zero constraint and
+possible extra-constraints taken into account. See
+details.</p>
+</td></tr>
+<tr valign="top"><td><code>Z</code></td>
+<td>
+<p>The matrix for the z-model</p>
+</td></tr>
+<tr valign="top"><td><code>nrow</code></td>
+<td>
+<p>Number of rows for 2d-models</p>
+</td></tr>
+<tr valign="top"><td><code>ncol</code></td>
+<td>
+<p>Number of columns for 2d-models</p>
+</td></tr>
+<tr valign="top"><td><code>nu</code></td>
+<td>
+<p>Smoothing parameter for the Matern2d-model,
+possible values are <code>c(0, 1, 2, 3)</code></p>
+</td></tr>
+<tr valign="top"><td><code>bvalue</code></td>
+<td>
+<p>TODO</p>
+</td></tr>
+<tr valign="top"><td><code>spde.prefix</code></td>
+<td>
+<p>TODO</p>
+</td></tr>
+<tr valign="top"><td><code>spde2.prefix</code></td>
+<td>
+<p>TODO</p>
+</td></tr>
+<tr valign="top"><td><code>spde2.transform</code></td>
+<td>
+<p>TODO</p>
+</td></tr>
+<tr valign="top"><td><code>spde3.prefix</code></td>
+<td>
+<p>TODO</p>
+</td></tr>
+<tr valign="top"><td><code>spde3.transform</code></td>
+<td>
+<p>TODO</p>
+</td></tr>
+<tr valign="top"><td><code>mean.linear</code></td>
+<td>
+<p>Prior mean for the linear component,
+only used if <code>model="linear"</code></p>
+</td></tr>
+<tr valign="top"><td><code>prec.linear</code></td>
+<td>
+<p>Prior precision for the linear
+component, only used if <code>model="linear"</code></p>
+</td></tr>
+<tr valign="top"><td><code>compute</code></td>
+<td>
+<p> A boolean variable indicating wheather the
+marginal posterior distribution for the nodes in the
+<code>f()</code> model should be computed or not. This is
+usefull for large models where we are only interested in
+some posterior marginals.</p>
+</td></tr>
+<tr valign="top"><td><code>of</code></td>
+<td>
+<p>TODO</p>
+</td></tr>
+<tr valign="top"><td><code>precision</code></td>
+<td>
+<p>The precision for the artifical noise added when creating a copy of a model and others.</p>
+</td></tr>
+<tr valign="top"><td><code>range</code></td>
+<td>
+<p>A vector of size two giving the lower and
+upper range for the scaling parameter <code>beta</code> in the
+model <code>COPY</code>, <code>CLINEAR</code>, <code>MEC</code> and <code>MEB</code>.
+If <code>low = high</code> then the identity mapping
+is used.</p>
+</td></tr>
+<tr valign="top"><td><code>adjust.for.con.comp</code></td>
+<td>
+<p>If TRUE (default), adjust some
+of the models (currently: besag, bym, bym2 and besag2) if the
+number of connected components in graph is larger than
+1. If FALSE, do nothing.</p>
+</td></tr>
+<tr valign="top"><td><code>order</code></td>
+<td>
+<p>Defines the <code>order</code> of the model: for
+model <code>ar</code> this defines the order p, in AR(p). Not
+used for other models at the time being.</p>
+</td></tr>
+<tr valign="top"><td><code>scale</code></td>
+<td>
+<p>A scaling vector. Its meaning depends on the model.</p>
+</td></tr>
+<tr valign="top"><td><code>strata</code></td>
+<td>
+<p>Currently not in use</p>
+</td></tr>
+<tr valign="top"><td><code>rgeneric</code></td>
+<td>
+<p>A object of class <code>inla.rgeneric</code> which defines the model. (EXPERIMENTAL!)</p>
+</td></tr>
+<tr valign="top"><td><code>cgeneric</code></td>
+<td>
+<p>A object of class <code>inla.cgeneric</code> which defines the model. (EXPERIMENTAL!)</p>
+</td></tr>
+<tr valign="top"><td><code>scale.model</code></td>
+<td>
+<p>Logical. If <code>TRUE</code> then scale the RW1 and RW2 and BESAG and BYM and BESAG2 and RW2D models so the their (generlized) variance is 1. Default value is <code>inla.getOption("scale.model.default")</code></p>
+</td></tr>
+<tr valign="top"><td><code>args.slm</code></td>
+<td>
+<p>Required arguments to the model=&quot;slm&quot;; see the documentation for further details.</p>
+</td></tr></table>
+<p>,
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>args.ar1c</code></td>
+<td>
+<p>Required arguments to the model=&quot;ar1c&quot;; see the documentation for further details.</p>
+</td></tr></table>
+<p>,
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>args.intslope</code></td>
+<td>
+<p>A list with the <code>subject</code> (factor),  <code>strata</code> (factor) and <code>covariates</code> (numeric) for the <code>intslope</code> model; see the documentation for further details.</p>
+</td></tr></table>
+<p>,
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>vb.correct</code></td>
+<td>
+<p>Add this model component to the list of variables to be used for the vb corrected Laplace approximation? If <code>NULL</code> use default choice,  otherwise correct if <code>TRUE</code> and do not if <code>FALSE</code>. (expert option)</p>
+</td></tr></table>
+<p>,
+</p>
+<table summary="R argblock">
+<tr valign="top"><td><code>locations</code></td>
+<td>
+<p>A matrix with locations for the model <code>dmatern</code>. This also defines <code>n</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>debug</code></td>
+<td>
+<p>Enable local debug output</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>There is no default value for <code>rankdef</code>, if it
+is not defined by the user then it is computed by the rank
+deficiency of the prior model (for the generic model, the
+default is zero), plus 1 for the sum-to-zero constraint if the
+prior model is proper, plus the number of extra
+constraints. <b>Oops:</b> This can be wrong, and then the user
+must define the <code>rankdef</code> explicitely.</p>
+
+
+<h3>Value</h3>
+
+<p>TODO</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.html">inla</a></code>, <code><a href="../../INLA/help/hyperpar.inla.html">hyperpar.inla</a></code></p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

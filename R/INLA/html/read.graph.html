@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Read and write a graph-object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for read.graph {INLA}"><tr><td>read.graph {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Read and write a graph-object</h2>
+
+<h3>Description</h3>
+
+<p>Construct a graph-object from a file or a matrix; write graph-object to file</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.read.graph(..., size.only = FALSE)
+inla.write.graph(graph, filename = "graph.dat", mode = c("binary", "ascii"), ...)
+
+## S3 method for class 'inla.graph'
+summary(object, ...)
+## S3 method for class 'inla.graph'
+plot(x, y, ...)
+## S3 method for class 'inla.graph.summary'
+print(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>filename</code></td>
+<td>
+<p>The filename of the graph.</p>
+</td></tr>
+<tr valign="top"><td><code>graph</code></td>
+<td>
+<p>An <code>inla.graph</code>-object, a (sparse) symmetric matrix, a filename containing the graph,
+a list or collection of characters and/or numbers defining the graph,
+or a neighbours list with class <code>nb</code> (see <code>spdep::card</code> and
+<code>spdep::poly2nb</code> for for details of <code>nb</code> and an example a function
+returning an <code>nb</code> object</p>
+</td></tr>
+<tr valign="top"><td><code>mode</code></td>
+<td>
+<p>The mode of the file; ascii-file or a (gzip-compressed) binary.</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>An <code>inla.graph</code> -object</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>An <code>inla.graph</code> -object</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>Not used</p>
+</td></tr>
+<tr valign="top"><td><code>size.only</code></td>
+<td>
+<p>Only read the size of the graph</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments. In <code>inla.read.graph</code>,
+then it is the graph definition (object, matrix, character, filename),  plus extra arguments.
+In <code>inla.write.graph</code> it is extra arguments to <code>inla.read.graph</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The output of <code>inla.read.graph</code>, is an <code>inla.graph</code> object, with elements
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>is the size of the graph</p>
+</td></tr>
+<tr valign="top"><td><code>nnbs</code></td>
+<td>
+<p>is a vector with the number of neigbours</p>
+</td></tr>
+<tr valign="top"><td><code>nbs</code></td>
+<td>
+<p>is a list-list with the neigbours</p>
+</td></tr>
+<tr valign="top"><td><code>cc</code></td>
+<td>
+<p>list with connected component information
+</p>
+
+<ul>
+<li><p><code>id</code>is a vector with the connected component id for each node (starting from 1)
+</p>
+</li>
+<li><p><code>n</code>is the number of connected components
+</p>
+</li>
+<li><p><code>nodes</code>is a list-list of nodes belonging to each connected component
+</p>
+</li>
+<li><p><code>mean</code>is a factor with one level for each connected component of
+size larger than one,  otherwise <code>NA</code>
+</p>
+</li></ul>
+
+</td></tr>
+</table>
+<p>Methods implemented for <code>inla.graph</code> are <code>summary</code> and <code>plot</code>.
+The method <code>plot</code> require the libraries <code>Rgraphviz</code> and <code>graph</code> from the Bioconductor-project,
+see <a href="https://www.bioconductor.org">https://www.bioconductor.org</a>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.spy.html">inla.spy</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## a graph from a file
+cat("3 1 1 2 2 1 1 3 0\n", file="g.dat")
+g = inla.read.graph("g.dat")
+## writing an inla.graph-object to file
+g.file = inla.write.graph(g, mode="binary")
+## re-reading it from that file
+gg = inla.read.graph(g.file)
+summary(g)
+##
+Not run:
+plot(g)
+inla.spy(g)
+## when defining the graph directly in the call,
+## we can use a mix of character and numbers
+g = inla.read.graph(c(3, 1, "1 2 2 1 1 3", 0))
+inla.spy(c(3, 1, "1 2 2 1 1 3 0"))
+inla.spy(c(3, 1, "1 2 2 1 1 3 0"),  reordering=3:1)
+inla.write.graph(c(3, 1, "1 2 2 1 1 3 0"))
+
+## building a graph from adjacency matrix
+adjacent = matrix(0, nrow = 4, ncol = 4)
+adjacent[1,4] = adjacent[4,1] = 1
+adjacent[2,4] = adjacent[4,2] = 1
+adjacent[2,3] = adjacent[3,2] = 1
+adjacent[3,4] = adjacent[4,3] = 1
+g = inla.read.graph(adjacent)
+plot(g)
+summary(g)
+End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

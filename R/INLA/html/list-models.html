@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: List available model components, likelihoods, priors, etc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.list.models {INLA}"><tr><td>inla.list.models {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>List available model components, likelihoods,  priors,  etc</h2>
+
+<h3>Description</h3>
+
+<p>List available model components, likelihoods,  priors,  etc.
+To read specific documentation for the individual elements, use <code><a href="../../INLA/help/inla.doc.html">inla.doc</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+    inla.list.models(section = names(inla.models()), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>section</code></td>
+<td>
+<p>The section(s) to list, missing <code>section</code> will list all sections.
+<code>names(inla.models())</code> lists available sections.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional argument to <code>cat</code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The list is <code>cat</code>'ed with <code>...</code> arguments.
+</p>
+<p>This function is EXPERIMENTAL.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Nothing is returned
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+inla.list.models("likelihood")
+inla.list.models(c("prior", "group"))
+inla.list.models(file=file("everything.txt"))
+
+#Show detailed doc for a specific prior/likelihood/latent model
+inla.doc("binomial")
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

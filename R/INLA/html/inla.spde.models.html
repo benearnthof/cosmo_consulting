@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: List SPDE models supported by inla.spde objects</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.spde.models {INLA}"><tr><td>inla.spde.models {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>List SPDE models supported by inla.spde objects</h2>
+
+<h3>Description</h3>
+
+<p>List SPDE models supported by inla.spde objects
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.spde.models(function.names = FALSE)
+
+inla.spde1.models()
+
+inla.spde2.models()
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>function.names</code></td>
+<td>
+<p>If <code>FALSE</code>, return list model name lists.  If
+<code>TRUE</code>, return list of model object constructor function names.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Returns a list of available SPDE model type name lists, one for each
+inla.spde model class (currently <code><a href="../../INLA/help/inla.spde1.html">inla.spde1()</a></code> and
+<code><a href="../../INLA/help/inla.spde2.html">inla.spde2()</a></code>).
+</p>
+
+
+<h3>Value</h3>
+
+<p>List of available SPDE model type name lists.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+## Display help for each supported inla.spde2 model:
+for (model in inla.spde2.models()) {
+      print(help(paste("inla.spde2.", model, sep = "")))
+  }
+
+## Display help for each supported inla.spde* model:
+models &lt;- inla.spde.models()
+for (type in names(models)) {
+      for (model in models[[type]]) {
+            print(help(paste("inla.", type, ".", model, sep = "")))
+        }
+  }
+
+## Display help for each supported inla.spde* model (equivalent to above):
+for (model in inla.spde.models(function.names = TRUE)) {
+      print(help(model))
+  }
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

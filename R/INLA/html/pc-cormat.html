@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Utility functions for the PC prior for a correlation matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for pc.cormat {INLA}"><tr><td>pc.cormat {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Utility functions for the PC prior for a correlation matrix</h2>
+
+<h3>Description</h3>
+
+<p>Functions to evaluate and sample from the
+PC prior for a correlation matrix.</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+    inla.pc.cormat.dim2p(dim)
+    inla.pc.cormat.p2dim(p)
+    inla.pc.cormat.theta2R(theta)
+    inla.pc.cormat.R2theta(R)
+    inla.pc.cormat.r2R(r)
+    inla.pc.cormat.R2r(R)
+    inla.pc.cormat.r2theta(r)
+    inla.pc.cormat.theta2r(theta)
+    inla.pc.cormat.permute(R)
+    inla.pc.cormat.rtheta(n=1, p, lambda = 1)
+    inla.pc.cormat.dtheta(theta, lambda = 1, log = FALSE)
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dim</code></td>
+<td>
+<p>The dimension of <code>theta</code>, the parameterisatin of the correlation matrix</p>
+</td></tr>
+<tr valign="top"><td><code>p</code></td>
+<td>
+<p>The dimension the correlation matrix</p>
+</td></tr>
+<tr valign="top"><td><code>theta</code></td>
+<td>
+<p>A vector of parameters for the correlation matrix</p>
+</td></tr>
+<tr valign="top"><td><code>r</code></td>
+<td>
+<p>The off diagonal elements of a correlation matrix</p>
+</td></tr>
+<tr valign="top"><td><code>R</code></td>
+<td>
+<p>A correlation matrix</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Number of observations</p>
+</td></tr>
+<tr valign="top"><td><code>lambda</code></td>
+<td>
+<p>The rate parameter in the prior</p>
+</td></tr>
+<tr valign="top"><td><code>log</code></td>
+<td>
+<p>Logical. Return the density in natural or log-scale.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The parameterisation of a correlation matrix of dimension <code>p</code> has <code>dim</code>
+parameters: <code>theta</code> which are in the interval -pi to pi.
+The alternative parameterisation is through the off-diagonal elements <code>r</code> of the
+correlation matrix <code>R</code>. The functions <code>inla.pc.cormat.&lt;A&gt;2&lt;B&gt;</code> convert between
+parameterisations <code>&lt;A&gt;</code> to parameterisations <code>&lt;B&gt;</code>,  where both
+<code>&lt;A&gt;</code> and <code>&lt;B&gt;</code> are one of <code>theta</code>,  <code>r</code> and <code>R</code>,
+and <code>p</code> and <code>dim</code>.
+</p>
+
+
+<h3>Value</h3>
+
+
+<p><code>inla.pc.cormat.rtheta</code> generate samples from the prior,  returning a matrix
+where each row is a sample of <code>theta</code>.
+<code>inla.pc.cormat.dtheta</code> evaluates the density of <code>theta</code>.
+<code>inla.pc.cormat.permute</code> randomly permutes a correlation matrix,
+which is useful if an exchangable sample of a correlation matrix is required.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  p = 4
+  print(paste("theta has length", inla.pc.cormat.p2dim(p)))
+  theta = inla.pc.cormat.rtheta(n=1, p=4, lambda = 1)
+  print("sample theta:")
+  print(theta)
+  print(paste("log.dens", inla.pc.cormat.dtheta(theta, log=TRUE)))
+  print("r:")
+  r = inla.pc.cormat.theta2r(theta)
+  print(r)
+  print("A sample from the non-exchangable prior, R:")
+  R = inla.pc.cormat.r2R(r)
+  print(R)
+  print("A sample from the exchangable prior, R:")
+  R = inla.pc.cormat.permute(R)
+  print(R)
+ </pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Low level triangulation mesh plotting</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for plot.inla.trimesh {INLA}"><tr><td>plot.inla.trimesh {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Low level triangulation mesh plotting</h2>
+
+<h3>Description</h3>
+
+<p>Plots a triangulation mesh using <code>rgl</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'inla.trimesh'
+plot(
+  x,
+  S,
+  color = NULL,
+  color.axis = NULL,
+  color.n = 512,
+  color.palette = cm.colors,
+  color.truncate = FALSE,
+  alpha = NULL,
+  lwd = 1,
+  specular = "black",
+  draw.vertices = TRUE,
+  draw.edges = TRUE,
+  edge.color = rgb(0.3, 0.3, 0.3),
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A 3-column triangle-to-vertex index map matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>S</code></td>
+<td>
+<p>A 3-column vertex coordinate matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>Color specification.  A single named color, a vector of scalar
+values, or a matrix of RGB values.</p>
+</td></tr>
+<tr valign="top"><td><code>color.axis</code></td>
+<td>
+<p>The min/max limit values for the color mapping.</p>
+</td></tr>
+<tr valign="top"><td><code>color.n</code></td>
+<td>
+<p>The number of colors to use in the color palette.</p>
+</td></tr>
+<tr valign="top"><td><code>color.palette</code></td>
+<td>
+<p>A color palette function.</p>
+</td></tr>
+<tr valign="top"><td><code>color.truncate</code></td>
+<td>
+<p>If <code>TRUE</code>, truncate the colors at the color axis
+limits.</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>Transparency/opaqueness values. See <code>rgl.material</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>lwd</code></td>
+<td>
+<p>Line width for edges. See <code>rgl.material</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>specular</code></td>
+<td>
+<p>Specular color. See <code>rgl.material</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>draw.vertices</code></td>
+<td>
+<p>If <code>TRUE</code>, draw triangle vertices.</p>
+</td></tr>
+<tr valign="top"><td><code>draw.edges</code></td>
+<td>
+<p>If <code>TRUE</code>, draw triangle edges.</p>
+</td></tr>
+<tr valign="top"><td><code>edge.color</code></td>
+<td>
+<p>Edge color specification.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional parameters passed to and from other methods.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/plot.inla.mesh.html">plot.inla.mesh()</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Return the coefficients in the 3-component AR(1) mixture...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for fgn {INLA}"><tr><td>fgn {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Return the coefficients in the 3-component AR(1) mixture representing FGN(H)</h2>
+
+<h3>Description</h3>
+
+<p>This function will return the coefficients in the 3-component AR(1)
+mixture representing FGN(H)</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+     inla.fgn(H, K=4L, lag.max = NULL, approx = TRUE)
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>H</code></td>
+<td>
+<p>The Hurst coeffcient (0&lt;H&lt;1),  or a vector of those</p>
+</td></tr>
+<tr valign="top"><td><code>K</code></td>
+<td>
+<p>The number of components in representation,  must be 3L or 4L</p>
+</td></tr>
+<tr valign="top"><td><code>lag.max</code></td>
+<td>
+<p>Integer. If positive integer, return the coeffcients implicitely as the ACF
+from 0 to <code>lag.max</code></p>
+</td></tr>
+<tr valign="top"><td><code>approx</code></td>
+<td>
+<p>Logical. If <code>lag.max</code> is an positive integer and <code>approx</code> is <code>FALSE</code>,
+then return the true ACF instead of the approximated one.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>inla.fgn</code> returns a named matrix.
+If <code>is.null(lag.max)</code>,  then
+first column is <code>H</code>,
+columns <code>1+1:K</code> are lag one correlations (or phi's),
+and columns <code>1+K+1:K</code> are the weights.
+If <code>lag.max &gt; 0</code>,  then return the ACFs in columns <code>2+(0:lag.max)</code>,
+for the H in column 1,  either the approximated ones or the the true ones.
+</p>
+<p>This function is EXPERIMENTAL!!!
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+     r = c(inla.fgn(0.7))
+     r_m = inla.fgn(seq(0.6, 0.8, by=0.01))
+ </pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

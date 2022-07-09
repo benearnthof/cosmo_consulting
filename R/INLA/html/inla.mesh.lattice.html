@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Lattice grids for inla.mesh</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.mesh.lattice {INLA}"><tr><td>inla.mesh.lattice {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Lattice grids for inla.mesh</h2>
+
+<h3>Description</h3>
+
+<p>Construct a lattice grid for <code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.mesh.lattice(
+  x = seq(0, 1, length.out = 2),
+  y = seq(0, 1, length.out = 2),
+  z = NULL,
+  dims = if (is.matrix(x)) {     dim(x) } else {     c(length(x), length(y)) },
+  units = NULL,
+  crs = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>vector or grid matrix of x-values</p>
+</td></tr>
+<tr valign="top"><td><code>y</code></td>
+<td>
+<p>vector of grid matrix of y-values</p>
+</td></tr>
+<tr valign="top"><td><code>z</code></td>
+<td>
+<p>if x is a matrix, a grid matrix of z-values</p>
+</td></tr>
+<tr valign="top"><td><code>dims</code></td>
+<td>
+<p>the size of the grid, length 2 vector</p>
+</td></tr>
+<tr valign="top"><td><code>units</code></td>
+<td>
+<p>One of <code>c("default", "longlat", "longsinlat")</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>crs</code></td>
+<td>
+<p>An optional <code>CRS</code> or <code>inla.CRS</code> object</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An <code>inla.mesh.lattice</code> object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.mesh.html">inla.mesh()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+lattice &lt;- inla.mesh.lattice(seq(0, 1, length.out = 17), seq(0, 1, length.out = 10))
+
+## Use the lattice "as-is", without refinement:
+mesh &lt;- inla.mesh.create(lattice = lattice, boundary = lattice$segm)
+mesh &lt;- inla.mesh.create(lattice = lattice, extend = FALSE)
+plot(mesh)
+
+## Refine the triangulation, with limits on triangle angles and edges:
+mesh &lt;- inla.mesh.create(
+    lattice = lattice,
+    refine = list(max.edge = 0.08),
+    extend = FALSE
+)
+plot(mesh)
+
+## Add an extension around the lattice, but maintain the lattice edges:
+mesh &lt;- inla.mesh.create(
+    lattice = lattice,
+    refine = list(max.edge = 0.08),
+    interior = lattice$segm
+)
+plot(mesh)
+
+## Only add extension:
+mesh &lt;- inla.mesh.create(lattice = lattice, refine = list(max.edge = 0.08))
+plot(mesh)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

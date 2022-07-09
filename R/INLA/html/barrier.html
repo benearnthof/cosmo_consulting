@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Functions for defining the Barrier models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.barrier {INLA}"><tr><td>inla.barrier {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Functions for defining the Barrier models</h2>
+
+<h3>Description</h3>
+
+<p>Functions for defining Barrier models as an <code>inla rgeneric</code> model</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ inla.barrier.pcmatern(mesh, barrier.triangles, prior.range,
+                       prior.sigma, range.fraction=0.2)
+ inla.barrier.polygon(mesh, barrier.triangles, Omega=NULL)
+ inla.barrier.q(fem, ranges, sigma=1)
+ inla.barrier.fem(mesh, barrier.triangles, Omega=NULL)
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mesh</code></td>
+<td>
+<p>The mesh to build the model on, from inla.mesh.2d</p>
+</td></tr>
+<tr valign="top"><td><code>barrier.triangles</code></td>
+<td>
+<p>The numerical ids of the triangles that make up the barrier area</p>
+</td></tr>
+<tr valign="top"><td><code>prior.range</code></td>
+<td>
+<p>2 parameters <code>(range0,Prange)</code> for the prior spatial range. 
+If <code>Prange</code> is <code>NA</code>, then <code>range0</code> is used as a fixed range value (not tested).</p>
+</td></tr>
+<tr valign="top"><td><code>prior.sigma</code></td>
+<td>
+<p>2 parameters <code>(sig0,Psig)</code> for the prior marginal standard deviation sigma. 
+If <code>Psig</code> is <code>NA</code>, then <code>sig0</code> is used as a fixed sigma value (not tested).</p>
+</td></tr>
+<tr valign="top"><td><code>range.fraction</code></td>
+<td>
+<p>The length of the spatial range inside the barrier area,
+as a fraction of the range parameter.</p>
+</td></tr>
+<tr valign="top"><td><code>Omega</code></td>
+<td>
+<p>Advanced option for creating a set of permeable barriers (not documented)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This model is described in the ArXiv preprint arXiv:1608.03787.
+For examples, see <a href="https://haakonbakka.bitbucket.io/btopic107.html">https://haakonbakka.bitbucket.io/btopic107.html</a>.
+</p>
+
+
+<h3>Value</h3>
+
+
+<p><code>inla.barrier.pcmatern</code> gives the (rgeneric) model object for fitting the model in INLA,
+<code>inla.barrier.polygon</code> gives the polygon around the barrier (mainly for plotting),
+<code>inla.barrier.q</code> is an internal method producing the Q matrix from a result of inla.barrier.fem,
+<code>inla.barrier.fem</code> is an internal method producing the Finite Element matrices.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Haakon Bakka <a href="mailto:bakka@r-inla.org">bakka@r-inla.org</a></p>
+
+
+<h3>See Also</h3>
+
+<p>inla.spde2.pcmatern</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

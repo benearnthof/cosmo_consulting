@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert between parameterizations for the AR(p) model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.ar.pacf2phi {INLA}"><tr><td>inla.ar.pacf2phi {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert between parameterizations for the AR(p) model</h2>
+
+<h3>Description</h3>
+
+<p>These functions convert between the AR(p) coefficients <code>phi</code>, the
+partial autorcorrelation coefficients <code>pacf</code> and the autocorrelation
+function <code>acf</code>.  The <code>phi</code>-parameterization is the same as used
+for <code>arima</code>-models in <code>R</code>; see <code>?arima</code> and the
+parameter-vector <code>a</code> in <code>Details</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.ar.pacf2phi(pac)
+
+inla.ar.phi2pacf(phi)
+
+inla.ar.phi2acf(phi, lag.max = length(phi))
+
+inla.ar.pacf2acf(pac, lag.max = length(pac))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>pac</code></td>
+<td>
+<p>The partial autorcorrelation coefficients</p>
+</td></tr>
+<tr valign="top"><td><code>phi</code></td>
+<td>
+<p>The AR(p) parameters <code>phi</code></p>
+</td></tr>
+<tr valign="top"><td><code>lag.max</code></td>
+<td>
+<p>The maximum lag to compute the ACF for</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+
+<ul>
+<li> <p><code>inla.ar.pacf2phi</code> returns <code>phi</code> for given <code>pacf</code>.
+</p>
+</li>
+<li> <p><code>inla.ar.phi2pacf</code> returns <code>pac</code> for given <code>phi</code>.
+</p>
+</li>
+<li> <p><code>inla.ar.phi2acf</code> returns <code>acf</code> for given <code>phi</code>.
+</p>
+</li>
+<li> <p><code>inla.ar.pacf2acf</code> returns <code>acf</code> for given <code>pacf</code>.
+</p>
+</li></ul>
+
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+pac &lt;- runif(5)
+phi &lt;- inla.ar.pacf2phi(pac)
+pac2 &lt;- inla.ar.phi2pacf(phi)
+print(paste("Error:", max(abs(pac2 - pac))))
+print("Correlation matrix (from pac)")
+print(toeplitz(inla.ar.pacf2acf(pac)))
+print("Correlation matrix (from phi)")
+print(toeplitz(inla.ar.phi2acf(phi)))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

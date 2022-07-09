@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Generate text RGB color specifications.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.generate.colors {INLA}"><tr><td>inla.generate.colors {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Generate text RGB color specifications.</h2>
+
+<h3>Description</h3>
+
+<p>Generates a tex RGB color specification matrix based on a color palette.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.generate.colors(
+  color,
+  color.axis = NULL,
+  color.n = 512,
+  color.palette = cm.colors,
+  color.truncate = FALSE,
+  alpha = NULL
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p><code>character</code>, <code>matrix</code> or <code>vector</code></p>
+</td></tr>
+<tr valign="top"><td><code>color.axis</code></td>
+<td>
+<p>The min/max limit values for the color mapping.</p>
+</td></tr>
+<tr valign="top"><td><code>color.n</code></td>
+<td>
+<p>The number of colors to use in the color palette.</p>
+</td></tr>
+<tr valign="top"><td><code>color.palette</code></td>
+<td>
+<p>A color palette function.</p>
+</td></tr>
+<tr valign="top"><td><code>color.truncate</code></td>
+<td>
+<p>If <code>TRUE</code>, truncate the colors at the color axis
+limits.</p>
+</td></tr>
+<tr valign="top"><td><code>alpha</code></td>
+<td>
+<p>Transparency/opaqueness values.</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

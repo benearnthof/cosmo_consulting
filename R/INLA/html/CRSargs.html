@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Show expanded CRS arguments</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.CRSargs {INLA}"><tr><td>inla.CRSargs {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Show expanded CRS arguments</h2>
+
+<h3>Description</h3>
+
+<p>Wrapper for <code>sp::CRS</code> and <code>inla.CRS</code> objects to extract the
+coordinate reference system argument string.
+Should no longer be used with PROJ6/rgdal3;
+see <code><a href="../../INLA/help/inla.crs_get_wkt.html">inla.crs_get_wkt()</a></code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.CRSargs(x, ...)
+
+inla.as.CRSargs.list(x, ...)
+
+inla.as.list.CRSargs(x, ...)
+
+inla.as.list.CRS(x, ...)
+
+inla.as.CRS.list(x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>An <code>sp::CRS</code> or <code>inla.CRS</code> object (for
+<code>inla.CRSargs</code> and <code>inla.as.list.CRS</code>), a character string (for
+<code>inla.as.list.CRSargs</code>), or a list (for <code>inla.as.CRS.list</code> and
+<code>inla.as.CRSargs.list</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional arguments passed on to other methods.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+
+<ul>
+<li> <p><code>inla.as.CRSargs.list</code>: CRS proj4 string for name=value pair list
+</p>
+</li></ul>
+
+
+<ul>
+<li> <p><code>inla.as.list.CRSargs</code>: List of name=value pairs from CRS proj4 string
+</p>
+</li></ul>
+
+
+
+<h3>Value</h3>
+
+<p>For <code>inla.CRSargs</code> and <code>inla.as.CRSargs.list</code>, a character
+string with PROJ.4 arguments.
+</p>
+<p>For <code>inla.as.list.CRS</code> and <code>inla.as.list.CRSargs</code>, a list of
+name/value pairs.
+</p>
+<p>For <code>inla.as.CRS.list</code>, a <code>CRS</code> or <code>inla.CRS</code> object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../rgdal/help/CRS-class.html">rgdal::CRSargs()</a></code>, <code><a href="../../INLA/help/inla.CRS.html">inla.CRS()</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+if (require(rgdal)) {
+    crs0 &lt;- inla.CRS("longlat")
+    p4s &lt;- inla.CRSargs(crs0)
+    lst &lt;- inla.as.list.CRSargs(p4s)
+    crs1 &lt;- inla.as.CRS.list(lst)
+    lst$a &lt;- 2
+    crs2 &lt;- inla.CRS(p4s, args = lst)
+    print(inla.CRSargs(crs0))
+    print(inla.CRSargs(crs1))
+    print(inla.CRSargs(crs2))
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

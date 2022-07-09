@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Generate samples from a GMRF using the GMRFLib implementation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for qsample {INLA}"><tr><td>qsample {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Generate samples from a GMRF using the GMRFLib implementation</h2>
+
+<h3>Description</h3>
+
+<p>This function generate samples from a GMRF using the GMRFLib implementation</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+ inla.qsample(
+        n = 1L,
+        Q,
+        b,
+        mu,
+        sample,
+        constr,
+        reordering = INLA::inla.reorderings(),
+        seed = 0L,
+        logdens = ifelse(missing(sample), FALSE, TRUE),
+        compute.mean = ifelse(missing(sample), FALSE, TRUE),
+        num.threads = if (seed == 0L) "0:0" else NULL,
+        selection = NULL, verbose = FALSE)
+ </pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>Number of samples. Only used if <code>missing(sample)</code></p>
+</td></tr>
+<tr valign="top"><td><code>Q</code></td>
+<td>
+<p>The precision matrix or a filename containing it.</p>
+</td></tr>
+<tr valign="top"><td><code>b</code></td>
+<td>
+<p>The linear term</p>
+</td></tr>
+<tr valign="top"><td><code>mu</code></td>
+<td>
+<p>The mu term</p>
+</td></tr>
+<tr valign="top"><td><code>sample</code></td>
+<td>
+<p>A matrix of optional samples where each column is a sample. If set, then evaluate the log-density for each sample only.</p>
+</td></tr>
+<tr valign="top"><td><code>constr</code></td>
+<td>
+<p>Optional linear constraints; see <code>?INLA::f</code> and argument <code>extraconstr</code></p>
+</td></tr>
+<tr valign="top"><td><code>reordering</code></td>
+<td>
+<p>The type of reordering algorithm to be used for <code>TAUCS</code>;
+either one of the names listed in <code>inla.reorderings()</code>
+or the output from <code>inla.qreordering(Q)</code>.
+The default is &quot;auto&quot; which try several reordering algorithm and use the best one for this particular matrix.</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>Control the RNG. If <code>seed=0L</code> then GMRFLib will set the seed
+intelligently/at 'random',  and this is and should be the default behaviour.
+If <code>seed &lt; 0L</code>  then the saved state of the RNG will be reused if possible, otherwise,
+GMRFLib will set the seed intelligently/at 'random'.
+If <code>seed &gt; 0L</code> then this value is used as the seed for the RNG.
+</p>
+<p>PLEASE NOTE1: If <code>seed!=0</code> then the computations will run in serial mode,  over-riding
+whatever is set in <code>num.threads</code> (a warning might be issued).
+</p>
+<p>PLEASE NOTE2: If the PARDISO sparse matrix library is used, continuity of the samples
+with respect to small changes in the precision matrix, can be expected but is
+not guaranteed. If this feature is required, please use the TAUCS sparse matrix library.</p>
+</td></tr>
+<tr valign="top"><td><code>logdens</code></td>
+<td>
+<p>If <code>TRUE</code>, compute also the log-density of each sample. Note that the output format then change.</p>
+</td></tr>
+<tr valign="top"><td><code>compute.mean</code></td>
+<td>
+<p>If <code>TRUE</code>, compute also the (constrained) mean. Note that the output format then change.</p>
+</td></tr>
+<tr valign="top"><td><code>num.threads</code></td>
+<td>
+<p>Maximum number of threads the
+<code>inla</code>-program will use, or as 'A:B' defining the number threads in the
+outer (A) and inner (B) layer for nested parallelism.
+<code>seed!=0</code> requires serial comptuations.</p>
+</td></tr>
+<tr valign="top"><td><code>selection</code></td>
+<td>
+<p>A vector of indices of each sample to
+return. <code>NULL</code> means return the whole sample.
+(Note that the log-density retured,  is for the whole sample.)
+The use of <code>selection</code> cannot be combined with the use of <code>sample</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>Logical. Run in verbose mode or not.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The log-density has form -1/2(x-mu)^T Q (x-mu) + b^T x
+</p>
+<p>If <code>logdens</code> is <code>FALSE</code>,  then <code>inla.qsample</code> returns
+the samples in a matrix,  where each column is a sample.
+If <code>logdens</code> or <code>compute.mean</code> is <code>TRUE</code>, then a list
+with names <code>sample</code>,
+<code>logdens</code> and <code>mean</code> is returned. The samples are stored in the matrix
+<code>sample</code> where each column is a sample, and the log
+densities of each sample are stored as the vector <code>logdens</code>.
+The mean (include corrections for the constraints,  if any) is store in
+the vector <code>mean</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Havard Rue <a href="mailto:hrue@r-inla.org">hrue@r-inla.org</a></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ g = system.file("demodata/germany.graph", package="INLA")
+ Q = inla.graph2matrix(g)
+ diag(Q) = dim(Q)[1L]
+ x = inla.qsample(10, Q)
+ ## Not run: matplot(x)
+ x = inla.qsample(10, Q, logdens=TRUE)
+ ## Not run: matplot(x$sample)
+
+ n = 3
+ Q = diag(n)
+ ns = 2
+
+ ## sample and evaluate a sample
+ x = inla.qsample(n, Q=Q, logdens=TRUE)
+ xx = inla.qsample(Q=Q,  sample = x$sample)
+ print(x$logdens - xx$logdens)
+
+ ## the use of a constraint
+ constr = list(A = matrix(rep(1, n), 1, n), e = 0)
+ x = inla.qsample(n, Q=Q, constr=constr)
+ print(constr$A %*% x)
+
+ ## control the RNG (require serial mode)
+ x = inla.qsample(n, Q=Q, seed = 123, num.threads="1:1")
+ ## restart from same seed,  only sample 1
+ xx = inla.qsample(n=1, Q=Q, seed = 123, num.threads="1:1")
+ ## continue from the save state, sample the remaining 2
+ xxx = inla.qsample(n=n-1, Q=Q, seed = -1, num.threads="1:1")
+ ## should be 0
+ print(x - cbind(xx, xxx))
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>

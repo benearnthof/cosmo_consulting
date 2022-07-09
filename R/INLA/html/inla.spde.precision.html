@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Precision matrices for SPDE models Calculates the precision...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+
+<table width="100%" summary="page for inla.spde.precision {INLA}"><tr><td>inla.spde.precision {INLA}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Precision matrices for SPDE models
+Calculates the precision matrix for given parameter values based on an
+<code>inla.spde</code> model object.</h2>
+
+<h3>Description</h3>
+
+<p>Precision matrices for SPDE models
+</p>
+<p>Calculates the precision matrix for given parameter values based on an
+<code>inla.spde</code> model object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inla.spde.precision(...)
+
+inla.spde1.precision(spde, ...)
+
+## S3 method for class 'inla.spde1'
+inla.spde.precision(spde, ...)
+
+inla.spde2.precision(
+  spde,
+  theta = NULL,
+  phi0 = inla.spde2.theta2phi0(spde, theta),
+  phi1 = inla.spde2.theta2phi1(spde, theta),
+  phi2 = inla.spde2.theta2phi2(spde, theta),
+  ...
+)
+
+## S3 method for class 'inla.spde2'
+inla.spde.precision(
+  spde,
+  theta = NULL,
+  phi0 = inla.spde2.theta2phi0(spde, theta),
+  phi1 = inla.spde2.theta2phi1(spde, theta),
+  phi2 = inla.spde2.theta2phi2(spde, theta),
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Additional parameters passed on to other methods.</p>
+</td></tr>
+<tr valign="top"><td><code>spde</code></td>
+<td>
+<p>An <code>inla.spde</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>theta</code></td>
+<td>
+<p>The parameter vector.</p>
+</td></tr>
+<tr valign="top"><td><code>phi0</code></td>
+<td>
+<p>Internal parameter for a generic model.  Expert option only.</p>
+</td></tr>
+<tr valign="top"><td><code>phi1</code></td>
+<td>
+<p>Internal parameter for a generic model.  Expert option only.</p>
+</td></tr>
+<tr valign="top"><td><code>phi2</code></td>
+<td>
+<p>Internal parameter for a generic model.  Expert option only.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A sparse precision matrix.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Finn Lindgren <a href="mailto:finn.lindgren@gmail.com">finn.lindgren@gmail.com</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="../../INLA/help/inla.spde.models.html">inla.spde.models()</a></code>, <code><a href="../../INLA/help/inla.spde2.generic.html">inla.spde2.generic()</a></code>,
+<code><a href="../../INLA/help/inla.spde2.theta2phi0.html">inla.spde2.theta2phi0()</a></code>, <code><a href="../../INLA/help/inla.spde2.theta2phi1.html">inla.spde2.theta2phi1()</a></code>,
+<code><a href="../../INLA/help/inla.spde2.theta2phi2.html">inla.spde2.theta2phi2()</a></code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>INLA</em> version 22.02.16-2 <a href="00Index.html">Index</a>]</div>
+</div></body></html>
