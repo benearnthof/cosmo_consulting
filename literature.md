@@ -81,3 +81,6 @@ https://ml4physicalsciences.github.io/2020/files/NeurIPS_ML4PS_2020_40.pdf
 
 Supplement for bayesian cosmo full syk stuff
 https://zenodo.org/record/3963028  
+
+Building on R INLA for large spherical datasets  
+https://ntnuopen.ntnu.no/ntnu-xmlui/bitstream/handle/11250/2500188/Elias%20Krainski.pdf?sequence=5&isAllowed=y  
