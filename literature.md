@@ -1,3 +1,9 @@
+### Skewed spatial data
+Modeling Skewed Spatial Data Using a Convolution of Gaussian and Log-Gaussian
+https://projecteuclid.org/journals/bayesian-analysis/volume-13/issue-2/Modeling-Skewed-Spatial-Data-Using-a-Convolution-of-Gaussian-and/10.1214/17-BA1064.full
+
+### GMRF
+
 Think continuous: Markovian Gaussian models in
 spatial statistics  
 https://www.math.ntnu.no/preprint/statistics/2011/S9-2011.pdf  
@@ -81,3 +87,6 @@ https://ml4physicalsciences.github.io/2020/files/NeurIPS_ML4PS_2020_40.pdf
 
 Supplement for bayesian cosmo full syk stuff
 https://zenodo.org/record/3963028  
+
+Building on R INLA for large spherical datasets  
+https://ntnuopen.ntnu.no/ntnu-xmlui/bitstream/handle/11250/2500188/Elias%20Krainski.pdf?sequence=5&isAllowed=y  
