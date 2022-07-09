@@ -1,3 +1,7 @@
+### Skewed spatial data
+Modeling Skewed Spatial Data Using a Convolution of Gaussian and Log-Gaussian
+https://projecteuclid.org/journals/bayesian-analysis/volume-13/issue-2/Modeling-Skewed-Spatial-Data-Using-a-Convolution-of-Gaussian-and/10.1214/17-BA1064.full
+
 Think continuous: Markovian Gaussian models in
 spatial statistics  
 https://www.math.ntnu.no/preprint/statistics/2011/S9-2011.pdf  
