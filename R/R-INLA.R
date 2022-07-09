@@ -13,6 +13,23 @@ list.of.packages <- c("gapminder", "gt", "tidyverse")
   lapply(list.of.packages, require, character.only = TRUE)
 }
 
+map1 <- readFITS(file = "2map-f1z1.fits")
+
+map1cols <-map1$col
+temps <- map1cols[]
+unlist_temp <- unlist(temps)
+
+df_temp <- as.data.frame(unlist_temp)
+
+CMB_temp <- as.CMBDataFrame(df_temp, nside = 512, ordering = "ring")
+CMB_temp_nested <- ordering(CMB_temp, new.ordering = "nested")
+
+colnames(CMB_temp_nested) <- "I"
+colnames(CMB_temp) <- "I"
+
+plot(CMB_temp_nested)
+plot(CMB_temp)
+
 
 
 # Definiere Struktur der Nachbarschaftsmatrix W für Auflösung 'res'
