@@ -100,3 +100,7 @@ https://arxiv.org/pdf/1104.3436.pdf
 Spatial modelling with inla: a review 
 https://ntnuopen.ntnu.no/ntnu-xmlui/bitstream/handle/11250/2578372/inla-spatial-review-main.pdf?sequence=2
 (very nice comments on models on spheres)
+
+The Holy Grail (Inference of Lognormal Fields on the Healpix Sphere):  
+https://www.cita.utoronto.ca/~niels/lnsmooth.pdf  
+
