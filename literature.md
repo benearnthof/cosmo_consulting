@@ -104,5 +104,6 @@ https://ntnuopen.ntnu.no/ntnu-xmlui/bitstream/handle/11250/2578372/inla-spatial-
 The Holy Grail (Inference of Lognormal Fields on the Healpix Sphere):  
 https://www.cita.utoronto.ca/~niels/lnsmooth.pdf  
 https://ift.pages.mpcdf.de/nifty/user/code.html  
+https://indico.ecap.work/event/8/contributions/160/attachments/78/162/NIFTy_tutorial.pdf  
 
 
