@@ -105,5 +105,6 @@ The Holy Grail (Inference of Lognormal Fields on the Healpix Sphere):
 https://www.cita.utoronto.ca/~niels/lnsmooth.pdf  
 https://ift.pages.mpcdf.de/nifty/user/code.html  
 https://indico.ecap.work/event/8/contributions/160/attachments/78/162/NIFTy_tutorial.pdf  
+https://www.youtube.com/watch?v=gfV4QBuziaE  
 
 
