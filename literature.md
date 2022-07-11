@@ -90,3 +90,7 @@ https://zenodo.org/record/3963028
 
 Building on R INLA for large spherical datasets  
 https://ntnuopen.ntnu.no/ntnu-xmlui/bitstream/handle/11250/2500188/Elias%20Krainski.pdf?sequence=5&isAllowed=y  
+
+Spherical INLA mesh on the globe  
+https://api.rpubs.com/zs_sz/mix_test_s2  
+
