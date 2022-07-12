@@ -17,6 +17,12 @@ sky_rs9_cart <- CMBDataFrame(sky_rs9, coords  = "cartesian")
 sky_rs9_sph <- CMBDataFrame(sky_rs9, coords = "spherical")
 
 # get window slice from full sky
-window(sky_rs9_sph) <- CMBWindow(theta = c(pi/2,pi/2,pi/2.1, pi/2.1), phi = c(0,pi/100,pi/100,0))
-plot(sky_rs9_sph)
-window(sky_rs9, in.pixels)
+# Define window as one pixel at a certain resolution of the sky
+# for example: 1 window is one pixel at resolution 3
+# that means the window contains 4086 pixels if we slice it out from
+# the full sky of resolution 9
+w1 <- window(sky_rs9, in.pixels = c(1), in.pixels.res = 3)
+plot(w1)
+
+pixel_list <- seq(1:100)
+lapply(pixel_list, function(x) neighbours(x,9))
