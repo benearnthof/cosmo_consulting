@@ -1,17 +1,5 @@
-library(rcosmo)
-library(INLA) 
-require(FITSio)
-library(data.table)
-library(Matrix)
-library(ggplot2)
-list.of.packages <- c("gapminder", "gt", "tidyverse")
+source("global_library.R")
 
-# install required packages, if necessary, and load them --
-{
-  new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-  if(length(new.packages)) install.packages(new.packages)
-  lapply(list.of.packages, require, character.only = TRUE)
-}
 
 map1 <- readFITS(file = "data/map_rs_2.fits")
 
@@ -23,8 +11,8 @@ df_temp <- as.data.frame(I)
 
 sky <- as.CMBDataFrame(df_temp, nside = 4, ordering = "nested")
 #sky <- ordering(sky, new.ordering = "ring")
-#sky_cartesian <- CMBDataFrame(sky, coords  = "cartesian")
-#sky_spherical <- CMBDataFrame(sky, coords = "spherical")
+# sky_cartesian <- CMBDataFrame(sky, coords  = "cartesian")
+# sky_spherical <- CMBDataFrame(sky, coords = "spherical")
 #CMB_temp_nested <- ordering(CMB_temp, new.ordering = "nested")
 sky[31,]
 #colnames(CMB_temp_nested) <- "I"
@@ -36,6 +24,7 @@ plot(sky)
 # plot windows slices
 window(sky_spherical) <- CMBWindow(theta = c(pi/2,pi/2,pi/2.1, pi/2.1), phi = c(0,pi/100,pi/100,0))
 plot(sky_spherical)
+
 
 window(sky_cartesian) <- CMBWindow(x = 0, y= 3/5, z = 4/5 ,r = 0.8, set.minus = TRUE)
 plot(sky_cartesian)
