@@ -107,4 +107,7 @@ https://ift.pages.mpcdf.de/nifty/user/code.html
 https://indico.ecap.work/event/8/contributions/160/attachments/78/162/NIFTy_tutorial.pdf  
 https://www.youtube.com/watch?v=gfV4QBuziaE  
 
+Understanding the SPDE Approach to Smoothing  
+https://link.springer.com/content/pdf/10.1007/s13253-019-00377-z.pdf  
+https://discourse.mc-stan.org/t/spde-models-in-brms/17346  
 
